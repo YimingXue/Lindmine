@@ -111,17 +111,24 @@ if __name__ == '__main__':
     for i in range(OUTPUT_CLASSES):
         CLASSES.append([])
     print('Grenerating patches:')
-    report_progress(0, HEIGHT - PATCH_SIZE + 1)
-    for i in range(HEIGHT - PATCH_SIZE + 1):
-        report_progress(i+1, HEIGHT - PATCH_SIZE + 1)
-        for j in range(WIDTH - PATCH_SIZE + 1):
-            if config.patch_mode == 'Center':
-                curr_inp = Patch_Center(i,j) # shape of curr_inp is (C,H,W)
-            elif config.patch_mode == 'TopLeft':
+    if config.patch_mode == 'TopLeft':
+        report_progress(0, HEIGHT - PATCH_SIZE + 1)
+        for i in range(HEIGHT - PATCH_SIZE + 1):
+            report_progress(i+1, HEIGHT - PATCH_SIZE + 1)
+            for j in range(WIDTH - PATCH_SIZE + 1):
                 curr_inp = Patch_TopLeft(i,j) # shape of curr_inp is (C,H,W)
-            curr_tar = target_mat[i, j]
-            if(curr_tar!=0): #Ignore patches with unknown landcover type for the central pixel
-                CLASSES[curr_tar-1].append(curr_inp)
+                curr_tar = target_mat[i, j]
+                if(curr_tar!=0): #Ignore patches with unknown landcover type for the central pixel
+                    CLASSES[curr_tar-1].append(curr_inp)
+    if config.patch_mode == 'Center':
+        report_progress(0, HEIGHT)
+        for i in range(HEIGHT):
+            report_progress(i+1, HEIGHT)
+            for j in range(WIDTH):
+                curr_inp = Patch_Center(i,j) # shape of curr_inp is (C,H,W)
+                curr_tar = target_mat[i, j]
+                if(curr_tar!=0): #Ignore patches with unknown landcover type for the central pixel
+                    CLASSES[curr_tar-1].append(curr_inp)
     report_progress_done()
     sys.stdout.write('\nInitial sample length per class:'.ljust(70))
     for c  in CLASSES:

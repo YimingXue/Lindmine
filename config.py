@@ -8,7 +8,7 @@ class DefaultConfigs(object):
     epochs = 40
     step_size = 40
     batch_size = 100
-    seed = 2019
+    seed = 75
     lr = 0.1
     weight_decay = 1e-4 # 1e-4
 
