@@ -102,7 +102,7 @@ def train(config, kwargs):
     else:
         raise Exception('Wrong name of the optimizer!')
     # decrease lr every 40 epochs, num_epochs=40
-    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=config.epochs, gamma=0.1)
+    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=config.step_size, gamma=0.1)
     # scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[40], gamma=0.1)
 
     # PERFORM TRAINING EXPERIMENT==========================================================
