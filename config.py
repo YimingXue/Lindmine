@@ -5,7 +5,7 @@ class DefaultConfigs(object):
     # train/test parameters
     model_name = 'SimpleFC' # SimpleNet/SimpleFC
     optimizer = 'SGD' # Adagrad/SGD/Adam
-    epochs = 40
+    epochs = 120
     step_size = 40
     batch_size = 100
     seed = 75
@@ -13,8 +13,8 @@ class DefaultConfigs(object):
     weight_decay = 1e-4 # 1e-4
 
     # IndianPines data preparation parameters\
-    patch_mode = 'TopLeft' # Center/TopLeft
-    patch_size = 21
+    patch_mode = 'Center' # Center/TopLeft
+    patch_size = 31
     indianPines_band = 220
     indianPines_class = 16
     indianPines_seed = 6

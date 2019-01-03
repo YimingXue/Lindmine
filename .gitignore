@@ -1,0 +1,7 @@
+# 指定不忽略的文件
+!Indian_pines_gt.mat
+!Indian_pines.mat
+
+# 指定忽略文件
+*.model
+*.mat
