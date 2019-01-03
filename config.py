@@ -14,7 +14,7 @@ class DefaultConfigs(object):
 
     # IndianPines data preparation parameters\
     patch_mode = 'TopLeft' # Center/TopLeft
-    patch_size = 21
+    patch_size = 1
     indianPines_band = 220
     indianPines_class = 16
     indianPines_seed = 6
