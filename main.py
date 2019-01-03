@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.nn.init as init
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from torch.autograd import Variable
@@ -10,6 +11,17 @@ from IndianPinesDataset import IndianPinesDataset
 import time
 import datetime
 import warnings
+
+def weights_init(m):
+    if isinstance(m, nn.Conv2d):
+        init.xavier_uniform(m.weight.data)
+        init.constant(m.bias.data, 0)
+    elif isinstance(m, nn.Linear):
+        init.xavier_uniform(m.weight.data)
+        init.constant(m.bias.data, 0)
+    # elif isinstance(m, nn.BatchNorm2d):
+    #     m.weight.data.normal_(1.0, 0.02)
+    #     m.bias.data.fill_(0)
 
 warnings.filterwarnings("ignore")
 CUDA_AVAILABLE = config.cuda and torch.cuda.is_available()
@@ -83,6 +95,7 @@ def train(config, kwargs):
     # CREATE AND IMPORT MODEL=============================================================
     print('\tcreate model')
     model = Model(config)
+    model.apply(weights_init)
     if CUDA_AVAILABLE:
         model.cuda()
     print(model)

@@ -26,15 +26,6 @@ class SimpleFC(nn.Module):
             # nn.Dropout(0.5),
             nn.ReLU(),
         )
-        torch.nn.init.xavier_uniform_(self.FC[0].weight)
-        self.FC[0].bias.data.zero_()
-        torch.nn.init.xavier_uniform_(self.FC[2].weight)
-        self.FC[2].bias.data.zero_()
-        torch.nn.init.xavier_uniform_(self.FC[4].weight)
-        self.FC[4].bias.data.zero_()
-        torch.nn.init.xavier_uniform_(self.FC[6].weight)
-        self.FC[6].bias.data.zero_()
-
         self.Softmax = nn.Softmax()
 
     def forward(self, x):
