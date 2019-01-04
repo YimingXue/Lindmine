@@ -2,6 +2,9 @@ class DefaultConfigs(object):
     # cuda
     cuda = True
 
+    # Dataset selection
+    dataset = 'IndianPines' # IndianPines/PaviaU/PaviaCenter
+
     # train/test parameters
     model_name = 'SimpleFC' # SimpleNet/SimpleFC/PPFsNet
     optimizer = 'SGD' # Adagrad/SGD/Adam
@@ -12,8 +15,8 @@ class DefaultConfigs(object):
     lr = 0.1
     weight_decay = 1e-4 # 1e-4
 
-    # IndianPines data preparation parameters\
-    patch_mode = 'Center' # Center/TopLeft
+    # IndianPines data preparation parameters
+    patch_mode = 'Center' # Center/TopLeft/PP(Pixel-Pair)
     patch_size = 21
     indianPines_band = 220
     indianPines_class = 16

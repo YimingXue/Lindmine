@@ -12,6 +12,7 @@ import sys
 from config import config
 
 # IndianPines Dataset Preparation Without Augmentation
+# 200 for training and the rest for testing
 
 def report_progress(progress, total, lbar_prefix = '', rbar_prefix=''):
     percent = int(progress / float(total) * 100)
@@ -80,10 +81,10 @@ if __name__ == '__main__':
     random.seed(config.indianPines_seed)
 
     # Load dataset
-    DATA_PATH = os.path.join(os.getcwd(),"Data")
+    DATA_PATH = os.path.join(os.getcwd(),"Data",config.dataset)
     input_mat = scipy.io.loadmat(os.path.join(DATA_PATH, 'Indian_pines.mat'))['indian_pines']
     target_mat = scipy.io.loadmat(os.path.join(DATA_PATH, 'Indian_pines_gt.mat'))['indian_pines_gt']
-    SAVE_PATH = os.path.join(os.getcwd(),"Data",config.patch_mode,"patch_size{}_seed{}".format(config.patch_size, str(config.indianPines_seed)))
+    SAVE_PATH = os.path.join(DATA_PATH,config.patch_mode,"patch_size{}_seed{}".format(config.patch_size, str(config.indianPines_seed)))
     if not os.path.exists(SAVE_PATH):
         os.makedirs(SAVE_PATH)
 
@@ -137,27 +138,39 @@ if __name__ == '__main__':
         sys.stdout.write(str(len(c)).ljust(4) + ' ')
     sys.stdout.write('\n')
 
-    # Make a test split with 25% data from each class
-    for c in range(OUTPUT_CLASSES): #for each class
+    # Only choose 9 classes which has more than 200 samples
+    IndianPines_list = [2,3,5,6,8,10,11,12,14]
+    for c in range(len(IndianPines_list)):
+        IndianPines_list[c] -= 1
+
+    # Make a train split with 200 data from 9 class, and test split with rest of data
+    for c in range(OUTPUT_CLASSES): 
+        if c not in IndianPines_list:
+            TRAIN_PATCH.append([])
+            continue
         class_population = len(CLASSES[c])
-        test_split_size = int(class_population*TEST_FRAC)
+        assert class_population > COUNT
             
         patches_of_current_class = CLASSES[c]
         shuffle(patches_of_current_class)
         
-        #Make training and test splits
-        TRAIN_PATCH.append(patches_of_current_class[:-test_split_size])
-            
-        TEST_PATCH.extend(patches_of_current_class[-test_split_size:])
+        # Make training and test splits
+        TRAIN_PATCH.append(patches_of_current_class[:COUNT])
+        # Make test splits
+        TEST_PATCH.extend(patches_of_current_class[COUNT:])
+        test_split_size = len(TEST_PATCH[c])
         TEST_LABELS.extend(np.full(test_split_size, c, dtype=int))
-    sys.stdout.write('Number of training samples per class after removal of test samples:'.ljust(70))
+    sys.stdout.write('Number of training samples per class:'.ljust(70))
     for c in TRAIN_PATCH:
         sys.stdout.write(str(len(c)).ljust(4) + ' ')
     sys.stdout.write('\n')
+    print('Length of testing data: {}\n'.format(len(TEST_PATCH)))
 
     # Oversample the classes which do not have at least COUNT patches 
     # in the training set and extract COUNT patches
     for i in range(OUTPUT_CLASSES):
+        if i not in IndianPines_list:
+            continue
         if(len(TRAIN_PATCH[i])<COUNT):
             tmp = TRAIN_PATCH[i]
             for j in range(COUNT//len(TRAIN_PATCH[i])):
@@ -170,13 +183,19 @@ if __name__ == '__main__':
         sys.stdout.write(str(len(c)).ljust(4) + ' ')
     sys.stdout.write('\n')
 
+    for c in range(OUTPUT_CLASSES):
+        if c not in IndianPines_list:
+            TRAIN_PATCH.remove([])
+
     TRAIN_PATCH = np.asarray(TRAIN_PATCH)
     TRAIN_PATCH = TRAIN_PATCH.reshape((-1,BAND,PATCH_SIZE,PATCH_SIZE))
     TRAIN_LABELS = np.array([])
     for l in range(OUTPUT_CLASSES):
+        if l not in IndianPines_list:
+            continue
         TRAIN_LABELS = np.append(TRAIN_LABELS, np.full(COUNT, l, dtype=int))
-    print('\nLength of TEST_PATCH: {}'.format(len(TEST_PATCH)))
-    print('Length of TRAIN_PATCH: {}'.format(len(TRAIN_PATCH)))
+    print('\nLength of TRAIN_PATCH: {}'.format(len(TRAIN_PATCH)))
+    print('Length of TEST_PATCH: {}'.format(len(TEST_PATCH)))
 
     # Save the patches in segments
     # 1. Training data

@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.init as init
 import torch.optim as optim
+from torchvision import transforms as T 
 from torch.utils.data import DataLoader
 from torch.autograd import Variable
 import os
@@ -49,7 +50,7 @@ def train(config, kwargs):
         os.makedirs(dir)
     path_name_current_fold = dir + config.model_name
     
-    # PRINT PARAMETERS
+    # PRINT PARAMETERS=======================================================================
     config.print_config()
     with open(path_name_current_fold + '.txt', 'a') as f:
         print('#############################  PARAMETERS  ###################################\n'
@@ -88,6 +89,11 @@ def train(config, kwargs):
           ), file=f)
     
     # LOAD TRAINING DATA===================================================================
+    # # data_augmentation
+    # transform_train = T.Compose([T.RandomHorizontalFlip(),
+    #                              T.RandomVerticalFlip(),
+    #                              T.ToTensor()
+    #                             ])
     print('\tload training data')
     train_dataloader = DataLoader(IndianPinesDataset(patch_size=config.patch_size,train=True), \
                                     batch_size=config.batch_size,shuffle=True,**kwargs)

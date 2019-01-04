@@ -9,12 +9,29 @@ import torch
 import scipy.io as sio
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+from PIL import Image
 
 # set random seed
 random.seed(config.seed)
 np.random.seed(config.seed)
 torch.manual_seed(config.seed)
 torch.cuda.manual_seed_all(config.seed)
+
+# rotate 90,180,270
+def rotation(image):
+    channel = image.shape[0]
+    n = random.randint(1,3)
+    length = image.shape[1]
+    for _ in range(n):
+        for c in range(channel):
+            for i in range(length):
+                for j in range(i+1,length):
+                    temp = image[c][i][j]
+                    image[c][i][j] = image[c][j][i]
+                    image[c][j][i] = temp
+            for i in range(len(image[c])):
+                image[c][i] = image[c][i][::-1]
+    return image
 
 # define dataset
 class IndianPinesDataset(Dataset):
@@ -24,7 +41,7 @@ class IndianPinesDataset(Dataset):
         self.train_images = None; self.train_labels = None
         self.test_images = None; self.test_labels = None
         
-        data_path = os.path.join(os.getcwd(),'Data',config.patch_mode,'patch_size{}_seed{}'.format(self.patch_size, str(config.indianPines_seed)))
+        data_path = os.path.join(os.getcwd(),'Data',config.dataset,config.patch_mode,'patch_size{}_seed{}'.format(self.patch_size, str(config.indianPines_seed)))
         file_list = os.listdir(data_path)
         
         first_flag = True
@@ -61,6 +78,13 @@ class IndianPinesDataset(Dataset):
 
     def __getitem__(self,index):
         if self.train == True:
+            # num = random.randint(0,1)
+            # if num == 0 :
+            #     self.train_images[index] = self.train_images[index][:,::-1,:] # Flip patch up-down
+            # if num == 1 :
+            #     self.train_images[index] = self.train_images[index][:,:,::-1] # Flip patch left-right
+            # if num == 2 :
+            #     self.train_images[index] = rotation(self.train_images[index]) # Rotate patch for 90/180/270
             return self.train_images[index], self.train_labels[index]
         else:
             return self.test_images[index], self.test_labels[index]
