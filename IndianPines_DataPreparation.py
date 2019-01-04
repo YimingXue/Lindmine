@@ -11,6 +11,8 @@ import argparse
 import sys
 from config import config
 
+# IndianPines Dataset Preparation Without Augmentation
+
 def report_progress(progress, total, lbar_prefix = '', rbar_prefix=''):
     percent = int(progress / float(total) * 100)
     buf = "%s|%s|  %s%d/%d %s"%(lbar_prefix, ('#' * percent).ljust(100, '-'),

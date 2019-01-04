@@ -3,9 +3,9 @@ class DefaultConfigs(object):
     cuda = True
 
     # train/test parameters
-    model_name = 'SimpleFC' # SimpleNet/SimpleFC
+    model_name = 'SimpleFC' # SimpleNet/SimpleFC/PPFsNet
     optimizer = 'SGD' # Adagrad/SGD/Adam
-    epochs = 120
+    epochs = 80
     step_size = 40
     batch_size = 100
     seed = 75
