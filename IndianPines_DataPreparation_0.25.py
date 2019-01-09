@@ -82,7 +82,10 @@ if __name__ == '__main__':
 
     # Load dataset
     DATA_PATH = os.path.join(os.getcwd(),"Data",config.dataset)
-    input_mat = scipy.io.loadmat(os.path.join(DATA_PATH, 'Indian_pines.mat'))['indian_pines']
+    if config.dataset == 'IndianPines':
+        input_mat = scipy.io.loadmat(os.path.join(DATA_PATH, 'Indian_pines.mat'))['indian_pines']
+    elif config.dataset == 'IndianPinesCorrected':
+        input_mat = scipy.io.loadmat(os.path.join(DATA_PATH, 'Indian_pines_corrected.mat'))['indian_pines_corrected']
     target_mat = scipy.io.loadmat(os.path.join(DATA_PATH, 'Indian_pines_gt.mat'))['indian_pines_gt']
     SAVE_PATH = os.path.join(DATA_PATH,config.patch_mode,"patch_size{}_seed{}".format(config.patch_size, str(config.indianPines_seed)))
     if not os.path.exists(SAVE_PATH):

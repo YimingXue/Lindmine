@@ -3,12 +3,12 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'IndianPines' # IndianPines/PaviaU/PaviaCenter
+    dataset = 'IndianPinesCorrected' # IndianPines/PaviaU/PaviaCenter/IndianPinesCorrected
 
     # train/test parameters
     model_name = 'SimpleFC' # SimpleNet/SimpleFC/PPFsNet
     optimizer = 'SGD' # Adagrad/SGD/Adam
-    epochs = 80
+    epochs = 120
     step_size = 40
     batch_size = 100
     seed = 75
@@ -18,7 +18,10 @@ class DefaultConfigs(object):
     # IndianPines data preparation parameters
     patch_mode = 'Center' # Center/TopLeft/PP(Pixel-Pair)
     patch_size = 21
-    indianPines_band = 220
+    if dataset == 'IndianPines':
+        indianPines_band = 220
+    elif dataset == 'IndianPinesCorrected':
+        indianPines_band = 200
     indianPines_class = 16
     indianPines_seed = 6
 

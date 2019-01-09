@@ -1,0 +1,193 @@
+#############################  PARAMETERS  ###################################
+# cuda
+	cuda: True
+# train/test parameters	model_name: SimpleFC
+	optimizer: SGD
+	epochs: 120
+	batch_size: 100
+	seed: 75
+	lr: 0.1
+	weight_decay: 0.0001
+# data preparation parameters
+	patch_size: 21
+	indianPines_band: 200
+	indianPines_class: 16
+# SimpleNet parameters
+	conv1: 500
+	conv2: 100
+	fc1: 200
+	fc2: 84
+# SimpleFC parameters
+	FC_1: 500
+	FC_2: 350
+	FC_3: 150
+	FC_4: 16
+##############################################################################
+
+#############################  MODEL  ###################################
+
+SimpleFC(
+  (FC): Sequential(
+    (0): Linear(in_features=88200, out_features=500, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=500, out_features=350, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=350, out_features=150, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=150, out_features=16, bias=True)
+    (7): ReLU()
+  )
+  (Softmax): Softmax()
+)
+##############################################################################
+
+Epoch 1/120| Time: 3.64s| Loss: 1.8527
+Epoch 2/120| Time: 3.42s| Loss: 1.2076
+Epoch 3/120| Time: 3.41s| Loss: 1.1399
+Epoch 4/120| Time: 3.39s| Loss: 0.8902
+Epoch 5/120| Time: 3.50s| Loss: 0.6069
+Epoch 6/120| Time: 3.52s| Loss: 0.4510
+Epoch 7/120| Time: 3.49s| Loss: 0.3798
+Epoch 8/120| Time: 3.59s| Loss: 0.3669
+Epoch 9/120| Time: 3.51s| Loss: 0.3436
+Epoch 10/120| Time: 3.33s| Loss: 0.2574
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-09_13-56-05/SimpleFC10.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-09_13-56-05/SimpleFC10.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 1 | Loss: 0.0091 | AccuracyNumber: 100
+	Batch_idx: 2 | Loss: 0.1897 | AccuracyNumber: 94
+	Batch_idx: 3 | Loss: 0.1129 | AccuracyNumber: 96
+	Batch_idx: 4 | Loss: 0.0822 | AccuracyNumber: 98
+	Batch_idx: 5 | Loss: 0.5119 | AccuracyNumber: 83
+	Batch_idx: 6 | Loss: 0.3939 | AccuracyNumber: 88
+	Batch_idx: 7 | Loss: 0.3596 | AccuracyNumber: 90
+	Batch_idx: 8 | Loss: 0.4598 | AccuracyNumber: 87
+	Batch_idx: 9 | Loss: 0.6057 | AccuracyNumber: 82
+	Batch_idx: 10 | Loss: 0.2813 | AccuracyNumber: 92
+	Batch_idx: 11 | Loss: 0.4194 | AccuracyNumber: 85
+	Batch_idx: 12 | Loss: 0.0340 | AccuracyNumber: 99
+	Batch_idx: 13 | Loss: 0.0859 | AccuracyNumber: 99
+	Batch_idx: 14 | Loss: 0.3161 | AccuracyNumber: 92
+	Batch_idx: 15 | Loss: 0.2049 | AccuracyNumber: 94
+	Batch_idx: 16 | Loss: 0.1712 | AccuracyNumber: 93
+	Batch_idx: 17 | Loss: 0.3822 | AccuracyNumber: 88
+	Batch_idx: 18 | Loss: 0.1556 | AccuracyNumber: 96
+	Batch_idx: 19 | Loss: 0.1218 | AccuracyNumber: 97
+	Batch_idx: 20 | Loss: 0.3121 | AccuracyNumber: 94
+	Batch_idx: 21 | Loss: 0.4184 | AccuracyNumber: 90
+	Batch_idx: 22 | Loss: 0.4550 | AccuracyNumber: 90
+	Batch_idx: 23 | Loss: 0.2455 | AccuracyNumber: 92
+Testing Loss: 0.2637 | Testing Accuracy: 92.4583 | Time: 2.64
+Epoch 11/120| Time: 3.44s| Loss: 0.2209
+Epoch 12/120| Time: 3.50s| Loss: 0.2068
+Epoch 13/120| Time: 3.46s| Loss: 0.2050
+Epoch 14/120| Time: 3.51s| Loss: 0.2021
+Epoch 15/120| Time: 3.50s| Loss: 0.1967
+Epoch 16/120| Time: 3.65s| Loss: 0.1921
+Epoch 17/120| Time: 3.52s| Loss: 0.1994
+Epoch 18/120| Time: 3.45s| Loss: 0.1904
+Epoch 19/120| Time: 3.42s| Loss: 0.1870
+Epoch 20/120| Time: 3.46s| Loss: 0.1861
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-09_13-56-05/SimpleFC20.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-09_13-56-05/SimpleFC20.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0019 | AccuracyNumber: 100
+	Batch_idx: 1 | Loss: 0.0093 | AccuracyNumber: 99
+	Batch_idx: 2 | Loss: 0.1392 | AccuracyNumber: 95
+	Batch_idx: 3 | Loss: 0.0353 | AccuracyNumber: 98
+	Batch_idx: 4 | Loss: 0.0083 | AccuracyNumber: 100
+	Batch_idx: 5 | Loss: 0.4566 | AccuracyNumber: 88
+	Batch_idx: 6 | Loss: 0.2147 | AccuracyNumber: 93
+	Batch_idx: 7 | Loss: 0.3091 | AccuracyNumber: 92
+	Batch_idx: 8 | Loss: 0.3133 | AccuracyNumber: 90
+	Batch_idx: 9 | Loss: 0.3398 | AccuracyNumber: 90
+	Batch_idx: 10 | Loss: 0.1931 | AccuracyNumber: 97
+	Batch_idx: 11 | Loss: 0.1892 | AccuracyNumber: 93
+	Batch_idx: 12 | Loss: 0.0137 | AccuracyNumber: 100
+	Batch_idx: 13 | Loss: 0.0295 | AccuracyNumber: 99
+	Batch_idx: 14 | Loss: 0.1722 | AccuracyNumber: 96
+	Batch_idx: 15 | Loss: 0.1659 | AccuracyNumber: 96
+	Batch_idx: 16 | Loss: 0.2229 | AccuracyNumber: 90
+	Batch_idx: 17 | Loss: 0.3476 | AccuracyNumber: 88
+	Batch_idx: 18 | Loss: 0.1092 | AccuracyNumber: 98
+	Batch_idx: 19 | Loss: 0.1199 | AccuracyNumber: 97
+	Batch_idx: 20 | Loss: 0.1099 | AccuracyNumber: 96
+	Batch_idx: 21 | Loss: 0.3395 | AccuracyNumber: 91
+	Batch_idx: 22 | Loss: 0.2991 | AccuracyNumber: 94
+	Batch_idx: 23 | Loss: 0.3036 | AccuracyNumber: 92
+Testing Loss: 0.1851 | Testing Accuracy: 94.6667 | Time: 2.55
+Epoch 21/120| Time: 3.45s| Loss: 0.1831
+Epoch 22/120| Time: 3.50s| Loss: 0.1958
+Epoch 23/120| Time: 3.45s| Loss: 0.1868
+Epoch 24/120| Time: 3.47s| Loss: 0.1928
+Epoch 25/120| Time: 3.56s| Loss: 0.1868
+Epoch 26/120| Time: 3.45s| Loss: 0.1816
+Epoch 27/120| Time: 3.47s| Loss: 0.1798
+Epoch 28/120| Time: 3.44s| Loss: 0.1807
+Epoch 29/120| Time: 3.48s| Loss: 0.1804
+Epoch 30/120| Time: 3.47s| Loss: 0.1859
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-09_13-56-05/SimpleFC30.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-09_13-56-05/SimpleFC30.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0021 | AccuracyNumber: 100
+	Batch_idx: 1 | Loss: 0.0092 | AccuracyNumber: 100
+	Batch_idx: 2 | Loss: 0.1399 | AccuracyNumber: 95
+	Batch_idx: 3 | Loss: 0.0173 | AccuracyNumber: 99
+	Batch_idx: 4 | Loss: 0.0049 | AccuracyNumber: 100
+	Batch_idx: 5 | Loss: 0.4141 | AccuracyNumber: 90
+	Batch_idx: 6 | Loss: 0.2293 | AccuracyNumber: 93
+	Batch_idx: 7 | Loss: 0.2380 | AccuracyNumber: 92
+	Batch_idx: 8 | Loss: 0.3124 | AccuracyNumber: 93
+	Batch_idx: 9 | Loss: 0.3261 | AccuracyNumber: 88
+	Batch_idx: 10 | Loss: 0.2322 | AccuracyNumber: 95
+	Batch_idx: 11 | Loss: 0.1851 | AccuracyNumber: 94
+	Batch_idx: 12 | Loss: 0.0078 | AccuracyNumber: 100
+	Batch_idx: 13 | Loss: 0.0292 | AccuracyNumber: 99
+	Batch_idx: 14 | Loss: 0.1897 | AccuracyNumber: 96
+	Batch_idx: 15 | Loss: 0.1507 | AccuracyNumber: 96
+	Batch_idx: 16 | Loss: 0.1536 | AccuracyNumber: 93
+	Batch_idx: 17 | Loss: 0.3490 | AccuracyNumber: 88
+	Batch_idx: 18 | Loss: 0.1761 | AccuracyNumber: 97
+	Batch_idx: 19 | Loss: 0.1604 | AccuracyNumber: 97
+	Batch_idx: 20 | Loss: 0.1034 | AccuracyNumber: 97
+	Batch_idx: 21 | Loss: 0.3590 | AccuracyNumber: 92
+	Batch_idx: 22 | Loss: 0.3340 | AccuracyNumber: 93
+	Batch_idx: 23 | Loss: 0.2582 | AccuracyNumber: 92
+Testing Loss: 0.1826 | Testing Accuracy: 94.9583 | Time: 2.65
+Epoch 31/120| Time: 3.43s| Loss: 0.1826
+Epoch 32/120| Time: 3.42s| Loss: 0.1851
+Epoch 33/120| Time: 3.44s| Loss: 0.1876
+Epoch 34/120| Time: 3.53s| Loss: 0.1945
+Epoch 35/120| Time: 3.42s| Loss: 0.2092
+Epoch 36/120| Time: 3.57s| Loss: 0.1934
+Epoch 37/120| Time: 3.40s| Loss: 0.2009
+Epoch 38/120| Time: 3.48s| Loss: 0.2076
+Epoch 39/120| Time: 3.45s| Loss: 0.2134
+Epoch 40/120| Time: 3.61s| Loss: 0.2008
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-09_13-56-05/SimpleFC40.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-09_13-56-05/SimpleFC40.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0020 | AccuracyNumber: 100
+	Batch_idx: 1 | Loss: 0.0408 | AccuracyNumber: 98
+	Batch_idx: 2 | Loss: 0.1392 | AccuracyNumber: 95
+	Batch_idx: 3 | Loss: 0.0583 | AccuracyNumber: 99
+	Batch_idx: 4 | Loss: 0.0310 | AccuracyNumber: 98
+	Batch_idx: 5 | Loss: 0.4543 | AccuracyNumber: 91
+	Batch_idx: 6 | Loss: 0.2526 | AccuracyNumber: 95
+	Batch_idx: 7 | Loss: 0.1581 | AccuracyNumber: 96
+	Batch_idx: 8 | Loss: 0.3265 | AccuracyNumber: 90
+	Batch_idx: 9 | Loss: 0.4286 | AccuracyNumber: 90
+	Batch_idx: 10 | Loss: 0.2164 | AccuracyNumber: 93
+	Batch_idx: 11 | Loss: 0.3151 | AccuracyNumber: 90
+	Batch_idx: 12 | Loss: 0.0366 | AccuracyNumber: 98
+	Batch_idx: 13 | Loss: 0.0306 | AccuracyNumber: 99
+	Batch_idx: 14 | Loss: 0.1451 | AccuracyNumber: 95
+	Batch_idx: 15 | Loss: 0.1596 | AccuracyNumber: 95
+	Batch_idx: 16 | Loss: 0.2822 | AccuracyNumber: 92
+	Batch_idx: 17 | Loss: 0.4248 | AccuracyNumber: 85
+	Batch_idx: 18 | Loss: 0.1232 | AccuracyNumber: 97
+	Batch_idx: 19 | Loss: 0.1233 | AccuracyNumber: 97
+	Batch_idx: 20 | Loss: 0.2106 | AccuracyNumber: 93
+	Batch_idx: 21 | Loss: 0.4259 | AccuracyNumber: 86
+	Batch_idx: 22 | Loss: 0.4019 | AccuracyNumber: 88
+	Batch_idx: 23 | Loss: 0.3595 | AccuracyNumber: 92
+Testing Loss: 0.2144 | Testing Accuracy: 93.8333 | Time: 2.66
+Epoch 41/120| Time: 3.52s| Loss: 0.1887
+Epoch 42/120| Time: 3.57s| Loss: 0.1831

@@ -228,6 +228,6 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
 
 if __name__ == '__main__':
     train(config, kwargs)
-    # epoch = 40
-    # evaluate_model_assign = 'SimpleFC_2019-01-03_13-08-17'
+    # epoch = 10
+    # evaluate_model_assign = 'SimpleFC_2019-01-04_21-34-07'
     # test(config, kwargs, epoch, evaluate_model_assign)
