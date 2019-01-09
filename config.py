@@ -22,6 +22,7 @@ class DefaultConfigs(object):
         indianPines_band = 220
     elif dataset == 'IndianPinesCorrected':
         indianPines_band = 200
+    band = indianPines_band
     indianPines_class = 16
     indianPines_seed = 6
 
