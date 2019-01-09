@@ -3,7 +3,7 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'IndianPinesCorrected' # IndianPines/PaviaU/PaviaCenter/IndianPinesCorrected
+    dataset = 'IndianPines' # IndianPines/PaviaU/PaviaCenter/IndianPinesCorrected
 
     # train/test parameters
     model_name = 'SimpleFC' # SimpleNet/SimpleFC/PPFsNet

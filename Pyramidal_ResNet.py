@@ -6,13 +6,28 @@ import math
 # from torch.autograd import Variable
 # import torchvision
 
-class SimpleNet(nn.Module):
+class Pyramidal_ResNet(nn.Module):
     def __init__(self, config):
-        super(SimpleNet, self).__init__()
+        super(Pyramidal_ResNet, self).__init__()
         self.config = config
-        self.size_after_conv_and_pool_twice = int(math.floor((math.floor((self.config.patch_size-5+1)/2.0)-5+1)/2.0))
-        self.fc_in = self.config.conv2*self.size_after_conv_and_pool_twice**2
 
+        self.Input_module = nn.Sequential(
+            nn.Conv2d(in_channels=self.config.indianPines_band, out_channels=self.config.indianPines_band, kernel_size=(3,3), stride=(1,1), padding=(1,1)),
+            nn.BatchNorm2d(self.config.indianPines_band),
+        )
+
+        self.Pyramidal_module_P1 = nn.Sequential(
+            # B(1)_1
+            nn.BatchNorm2d(self.config.indianPines_band),
+            nn.Conv2d(in_channels=self.config.indianPines_band, out_channels=64, kernel_size=(1,1), stride=(1,1)),
+            # B(1)_2
+            nn.BatchNorm2d(64),
+            nn.Conv2d(in_channels=64, out_channels=64, kernel_size=(7,7), stride=(1,1), padding=(3,3)),
+            # B(1)_3
+            nn.BatchNorm2d(64),
+            nn.Conv2d(in_channels=64, out_channels=self.config.indianPines_band, kernel_size=(1,1), stride=(1,1))
+        )
+        
         self.feature_extractor = nn.Sequential(
             nn.Conv2d(self.config.indianPines_band, self.config.conv1, 5),
             nn.ReLU(),
@@ -67,6 +82,6 @@ class SimpleNet(nn.Module):
         return num_correct_classified
     
 if __name__ == '__main__':
-    model = SimpleNet(config)
+    model = Pyramidal_ResNet(config)
     print(model)
 
