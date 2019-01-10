@@ -37,8 +37,6 @@ class SimpleFC(nn.Module):
         return prob, softmax_prob
     
     def calculate_objective(self, images, labels):
-        labels = torch.squeeze(labels)
-        labels = labels.type(torch.cuda.LongTensor)
         # forward pass
         prob, softmax_prob = self.forward(images)
         # calculate cross entropy loss
@@ -47,8 +45,6 @@ class SimpleFC(nn.Module):
         return output
     
     def calculate_classification_accuary(self, images, labels):
-        labels = torch.squeeze(labels)
-        labels = labels.type(torch.cuda.LongTensor)
         # forward pass
         prob, softmax_prob = self.forward(images)
         # calculate classification error

@@ -8,7 +8,7 @@ from torch.autograd import Variable
 import os
 import numpy as np
 from config import config
-from IndianPinesDataset import IndianPinesDataset
+from Hyperspectral_Dataset import Hyperspectral_Dataset
 import time
 import datetime
 import warnings
@@ -36,8 +36,8 @@ MODEL_SIGNATURE = str(datetime.datetime.now())[0:19].replace(' ', '_').replace('
 
 def train(config, kwargs):
     # IMPORT MODEL==========================================================================
-    if config.model_name == 'SimpleNet':
-        from SimpleNet import SimpleNet as Model
+    if config.model_name == 'Pyramidal_ResNet':
+        from Pyramidal_ResNet import Pyramidal_ResNet as Model
     elif config.model_name == 'SimpleFC':
         from SimpleFC import SimpleFC as Model
     else:
@@ -95,7 +95,7 @@ def train(config, kwargs):
     #                              T.ToTensor()
     #                             ])
     print('\tload training data')
-    train_dataloader = DataLoader(IndianPinesDataset(patch_size=config.patch_size,train=True), \
+    train_dataloader = DataLoader(Hyperspectral_Dataset(config,train=True), \
                                     batch_size=config.batch_size,shuffle=True,**kwargs)
     
     # CREATE AND IMPORT MODEL=============================================================
@@ -138,11 +138,11 @@ def train(config, kwargs):
         # start training
         for batch_idx, (train_images, train_labels) in enumerate(train_dataloader):
             # data preparation
-            train_images, train_labels = train_images.type(torch.FloatTensor), train_labels.type(torch.FloatTensor)
+            train_images, train_labels = train_images.type(torch.FloatTensor), train_labels.type(torch.LongTensor)
             if CUDA_AVAILABLE:
                 train_images, train_labels = train_images.cuda(), train_labels.cuda()
             train_images, train_labels = Variable(train_images), Variable(train_labels)
-
+            
             # reset gradients
             optimizer.zero_grad()
             # calculate loss
@@ -173,7 +173,7 @@ def train(config, kwargs):
 def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
     # LOAD TRAINING DATA========================================================================
     print('\tload testing data')
-    test_dataloader = DataLoader(IndianPinesDataset(patch_size=config.patch_size,train=train_assign), \
+    test_dataloader = DataLoader(Hyperspectral_Dataset(config,train=train_assign), \
                                     batch_size=config.batch_size,shuffle=False,**kwargs)
     
     # DIRECTORY FOR LOADING=====================================================================
@@ -203,7 +203,7 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
     t_ll_s = time.time()
     for batch_idx, (test_images, test_labels) in enumerate(test_dataloader):
         # data preparation
-        test_images, test_labels = test_images.type(torch.FloatTensor), test_labels.type(torch.FloatTensor)
+        test_images, test_labels = test_images.type(torch.FloatTensor), test_labels.type(torch.LongTensor)
         if CUDA_AVAILABLE:
             test_images, test_labels = test_images.cuda(), test_labels.cuda()
         test_images, test_labels = Variable(test_images), Variable(test_labels)

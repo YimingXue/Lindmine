@@ -1,0 +1,823 @@
+#############################  PARAMETERS  ###################################
+# cuda
+	cuda: True
+# train/test parameters	model_name: SimpleFC
+	optimizer: SGD
+	epochs: 120
+	batch_size: 100
+	seed: 75
+	lr: 0.1
+	weight_decay: 0.0001
+# data preparation parameters
+	patch_size: 21
+	indianPines_band: 220
+	indianPines_class: 16
+# SimpleNet parameters
+	conv1: 500
+	conv2: 100
+	fc1: 200
+	fc2: 84
+# SimpleFC parameters
+	FC_1: 500
+	FC_2: 350
+	FC_3: 150
+	FC_4: 16
+##############################################################################
+
+#############################  MODEL  ###################################
+
+SimpleFC(
+  (FC): Sequential(
+    (0): Linear(in_features=97020, out_features=500, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=500, out_features=350, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=350, out_features=150, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=150, out_features=16, bias=True)
+    (7): ReLU()
+  )
+  (Softmax): Softmax()
+)
+##############################################################################
+
+Epoch 1/120| Time: 7.81s| Loss: 1.5829
+Epoch 2/120| Time: 7.78s| Loss: 0.5673
+Epoch 3/120| Time: 7.78s| Loss: 0.5517
+Epoch 4/120| Time: 7.77s| Loss: 0.5324
+Epoch 5/120| Time: 7.83s| Loss: 0.3416
+Epoch 6/120| Time: 7.78s| Loss: 0.2902
+Epoch 7/120| Time: 7.83s| Loss: 0.1670
+Epoch 8/120| Time: 7.81s| Loss: 0.1028
+Epoch 9/120| Time: 7.81s| Loss: 0.0903
+Epoch 10/120| Time: 7.79s| Loss: 0.0849
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC10.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC10.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6615 | AccuracyNumber: 91
+	Batch_idx: 1 | Loss: 0.0075 | AccuracyNumber: 100
+	Batch_idx: 2 | Loss: 0.0021 | AccuracyNumber: 100
+	Batch_idx: 3 | Loss: 0.0099 | AccuracyNumber: 100
+	Batch_idx: 4 | Loss: 0.0019 | AccuracyNumber: 100
+	Batch_idx: 5 | Loss: 0.0536 | AccuracyNumber: 98
+	Batch_idx: 6 | Loss: 0.0098 | AccuracyNumber: 100
+	Batch_idx: 7 | Loss: 0.1484 | AccuracyNumber: 97
+	Batch_idx: 8 | Loss: 0.1054 | AccuracyNumber: 98
+	Batch_idx: 9 | Loss: 0.1259 | AccuracyNumber: 97
+	Batch_idx: 10 | Loss: 0.2139 | AccuracyNumber: 97
+	Batch_idx: 11 | Loss: 0.0568 | AccuracyNumber: 100
+	Batch_idx: 12 | Loss: 0.1046 | AccuracyNumber: 98
+	Batch_idx: 13 | Loss: 0.0601 | AccuracyNumber: 98
+	Batch_idx: 14 | Loss: 0.0775 | AccuracyNumber: 97
+	Batch_idx: 15 | Loss: 0.0033 | AccuracyNumber: 100
+	Batch_idx: 16 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 17 | Loss: 0.0512 | AccuracyNumber: 99
+	Batch_idx: 18 | Loss: 0.4575 | AccuracyNumber: 85
+	Batch_idx: 19 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 20 | Loss: 0.0035 | AccuracyNumber: 100
+	Batch_idx: 21 | Loss: 0.0109 | AccuracyNumber: 100
+	Batch_idx: 22 | Loss: 0.0035 | AccuracyNumber: 100
+	Batch_idx: 23 | Loss: 0.0023 | AccuracyNumber: 100
+	Batch_idx: 24 | Loss: 0.0254 | AccuracyNumber: 100
+	Batch_idx: 25 | Loss: 0.0100 | AccuracyNumber: 100
+	Batch_idx: 26 | Loss: 0.0295 | AccuracyNumber: 99
+	Batch_idx: 27 | Loss: 0.0526 | AccuracyNumber: 98
+	Batch_idx: 28 | Loss: 0.0628 | AccuracyNumber: 99
+	Batch_idx: 29 | Loss: 0.0079 | AccuracyNumber: 100
+	Batch_idx: 30 | Loss: 0.0067 | AccuracyNumber: 100
+	Batch_idx: 31 | Loss: 0.0261 | AccuracyNumber: 99
+	Batch_idx: 32 | Loss: 0.0304 | AccuracyNumber: 99
+	Batch_idx: 33 | Loss: 0.0208 | AccuracyNumber: 99
+	Batch_idx: 34 | Loss: 0.0492 | AccuracyNumber: 99
+	Batch_idx: 35 | Loss: 0.0221 | AccuracyNumber: 99
+	Batch_idx: 36 | Loss: 0.0441 | AccuracyNumber: 98
+	Batch_idx: 37 | Loss: 0.0206 | AccuracyNumber: 99
+	Batch_idx: 38 | Loss: 0.1212 | AccuracyNumber: 98
+	Batch_idx: 39 | Loss: 0.1062 | AccuracyNumber: 97
+	Batch_idx: 40 | Loss: 0.1307 | AccuracyNumber: 93
+	Batch_idx: 41 | Loss: 0.0560 | AccuracyNumber: 97
+	Batch_idx: 42 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 43 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 44 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 45 | Loss: 0.0006 | AccuracyNumber: 100
+	Batch_idx: 46 | Loss: 0.0048 | AccuracyNumber: 100
+	Batch_idx: 47 | Loss: 0.0025 | AccuracyNumber: 100
+	Batch_idx: 48 | Loss: 0.0010 | AccuracyNumber: 100
+	Batch_idx: 49 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 50 | Loss: 0.6681 | AccuracyNumber: 80
+	Batch_idx: 51 | Loss: 3.4303 | AccuracyNumber: 0
+Testing Loss: 0.1366 | Testing Accuracy: 96.3077 | Time: 7.84
+Epoch 11/120| Time: 8.19s| Loss: 0.1001
+Epoch 12/120| Time: 8.13s| Loss: 0.1000
+Epoch 13/120| Time: 7.87s| Loss: 0.0796
+Epoch 14/120| Time: 7.72s| Loss: 0.1228
+Epoch 15/120| Time: 7.98s| Loss: 0.0890
+Epoch 16/120| Time: 7.71s| Loss: 0.0902
+Epoch 17/120| Time: 7.56s| Loss: 0.1196
+Epoch 18/120| Time: 7.56s| Loss: 0.1793
+Epoch 19/120| Time: 7.57s| Loss: 0.0879
+Epoch 20/120| Time: 7.54s| Loss: 0.0839
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC20.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC20.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6470 | AccuracyNumber: 98
+	Batch_idx: 1 | Loss: 0.0873 | AccuracyNumber: 98
+	Batch_idx: 2 | Loss: 0.0761 | AccuracyNumber: 98
+	Batch_idx: 3 | Loss: 0.0277 | AccuracyNumber: 98
+	Batch_idx: 4 | Loss: 0.0184 | AccuracyNumber: 99
+	Batch_idx: 5 | Loss: 0.0430 | AccuracyNumber: 99
+	Batch_idx: 6 | Loss: 0.0798 | AccuracyNumber: 98
+	Batch_idx: 7 | Loss: 0.1429 | AccuracyNumber: 92
+	Batch_idx: 8 | Loss: 0.1403 | AccuracyNumber: 94
+	Batch_idx: 9 | Loss: 0.1809 | AccuracyNumber: 89
+	Batch_idx: 10 | Loss: 0.2272 | AccuracyNumber: 87
+	Batch_idx: 11 | Loss: 0.2811 | AccuracyNumber: 88
+	Batch_idx: 12 | Loss: 0.2200 | AccuracyNumber: 91
+	Batch_idx: 13 | Loss: 0.1344 | AccuracyNumber: 97
+	Batch_idx: 14 | Loss: 0.0734 | AccuracyNumber: 98
+	Batch_idx: 15 | Loss: 0.0035 | AccuracyNumber: 100
+	Batch_idx: 16 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 17 | Loss: 0.0046 | AccuracyNumber: 100
+	Batch_idx: 18 | Loss: 0.3894 | AccuracyNumber: 86
+	Batch_idx: 19 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 20 | Loss: 0.0037 | AccuracyNumber: 100
+	Batch_idx: 21 | Loss: 0.0040 | AccuracyNumber: 100
+	Batch_idx: 22 | Loss: 0.0124 | AccuracyNumber: 99
+	Batch_idx: 23 | Loss: 0.0066 | AccuracyNumber: 100
+	Batch_idx: 24 | Loss: 0.0019 | AccuracyNumber: 100
+	Batch_idx: 25 | Loss: 0.0050 | AccuracyNumber: 100
+	Batch_idx: 26 | Loss: 0.0122 | AccuracyNumber: 100
+	Batch_idx: 27 | Loss: 0.0017 | AccuracyNumber: 100
+	Batch_idx: 28 | Loss: 0.0055 | AccuracyNumber: 100
+	Batch_idx: 29 | Loss: 0.0072 | AccuracyNumber: 100
+	Batch_idx: 30 | Loss: 0.0049 | AccuracyNumber: 100
+	Batch_idx: 31 | Loss: 0.0040 | AccuracyNumber: 100
+	Batch_idx: 32 | Loss: 0.0038 | AccuracyNumber: 100
+	Batch_idx: 33 | Loss: 0.0045 | AccuracyNumber: 100
+	Batch_idx: 34 | Loss: 0.0145 | AccuracyNumber: 99
+	Batch_idx: 35 | Loss: 0.0035 | AccuracyNumber: 100
+	Batch_idx: 36 | Loss: 0.0056 | AccuracyNumber: 100
+	Batch_idx: 37 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 38 | Loss: 0.0680 | AccuracyNumber: 99
+	Batch_idx: 39 | Loss: 0.0400 | AccuracyNumber: 98
+	Batch_idx: 40 | Loss: 0.0396 | AccuracyNumber: 99
+	Batch_idx: 41 | Loss: 0.0172 | AccuracyNumber: 99
+	Batch_idx: 42 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 43 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 44 | Loss: 0.0000 | AccuracyNumber: 100
+	Batch_idx: 45 | Loss: 0.0036 | AccuracyNumber: 100
+	Batch_idx: 46 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 47 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 48 | Loss: 0.0009 | AccuracyNumber: 100
+	Batch_idx: 49 | Loss: 0.0026 | AccuracyNumber: 100
+	Batch_idx: 50 | Loss: 0.6368 | AccuracyNumber: 80
+	Batch_idx: 51 | Loss: 3.2689 | AccuracyNumber: 0
+Testing Loss: 0.1338 | Testing Accuracy: 95.8269 | Time: 7.91
+Epoch 21/120| Time: 7.90s| Loss: 0.1336
+Epoch 22/120| Time: 7.87s| Loss: 0.1071
+Epoch 23/120| Time: 8.09s| Loss: 0.0725
+Epoch 24/120| Time: 7.78s| Loss: 0.0705
+Epoch 25/120| Time: 8.00s| Loss: 0.0642
+Epoch 26/120| Time: 7.82s| Loss: 0.0667
+Epoch 27/120| Time: 7.84s| Loss: 0.0650
+Epoch 28/120| Time: 7.84s| Loss: 0.0730
+Epoch 29/120| Time: 7.80s| Loss: 0.0607
+Epoch 30/120| Time: 7.78s| Loss: 0.0537
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC30.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC30.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6678 | AccuracyNumber: 95
+	Batch_idx: 1 | Loss: 0.0298 | AccuracyNumber: 99
+	Batch_idx: 2 | Loss: 0.0036 | AccuracyNumber: 100
+	Batch_idx: 3 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 4 | Loss: 0.0142 | AccuracyNumber: 99
+	Batch_idx: 5 | Loss: 0.0014 | AccuracyNumber: 100
+	Batch_idx: 6 | Loss: 0.0025 | AccuracyNumber: 100
+	Batch_idx: 7 | Loss: 0.1066 | AccuracyNumber: 96
+	Batch_idx: 8 | Loss: 0.0415 | AccuracyNumber: 98
+	Batch_idx: 9 | Loss: 0.0065 | AccuracyNumber: 100
+	Batch_idx: 10 | Loss: 0.0930 | AccuracyNumber: 97
+	Batch_idx: 11 | Loss: 0.0125 | AccuracyNumber: 100
+	Batch_idx: 12 | Loss: 0.0786 | AccuracyNumber: 98
+	Batch_idx: 13 | Loss: 0.0610 | AccuracyNumber: 98
+	Batch_idx: 14 | Loss: 0.0621 | AccuracyNumber: 98
+	Batch_idx: 15 | Loss: 0.0080 | AccuracyNumber: 100
+	Batch_idx: 16 | Loss: 0.0129 | AccuracyNumber: 99
+	Batch_idx: 17 | Loss: 0.0285 | AccuracyNumber: 99
+	Batch_idx: 18 | Loss: 0.4052 | AccuracyNumber: 85
+	Batch_idx: 19 | Loss: 0.0011 | AccuracyNumber: 100
+	Batch_idx: 20 | Loss: 0.0025 | AccuracyNumber: 100
+	Batch_idx: 21 | Loss: 0.0017 | AccuracyNumber: 100
+	Batch_idx: 22 | Loss: 0.1080 | AccuracyNumber: 99
+	Batch_idx: 23 | Loss: 0.0116 | AccuracyNumber: 100
+	Batch_idx: 24 | Loss: 0.0032 | AccuracyNumber: 100
+	Batch_idx: 25 | Loss: 0.0049 | AccuracyNumber: 100
+	Batch_idx: 26 | Loss: 0.0528 | AccuracyNumber: 99
+	Batch_idx: 27 | Loss: 0.0332 | AccuracyNumber: 98
+	Batch_idx: 28 | Loss: 0.0087 | AccuracyNumber: 100
+	Batch_idx: 29 | Loss: 0.0010 | AccuracyNumber: 100
+	Batch_idx: 30 | Loss: 0.0079 | AccuracyNumber: 100
+	Batch_idx: 31 | Loss: 0.0016 | AccuracyNumber: 100
+	Batch_idx: 32 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 33 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 34 | Loss: 0.0164 | AccuracyNumber: 99
+	Batch_idx: 35 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 36 | Loss: 0.0007 | AccuracyNumber: 100
+	Batch_idx: 37 | Loss: 0.0206 | AccuracyNumber: 99
+	Batch_idx: 38 | Loss: 0.1127 | AccuracyNumber: 99
+	Batch_idx: 39 | Loss: 0.0244 | AccuracyNumber: 99
+	Batch_idx: 40 | Loss: 0.0320 | AccuracyNumber: 99
+	Batch_idx: 41 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 42 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 43 | Loss: 0.0000 | AccuracyNumber: 100
+	Batch_idx: 44 | Loss: 0.0000 | AccuracyNumber: 100
+	Batch_idx: 45 | Loss: 0.0007 | AccuracyNumber: 100
+	Batch_idx: 46 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 47 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 48 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 49 | Loss: 0.0006 | AccuracyNumber: 100
+	Batch_idx: 50 | Loss: 0.6522 | AccuracyNumber: 79
+	Batch_idx: 51 | Loss: 3.1474 | AccuracyNumber: 0
+Testing Loss: 0.1132 | Testing Accuracy: 96.7500 | Time: 7.89
+Epoch 31/120| Time: 7.97s| Loss: 0.0511
+Epoch 32/120| Time: 7.78s| Loss: 0.0529
+Epoch 33/120| Time: 7.70s| Loss: 0.0508
+Epoch 34/120| Time: 7.84s| Loss: 0.0528
+Epoch 35/120| Time: 7.73s| Loss: 0.0528
+Epoch 36/120| Time: 7.81s| Loss: 0.0528
+Epoch 37/120| Time: 7.83s| Loss: 0.0508
+Epoch 38/120| Time: 7.78s| Loss: 0.0508
+Epoch 39/120| Time: 7.80s| Loss: 0.0508
+Epoch 40/120| Time: 7.84s| Loss: 0.0528
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC40.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC40.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6683 | AccuracyNumber: 92
+	Batch_idx: 1 | Loss: 0.0194 | AccuracyNumber: 99
+	Batch_idx: 2 | Loss: 0.0014 | AccuracyNumber: 100
+	Batch_idx: 3 | Loss: 0.0006 | AccuracyNumber: 100
+	Batch_idx: 4 | Loss: 0.0035 | AccuracyNumber: 100
+	Batch_idx: 5 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 6 | Loss: 0.0009 | AccuracyNumber: 100
+	Batch_idx: 7 | Loss: 0.1124 | AccuracyNumber: 96
+	Batch_idx: 8 | Loss: 0.0242 | AccuracyNumber: 100
+	Batch_idx: 9 | Loss: 0.0032 | AccuracyNumber: 100
+	Batch_idx: 10 | Loss: 0.0685 | AccuracyNumber: 98
+	Batch_idx: 11 | Loss: 0.0033 | AccuracyNumber: 100
+	Batch_idx: 12 | Loss: 0.0726 | AccuracyNumber: 98
+	Batch_idx: 13 | Loss: 0.0606 | AccuracyNumber: 98
+	Batch_idx: 14 | Loss: 0.0586 | AccuracyNumber: 98
+	Batch_idx: 15 | Loss: 0.0083 | AccuracyNumber: 100
+	Batch_idx: 16 | Loss: 0.0029 | AccuracyNumber: 100
+	Batch_idx: 17 | Loss: 0.0253 | AccuracyNumber: 99
+	Batch_idx: 18 | Loss: 0.4077 | AccuracyNumber: 85
+	Batch_idx: 19 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 20 | Loss: 0.0015 | AccuracyNumber: 100
+	Batch_idx: 21 | Loss: 0.0009 | AccuracyNumber: 100
+	Batch_idx: 22 | Loss: 0.1013 | AccuracyNumber: 99
+	Batch_idx: 23 | Loss: 0.0081 | AccuracyNumber: 100
+	Batch_idx: 24 | Loss: 0.0017 | AccuracyNumber: 100
+	Batch_idx: 25 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 26 | Loss: 0.0373 | AccuracyNumber: 99
+	Batch_idx: 27 | Loss: 0.0155 | AccuracyNumber: 98
+	Batch_idx: 28 | Loss: 0.0051 | AccuracyNumber: 100
+	Batch_idx: 29 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 30 | Loss: 0.0030 | AccuracyNumber: 100
+	Batch_idx: 31 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 32 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 33 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 34 | Loss: 0.0097 | AccuracyNumber: 99
+	Batch_idx: 35 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 36 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 37 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 38 | Loss: 0.0926 | AccuracyNumber: 99
+	Batch_idx: 39 | Loss: 0.0261 | AccuracyNumber: 99
+	Batch_idx: 40 | Loss: 0.0321 | AccuracyNumber: 99
+	Batch_idx: 41 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 42 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 43 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 44 | Loss: 0.0000 | AccuracyNumber: 100
+	Batch_idx: 45 | Loss: 0.0011 | AccuracyNumber: 100
+	Batch_idx: 46 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 47 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 48 | Loss: 0.0003 | AccuracyNumber: 100
+	Batch_idx: 49 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 50 | Loss: 0.6283 | AccuracyNumber: 80
+	Batch_idx: 51 | Loss: 3.1175 | AccuracyNumber: 0
+Testing Loss: 0.1083 | Testing Accuracy: 96.8269 | Time: 8.09
+Epoch 41/120| Time: 7.85s| Loss: 0.0508
+Epoch 42/120| Time: 8.04s| Loss: 0.0508
+Epoch 43/120| Time: 7.93s| Loss: 0.0528
+Epoch 44/120| Time: 7.74s| Loss: 0.0508
+Epoch 45/120| Time: 7.87s| Loss: 0.0508
+Epoch 46/120| Time: 7.88s| Loss: 0.0508
+Epoch 47/120| Time: 7.96s| Loss: 0.0508
+Epoch 48/120| Time: 8.02s| Loss: 0.0528
+Epoch 49/120| Time: 8.00s| Loss: 0.0508
+Epoch 50/120| Time: 7.98s| Loss: 0.0528
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC50.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC50.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6687 | AccuracyNumber: 92
+	Batch_idx: 1 | Loss: 0.0189 | AccuracyNumber: 99
+	Batch_idx: 2 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 3 | Loss: 0.0006 | AccuracyNumber: 100
+	Batch_idx: 4 | Loss: 0.0032 | AccuracyNumber: 100
+	Batch_idx: 5 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 6 | Loss: 0.0009 | AccuracyNumber: 100
+	Batch_idx: 7 | Loss: 0.1129 | AccuracyNumber: 96
+	Batch_idx: 8 | Loss: 0.0239 | AccuracyNumber: 100
+	Batch_idx: 9 | Loss: 0.0033 | AccuracyNumber: 100
+	Batch_idx: 10 | Loss: 0.0686 | AccuracyNumber: 98
+	Batch_idx: 11 | Loss: 0.0034 | AccuracyNumber: 100
+	Batch_idx: 12 | Loss: 0.0729 | AccuracyNumber: 98
+	Batch_idx: 13 | Loss: 0.0606 | AccuracyNumber: 98
+	Batch_idx: 14 | Loss: 0.0589 | AccuracyNumber: 98
+	Batch_idx: 15 | Loss: 0.0084 | AccuracyNumber: 100
+	Batch_idx: 16 | Loss: 0.0027 | AccuracyNumber: 100
+	Batch_idx: 17 | Loss: 0.0250 | AccuracyNumber: 99
+	Batch_idx: 18 | Loss: 0.4075 | AccuracyNumber: 85
+	Batch_idx: 19 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 20 | Loss: 0.0015 | AccuracyNumber: 100
+	Batch_idx: 21 | Loss: 0.0009 | AccuracyNumber: 100
+	Batch_idx: 22 | Loss: 0.1012 | AccuracyNumber: 99
+	Batch_idx: 23 | Loss: 0.0081 | AccuracyNumber: 100
+	Batch_idx: 24 | Loss: 0.0018 | AccuracyNumber: 100
+	Batch_idx: 25 | Loss: 0.0015 | AccuracyNumber: 100
+	Batch_idx: 26 | Loss: 0.0363 | AccuracyNumber: 99
+	Batch_idx: 27 | Loss: 0.0163 | AccuracyNumber: 98
+	Batch_idx: 28 | Loss: 0.0049 | AccuracyNumber: 100
+	Batch_idx: 29 | Loss: 0.0007 | AccuracyNumber: 100
+	Batch_idx: 30 | Loss: 0.0029 | AccuracyNumber: 100
+	Batch_idx: 31 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 32 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 33 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 34 | Loss: 0.0094 | AccuracyNumber: 99
+	Batch_idx: 35 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 36 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 37 | Loss: 0.0009 | AccuracyNumber: 100
+	Batch_idx: 38 | Loss: 0.0910 | AccuracyNumber: 99
+	Batch_idx: 39 | Loss: 0.0256 | AccuracyNumber: 99
+	Batch_idx: 40 | Loss: 0.0320 | AccuracyNumber: 99
+	Batch_idx: 41 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 42 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 43 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 44 | Loss: 0.0000 | AccuracyNumber: 100
+	Batch_idx: 45 | Loss: 0.0011 | AccuracyNumber: 100
+	Batch_idx: 46 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 47 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 48 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 49 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 50 | Loss: 0.6272 | AccuracyNumber: 80
+	Batch_idx: 51 | Loss: 3.1185 | AccuracyNumber: 0
+Testing Loss: 0.1083 | Testing Accuracy: 96.8269 | Time: 7.93
+Epoch 51/120| Time: 7.93s| Loss: 0.0508
+Epoch 52/120| Time: 8.00s| Loss: 0.0508
+Epoch 53/120| Time: 8.07s| Loss: 0.0528
+Epoch 54/120| Time: 7.89s| Loss: 0.0508
+Epoch 55/120| Time: 8.01s| Loss: 0.0528
+Epoch 56/120| Time: 7.71s| Loss: 0.0528
+Epoch 57/120| Time: 8.11s| Loss: 0.0508
+Epoch 58/120| Time: 8.02s| Loss: 0.0508
+Epoch 59/120| Time: 8.02s| Loss: 0.0508
+Epoch 60/120| Time: 8.09s| Loss: 0.0548
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC60.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC60.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6692 | AccuracyNumber: 92
+	Batch_idx: 1 | Loss: 0.0185 | AccuracyNumber: 99
+	Batch_idx: 2 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 3 | Loss: 0.0006 | AccuracyNumber: 100
+	Batch_idx: 4 | Loss: 0.0031 | AccuracyNumber: 100
+	Batch_idx: 5 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 6 | Loss: 0.0009 | AccuracyNumber: 100
+	Batch_idx: 7 | Loss: 0.1134 | AccuracyNumber: 96
+	Batch_idx: 8 | Loss: 0.0235 | AccuracyNumber: 100
+	Batch_idx: 9 | Loss: 0.0034 | AccuracyNumber: 100
+	Batch_idx: 10 | Loss: 0.0695 | AccuracyNumber: 98
+	Batch_idx: 11 | Loss: 0.0035 | AccuracyNumber: 100
+	Batch_idx: 12 | Loss: 0.0733 | AccuracyNumber: 98
+	Batch_idx: 13 | Loss: 0.0606 | AccuracyNumber: 98
+	Batch_idx: 14 | Loss: 0.0590 | AccuracyNumber: 98
+	Batch_idx: 15 | Loss: 0.0085 | AccuracyNumber: 100
+	Batch_idx: 16 | Loss: 0.0025 | AccuracyNumber: 100
+	Batch_idx: 17 | Loss: 0.0247 | AccuracyNumber: 99
+	Batch_idx: 18 | Loss: 0.4075 | AccuracyNumber: 85
+	Batch_idx: 19 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 20 | Loss: 0.0014 | AccuracyNumber: 100
+	Batch_idx: 21 | Loss: 0.0010 | AccuracyNumber: 100
+	Batch_idx: 22 | Loss: 0.1010 | AccuracyNumber: 99
+	Batch_idx: 23 | Loss: 0.0082 | AccuracyNumber: 100
+	Batch_idx: 24 | Loss: 0.0017 | AccuracyNumber: 100
+	Batch_idx: 25 | Loss: 0.0015 | AccuracyNumber: 100
+	Batch_idx: 26 | Loss: 0.0352 | AccuracyNumber: 99
+	Batch_idx: 27 | Loss: 0.0163 | AccuracyNumber: 98
+	Batch_idx: 28 | Loss: 0.0047 | AccuracyNumber: 100
+	Batch_idx: 29 | Loss: 0.0007 | AccuracyNumber: 100
+	Batch_idx: 30 | Loss: 0.0027 | AccuracyNumber: 100
+	Batch_idx: 31 | Loss: 0.0006 | AccuracyNumber: 100
+	Batch_idx: 32 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 33 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 34 | Loss: 0.0091 | AccuracyNumber: 99
+	Batch_idx: 35 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 36 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 37 | Loss: 0.0009 | AccuracyNumber: 100
+	Batch_idx: 38 | Loss: 0.0894 | AccuracyNumber: 99
+	Batch_idx: 39 | Loss: 0.0246 | AccuracyNumber: 99
+	Batch_idx: 40 | Loss: 0.0316 | AccuracyNumber: 99
+	Batch_idx: 41 | Loss: 0.0011 | AccuracyNumber: 100
+	Batch_idx: 42 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 43 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 44 | Loss: 0.0000 | AccuracyNumber: 100
+	Batch_idx: 45 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 46 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 47 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 48 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 49 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 50 | Loss: 0.6262 | AccuracyNumber: 80
+	Batch_idx: 51 | Loss: 3.1205 | AccuracyNumber: 0
+Testing Loss: 0.1082 | Testing Accuracy: 96.8269 | Time: 8.00
+Epoch 61/120| Time: 7.70s| Loss: 0.0508
+Epoch 62/120| Time: 7.64s| Loss: 0.0528
+Epoch 63/120| Time: 7.84s| Loss: 0.0528
+Epoch 64/120| Time: 7.96s| Loss: 0.0508
+Epoch 65/120| Time: 8.23s| Loss: 0.0508
+Epoch 66/120| Time: 7.76s| Loss: 0.0548
+Epoch 67/120| Time: 7.70s| Loss: 0.0528
+Epoch 68/120| Time: 7.74s| Loss: 0.0528
+Epoch 69/120| Time: 7.86s| Loss: 0.0508
+Epoch 70/120| Time: 8.06s| Loss: 0.0508
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC70.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC70.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6695 | AccuracyNumber: 91
+	Batch_idx: 1 | Loss: 0.0178 | AccuracyNumber: 99
+	Batch_idx: 2 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 3 | Loss: 0.0006 | AccuracyNumber: 100
+	Batch_idx: 4 | Loss: 0.0029 | AccuracyNumber: 100
+	Batch_idx: 5 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 6 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 7 | Loss: 0.1141 | AccuracyNumber: 96
+	Batch_idx: 8 | Loss: 0.0235 | AccuracyNumber: 100
+	Batch_idx: 9 | Loss: 0.0035 | AccuracyNumber: 100
+	Batch_idx: 10 | Loss: 0.0704 | AccuracyNumber: 98
+	Batch_idx: 11 | Loss: 0.0036 | AccuracyNumber: 100
+	Batch_idx: 12 | Loss: 0.0733 | AccuracyNumber: 98
+	Batch_idx: 13 | Loss: 0.0606 | AccuracyNumber: 98
+	Batch_idx: 14 | Loss: 0.0593 | AccuracyNumber: 98
+	Batch_idx: 15 | Loss: 0.0086 | AccuracyNumber: 100
+	Batch_idx: 16 | Loss: 0.0023 | AccuracyNumber: 100
+	Batch_idx: 17 | Loss: 0.0245 | AccuracyNumber: 99
+	Batch_idx: 18 | Loss: 0.4073 | AccuracyNumber: 85
+	Batch_idx: 19 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 20 | Loss: 0.0014 | AccuracyNumber: 100
+	Batch_idx: 21 | Loss: 0.0010 | AccuracyNumber: 100
+	Batch_idx: 22 | Loss: 0.1009 | AccuracyNumber: 99
+	Batch_idx: 23 | Loss: 0.0082 | AccuracyNumber: 100
+	Batch_idx: 24 | Loss: 0.0018 | AccuracyNumber: 100
+	Batch_idx: 25 | Loss: 0.0017 | AccuracyNumber: 100
+	Batch_idx: 26 | Loss: 0.0342 | AccuracyNumber: 99
+	Batch_idx: 27 | Loss: 0.0166 | AccuracyNumber: 98
+	Batch_idx: 28 | Loss: 0.0045 | AccuracyNumber: 100
+	Batch_idx: 29 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 30 | Loss: 0.0026 | AccuracyNumber: 100
+	Batch_idx: 31 | Loss: 0.0006 | AccuracyNumber: 100
+	Batch_idx: 32 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 33 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 34 | Loss: 0.0088 | AccuracyNumber: 99
+	Batch_idx: 35 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 36 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 37 | Loss: 0.0009 | AccuracyNumber: 100
+	Batch_idx: 38 | Loss: 0.0879 | AccuracyNumber: 99
+	Batch_idx: 39 | Loss: 0.0238 | AccuracyNumber: 99
+	Batch_idx: 40 | Loss: 0.0314 | AccuracyNumber: 99
+	Batch_idx: 41 | Loss: 0.0011 | AccuracyNumber: 100
+	Batch_idx: 42 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 43 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 44 | Loss: 0.0000 | AccuracyNumber: 100
+	Batch_idx: 45 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 46 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 47 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 48 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 49 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 50 | Loss: 0.6254 | AccuracyNumber: 80
+	Batch_idx: 51 | Loss: 3.1237 | AccuracyNumber: 0
+Testing Loss: 0.1082 | Testing Accuracy: 96.8077 | Time: 8.02
+Epoch 71/120| Time: 7.91s| Loss: 0.0508
+Epoch 72/120| Time: 7.81s| Loss: 0.0508
+Epoch 73/120| Time: 7.69s| Loss: 0.0508
+Epoch 74/120| Time: 7.72s| Loss: 0.0528
+Epoch 75/120| Time: 7.74s| Loss: 0.0528
+Epoch 76/120| Time: 7.72s| Loss: 0.0508
+Epoch 77/120| Time: 7.72s| Loss: 0.0548
+Epoch 78/120| Time: 7.71s| Loss: 0.0508
+Epoch 79/120| Time: 7.82s| Loss: 0.0528
+Epoch 80/120| Time: 7.77s| Loss: 0.0528
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC80.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC80.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6700 | AccuracyNumber: 90
+	Batch_idx: 1 | Loss: 0.0174 | AccuracyNumber: 99
+	Batch_idx: 2 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 3 | Loss: 0.0007 | AccuracyNumber: 100
+	Batch_idx: 4 | Loss: 0.0027 | AccuracyNumber: 100
+	Batch_idx: 5 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 6 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 7 | Loss: 0.1147 | AccuracyNumber: 96
+	Batch_idx: 8 | Loss: 0.0235 | AccuracyNumber: 100
+	Batch_idx: 9 | Loss: 0.0037 | AccuracyNumber: 100
+	Batch_idx: 10 | Loss: 0.0712 | AccuracyNumber: 98
+	Batch_idx: 11 | Loss: 0.0036 | AccuracyNumber: 100
+	Batch_idx: 12 | Loss: 0.0735 | AccuracyNumber: 98
+	Batch_idx: 13 | Loss: 0.0608 | AccuracyNumber: 98
+	Batch_idx: 14 | Loss: 0.0595 | AccuracyNumber: 98
+	Batch_idx: 15 | Loss: 0.0087 | AccuracyNumber: 100
+	Batch_idx: 16 | Loss: 0.0022 | AccuracyNumber: 100
+	Batch_idx: 17 | Loss: 0.0242 | AccuracyNumber: 99
+	Batch_idx: 18 | Loss: 0.4073 | AccuracyNumber: 85
+	Batch_idx: 19 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 20 | Loss: 0.0014 | AccuracyNumber: 100
+	Batch_idx: 21 | Loss: 0.0010 | AccuracyNumber: 100
+	Batch_idx: 22 | Loss: 0.1007 | AccuracyNumber: 99
+	Batch_idx: 23 | Loss: 0.0082 | AccuracyNumber: 100
+	Batch_idx: 24 | Loss: 0.0017 | AccuracyNumber: 100
+	Batch_idx: 25 | Loss: 0.0016 | AccuracyNumber: 100
+	Batch_idx: 26 | Loss: 0.0331 | AccuracyNumber: 99
+	Batch_idx: 27 | Loss: 0.0164 | AccuracyNumber: 99
+	Batch_idx: 28 | Loss: 0.0043 | AccuracyNumber: 100
+	Batch_idx: 29 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 30 | Loss: 0.0024 | AccuracyNumber: 100
+	Batch_idx: 31 | Loss: 0.0006 | AccuracyNumber: 100
+	Batch_idx: 32 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 33 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 34 | Loss: 0.0085 | AccuracyNumber: 99
+	Batch_idx: 35 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 36 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 37 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 38 | Loss: 0.0864 | AccuracyNumber: 99
+	Batch_idx: 39 | Loss: 0.0231 | AccuracyNumber: 99
+	Batch_idx: 40 | Loss: 0.0314 | AccuracyNumber: 99
+	Batch_idx: 41 | Loss: 0.0011 | AccuracyNumber: 100
+	Batch_idx: 42 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 43 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 44 | Loss: 0.0000 | AccuracyNumber: 100
+	Batch_idx: 45 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 46 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 47 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 48 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 49 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 50 | Loss: 0.6245 | AccuracyNumber: 80
+	Batch_idx: 51 | Loss: 3.1263 | AccuracyNumber: 0
+Testing Loss: 0.1082 | Testing Accuracy: 96.8077 | Time: 7.80
+Epoch 81/120| Time: 7.74s| Loss: 0.0528
+Epoch 82/120| Time: 7.69s| Loss: 0.0508
+Epoch 83/120| Time: 7.51s| Loss: 0.0508
+Epoch 84/120| Time: 7.53s| Loss: 0.0508
+Epoch 85/120| Time: 7.54s| Loss: 0.0508
+Epoch 86/120| Time: 7.50s| Loss: 0.0508
+Epoch 87/120| Time: 7.52s| Loss: 0.0528
+Epoch 88/120| Time: 7.54s| Loss: 0.0528
+Epoch 89/120| Time: 7.53s| Loss: 0.0508
+Epoch 90/120| Time: 7.53s| Loss: 0.0508
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC90.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC90.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6700 | AccuracyNumber: 90
+	Batch_idx: 1 | Loss: 0.0174 | AccuracyNumber: 99
+	Batch_idx: 2 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 3 | Loss: 0.0007 | AccuracyNumber: 100
+	Batch_idx: 4 | Loss: 0.0027 | AccuracyNumber: 100
+	Batch_idx: 5 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 6 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 7 | Loss: 0.1146 | AccuracyNumber: 96
+	Batch_idx: 8 | Loss: 0.0234 | AccuracyNumber: 100
+	Batch_idx: 9 | Loss: 0.0037 | AccuracyNumber: 100
+	Batch_idx: 10 | Loss: 0.0712 | AccuracyNumber: 98
+	Batch_idx: 11 | Loss: 0.0036 | AccuracyNumber: 100
+	Batch_idx: 12 | Loss: 0.0736 | AccuracyNumber: 98
+	Batch_idx: 13 | Loss: 0.0608 | AccuracyNumber: 98
+	Batch_idx: 14 | Loss: 0.0595 | AccuracyNumber: 98
+	Batch_idx: 15 | Loss: 0.0087 | AccuracyNumber: 100
+	Batch_idx: 16 | Loss: 0.0021 | AccuracyNumber: 100
+	Batch_idx: 17 | Loss: 0.0242 | AccuracyNumber: 99
+	Batch_idx: 18 | Loss: 0.4073 | AccuracyNumber: 85
+	Batch_idx: 19 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 20 | Loss: 0.0014 | AccuracyNumber: 100
+	Batch_idx: 21 | Loss: 0.0010 | AccuracyNumber: 100
+	Batch_idx: 22 | Loss: 0.1007 | AccuracyNumber: 99
+	Batch_idx: 23 | Loss: 0.0082 | AccuracyNumber: 100
+	Batch_idx: 24 | Loss: 0.0017 | AccuracyNumber: 100
+	Batch_idx: 25 | Loss: 0.0016 | AccuracyNumber: 100
+	Batch_idx: 26 | Loss: 0.0330 | AccuracyNumber: 99
+	Batch_idx: 27 | Loss: 0.0162 | AccuracyNumber: 99
+	Batch_idx: 28 | Loss: 0.0042 | AccuracyNumber: 100
+	Batch_idx: 29 | Loss: 0.0007 | AccuracyNumber: 100
+	Batch_idx: 30 | Loss: 0.0024 | AccuracyNumber: 100
+	Batch_idx: 31 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 32 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 33 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 34 | Loss: 0.0085 | AccuracyNumber: 99
+	Batch_idx: 35 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 36 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 37 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 38 | Loss: 0.0863 | AccuracyNumber: 99
+	Batch_idx: 39 | Loss: 0.0230 | AccuracyNumber: 99
+	Batch_idx: 40 | Loss: 0.0314 | AccuracyNumber: 99
+	Batch_idx: 41 | Loss: 0.0011 | AccuracyNumber: 100
+	Batch_idx: 42 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 43 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 44 | Loss: 0.0000 | AccuracyNumber: 100
+	Batch_idx: 45 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 46 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 47 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 48 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 49 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 50 | Loss: 0.6245 | AccuracyNumber: 80
+	Batch_idx: 51 | Loss: 3.1269 | AccuracyNumber: 0
+Testing Loss: 0.1082 | Testing Accuracy: 96.8077 | Time: 7.50
+Epoch 91/120| Time: 7.55s| Loss: 0.0508
+Epoch 92/120| Time: 7.52s| Loss: 0.0508
+Epoch 93/120| Time: 7.50s| Loss: 0.0528
+Epoch 94/120| Time: 7.52s| Loss: 0.0528
+Epoch 95/120| Time: 7.53s| Loss: 0.0528
+Epoch 96/120| Time: 7.51s| Loss: 0.0508
+Epoch 97/120| Time: 7.56s| Loss: 0.0508
+Epoch 98/120| Time: 7.79s| Loss: 0.0508
+Epoch 99/120| Time: 7.75s| Loss: 0.0508
+Epoch 100/120| Time: 7.85s| Loss: 0.0528
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC100.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC100.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6700 | AccuracyNumber: 90
+	Batch_idx: 1 | Loss: 0.0173 | AccuracyNumber: 99
+	Batch_idx: 2 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 3 | Loss: 0.0007 | AccuracyNumber: 100
+	Batch_idx: 4 | Loss: 0.0027 | AccuracyNumber: 100
+	Batch_idx: 5 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 6 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 7 | Loss: 0.1145 | AccuracyNumber: 96
+	Batch_idx: 8 | Loss: 0.0234 | AccuracyNumber: 100
+	Batch_idx: 9 | Loss: 0.0037 | AccuracyNumber: 100
+	Batch_idx: 10 | Loss: 0.0712 | AccuracyNumber: 98
+	Batch_idx: 11 | Loss: 0.0036 | AccuracyNumber: 100
+	Batch_idx: 12 | Loss: 0.0736 | AccuracyNumber: 98
+	Batch_idx: 13 | Loss: 0.0608 | AccuracyNumber: 98
+	Batch_idx: 14 | Loss: 0.0596 | AccuracyNumber: 98
+	Batch_idx: 15 | Loss: 0.0087 | AccuracyNumber: 100
+	Batch_idx: 16 | Loss: 0.0021 | AccuracyNumber: 100
+	Batch_idx: 17 | Loss: 0.0242 | AccuracyNumber: 99
+	Batch_idx: 18 | Loss: 0.4073 | AccuracyNumber: 85
+	Batch_idx: 19 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 20 | Loss: 0.0014 | AccuracyNumber: 100
+	Batch_idx: 21 | Loss: 0.0010 | AccuracyNumber: 100
+	Batch_idx: 22 | Loss: 0.1006 | AccuracyNumber: 99
+	Batch_idx: 23 | Loss: 0.0082 | AccuracyNumber: 100
+	Batch_idx: 24 | Loss: 0.0017 | AccuracyNumber: 100
+	Batch_idx: 25 | Loss: 0.0016 | AccuracyNumber: 100
+	Batch_idx: 26 | Loss: 0.0329 | AccuracyNumber: 99
+	Batch_idx: 27 | Loss: 0.0162 | AccuracyNumber: 99
+	Batch_idx: 28 | Loss: 0.0042 | AccuracyNumber: 100
+	Batch_idx: 29 | Loss: 0.0007 | AccuracyNumber: 100
+	Batch_idx: 30 | Loss: 0.0024 | AccuracyNumber: 100
+	Batch_idx: 31 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 32 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 33 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 34 | Loss: 0.0085 | AccuracyNumber: 99
+	Batch_idx: 35 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 36 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 37 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 38 | Loss: 0.0861 | AccuracyNumber: 99
+	Batch_idx: 39 | Loss: 0.0229 | AccuracyNumber: 99
+	Batch_idx: 40 | Loss: 0.0313 | AccuracyNumber: 99
+	Batch_idx: 41 | Loss: 0.0011 | AccuracyNumber: 100
+	Batch_idx: 42 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 43 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 44 | Loss: 0.0000 | AccuracyNumber: 100
+	Batch_idx: 45 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 46 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 47 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 48 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 49 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 50 | Loss: 0.6244 | AccuracyNumber: 80
+	Batch_idx: 51 | Loss: 3.1275 | AccuracyNumber: 0
+Testing Loss: 0.1082 | Testing Accuracy: 96.8077 | Time: 8.17
+Epoch 101/120| Time: 7.78s| Loss: 0.0508
+Epoch 102/120| Time: 7.77s| Loss: 0.0528
+Epoch 103/120| Time: 7.70s| Loss: 0.0508
+Epoch 104/120| Time: 7.71s| Loss: 0.0528
+Epoch 105/120| Time: 7.88s| Loss: 0.0548
+Epoch 106/120| Time: 8.10s| Loss: 0.0508
+Epoch 107/120| Time: 8.25s| Loss: 0.0548
+Epoch 108/120| Time: 7.97s| Loss: 0.0508
+Epoch 109/120| Time: 8.36s| Loss: 0.0508
+Epoch 110/120| Time: 8.10s| Loss: 0.0528
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC110.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC110.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6701 | AccuracyNumber: 90
+	Batch_idx: 1 | Loss: 0.0173 | AccuracyNumber: 99
+	Batch_idx: 2 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 3 | Loss: 0.0007 | AccuracyNumber: 100
+	Batch_idx: 4 | Loss: 0.0027 | AccuracyNumber: 100
+	Batch_idx: 5 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 6 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 7 | Loss: 0.1145 | AccuracyNumber: 96
+	Batch_idx: 8 | Loss: 0.0234 | AccuracyNumber: 100
+	Batch_idx: 9 | Loss: 0.0037 | AccuracyNumber: 100
+	Batch_idx: 10 | Loss: 0.0713 | AccuracyNumber: 98
+	Batch_idx: 11 | Loss: 0.0036 | AccuracyNumber: 100
+	Batch_idx: 12 | Loss: 0.0736 | AccuracyNumber: 98
+	Batch_idx: 13 | Loss: 0.0608 | AccuracyNumber: 98
+	Batch_idx: 14 | Loss: 0.0596 | AccuracyNumber: 98
+	Batch_idx: 15 | Loss: 0.0087 | AccuracyNumber: 100
+	Batch_idx: 16 | Loss: 0.0021 | AccuracyNumber: 100
+	Batch_idx: 17 | Loss: 0.0241 | AccuracyNumber: 99
+	Batch_idx: 18 | Loss: 0.4073 | AccuracyNumber: 85
+	Batch_idx: 19 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 20 | Loss: 0.0014 | AccuracyNumber: 100
+	Batch_idx: 21 | Loss: 0.0010 | AccuracyNumber: 100
+	Batch_idx: 22 | Loss: 0.1006 | AccuracyNumber: 99
+	Batch_idx: 23 | Loss: 0.0082 | AccuracyNumber: 100
+	Batch_idx: 24 | Loss: 0.0017 | AccuracyNumber: 100
+	Batch_idx: 25 | Loss: 0.0016 | AccuracyNumber: 100
+	Batch_idx: 26 | Loss: 0.0328 | AccuracyNumber: 99
+	Batch_idx: 27 | Loss: 0.0162 | AccuracyNumber: 99
+	Batch_idx: 28 | Loss: 0.0042 | AccuracyNumber: 100
+	Batch_idx: 29 | Loss: 0.0007 | AccuracyNumber: 100
+	Batch_idx: 30 | Loss: 0.0024 | AccuracyNumber: 100
+	Batch_idx: 31 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 32 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 33 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 34 | Loss: 0.0084 | AccuracyNumber: 99
+	Batch_idx: 35 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 36 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 37 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 38 | Loss: 0.0860 | AccuracyNumber: 99
+	Batch_idx: 39 | Loss: 0.0228 | AccuracyNumber: 99
+	Batch_idx: 40 | Loss: 0.0313 | AccuracyNumber: 99
+	Batch_idx: 41 | Loss: 0.0011 | AccuracyNumber: 100
+	Batch_idx: 42 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 43 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 44 | Loss: 0.0000 | AccuracyNumber: 100
+	Batch_idx: 45 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 46 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 47 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 48 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 49 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 50 | Loss: 0.6244 | AccuracyNumber: 80
+	Batch_idx: 51 | Loss: 3.1279 | AccuracyNumber: 0
+Testing Loss: 0.1082 | Testing Accuracy: 96.8077 | Time: 8.00
+Epoch 111/120| Time: 7.99s| Loss: 0.0528
+Epoch 112/120| Time: 7.74s| Loss: 0.0508
+Epoch 113/120| Time: 7.85s| Loss: 0.0508
+Epoch 114/120| Time: 7.86s| Loss: 0.0528
+Epoch 115/120| Time: 8.09s| Loss: 0.0508
+Epoch 116/120| Time: 7.91s| Loss: 0.0508
+Epoch 117/120| Time: 7.86s| Loss: 0.0528
+Epoch 118/120| Time: 7.84s| Loss: 0.0508
+Epoch 119/120| Time: 7.81s| Loss: 0.0528
+Epoch 120/120| Time: 7.90s| Loss: 0.0528
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC120.model model saved--<<
+>>--/home/xueyiming/PytorchWorkspace/snapshots/patch_size21/SimpleFC_2019-01-10_09-04-30/SimpleFC120.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6701 | AccuracyNumber: 90
+	Batch_idx: 1 | Loss: 0.0172 | AccuracyNumber: 99
+	Batch_idx: 2 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 3 | Loss: 0.0007 | AccuracyNumber: 100
+	Batch_idx: 4 | Loss: 0.0027 | AccuracyNumber: 100
+	Batch_idx: 5 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 6 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 7 | Loss: 0.1144 | AccuracyNumber: 96
+	Batch_idx: 8 | Loss: 0.0233 | AccuracyNumber: 100
+	Batch_idx: 9 | Loss: 0.0037 | AccuracyNumber: 100
+	Batch_idx: 10 | Loss: 0.0713 | AccuracyNumber: 98
+	Batch_idx: 11 | Loss: 0.0037 | AccuracyNumber: 100
+	Batch_idx: 12 | Loss: 0.0736 | AccuracyNumber: 98
+	Batch_idx: 13 | Loss: 0.0608 | AccuracyNumber: 98
+	Batch_idx: 14 | Loss: 0.0596 | AccuracyNumber: 98
+	Batch_idx: 15 | Loss: 0.0087 | AccuracyNumber: 100
+	Batch_idx: 16 | Loss: 0.0021 | AccuracyNumber: 100
+	Batch_idx: 17 | Loss: 0.0241 | AccuracyNumber: 99
+	Batch_idx: 18 | Loss: 0.4072 | AccuracyNumber: 85
+	Batch_idx: 19 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 20 | Loss: 0.0014 | AccuracyNumber: 100
+	Batch_idx: 21 | Loss: 0.0010 | AccuracyNumber: 100
+	Batch_idx: 22 | Loss: 0.1006 | AccuracyNumber: 99
+	Batch_idx: 23 | Loss: 0.0082 | AccuracyNumber: 100
+	Batch_idx: 24 | Loss: 0.0017 | AccuracyNumber: 100
+	Batch_idx: 25 | Loss: 0.0016 | AccuracyNumber: 100
+	Batch_idx: 26 | Loss: 0.0327 | AccuracyNumber: 99
+	Batch_idx: 27 | Loss: 0.0162 | AccuracyNumber: 99
+	Batch_idx: 28 | Loss: 0.0042 | AccuracyNumber: 100
+	Batch_idx: 29 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 30 | Loss: 0.0024 | AccuracyNumber: 100
+	Batch_idx: 31 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 32 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 33 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 34 | Loss: 0.0084 | AccuracyNumber: 99
+	Batch_idx: 35 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 36 | Loss: 0.0013 | AccuracyNumber: 100
+	Batch_idx: 37 | Loss: 0.0008 | AccuracyNumber: 100
+	Batch_idx: 38 | Loss: 0.0858 | AccuracyNumber: 99
+	Batch_idx: 39 | Loss: 0.0228 | AccuracyNumber: 99
+	Batch_idx: 40 | Loss: 0.0313 | AccuracyNumber: 99
+	Batch_idx: 41 | Loss: 0.0011 | AccuracyNumber: 100
+	Batch_idx: 42 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 43 | Loss: 0.0001 | AccuracyNumber: 100
+	Batch_idx: 44 | Loss: 0.0000 | AccuracyNumber: 100
+	Batch_idx: 45 | Loss: 0.0012 | AccuracyNumber: 100
+	Batch_idx: 46 | Loss: 0.0005 | AccuracyNumber: 100
+	Batch_idx: 47 | Loss: 0.0002 | AccuracyNumber: 100
+	Batch_idx: 48 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 49 | Loss: 0.0004 | AccuracyNumber: 100
+	Batch_idx: 50 | Loss: 0.6243 | AccuracyNumber: 80
+	Batch_idx: 51 | Loss: 3.1282 | AccuracyNumber: 0
+Testing Loss: 0.1082 | Testing Accuracy: 96.8077 | Time: 7.86
