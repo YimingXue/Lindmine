@@ -4,7 +4,7 @@ class DefaultConfigs(object):
 
     # Dataset selection
     dataset = 'Indian_pines' # Indian_pines/indian_pines_corrected/PaviaU/PaviaCenter
-    train_percent = 0.5
+    train_percent = 0.2
 
     # train/test parameters
     model_name = 'SimpleFC' # Pyramidal_ResNet/SimpleFC/PPFsNet
@@ -21,13 +21,16 @@ class DefaultConfigs(object):
     patch_size = 21
     if dataset == 'Indian_pines':
         indianPines_band = 220
-        band = indianPines_band
     elif dataset == 'Indian_pines_corrected':
         indianPines_band = 200
-        band = indianPines_band
     indianPines_class = 16
     indianPines_seed = 6
 
+    # Dataset
+    if dataset == 'Indian_pines' or dataset == 'Indian_pines_corrected':
+        band = indianPines_band
+        num_classes = indianPines_class
+    
     # SimpleNet parameters
     conv1 = 500
     conv2 = 100
@@ -44,6 +47,7 @@ class DefaultConfigs(object):
         print('#######################PARAMETERS#######################'
           '# cuda\n'
           '\tcuda: {}\n'
+          
           '# train/test parameters'
           '\tmodel_name: {}\n'
           '\toptimizer: {}\n'
@@ -52,15 +56,19 @@ class DefaultConfigs(object):
           '\tseed: {}\n'
           '\tlr: {}\n'
           '\tweight_decay: {}\n'
+          
           '# data preparation parameters\n'
           '\tpatch_size: {}\n'
-          '\tindianPines_band: {}\n'
-          '\tindianPines_class: {}\n'
+          '\tdataset: {}\n'
+          '\tband: {}\n'
+          '\tnumber_classes: {}\n'
+          
           '# SimpleNet parameters\n'
           '\tconv1: {}\n'
           '\tconv2: {}\n'
           '\tfc1: {}\n'
           '\tfc2: {}\n'
+          
           '# SimpleFC parameters\n'
           '\tFC_1: {}\n'
           '\tFC_2: {}\n'
@@ -68,8 +76,8 @@ class DefaultConfigs(object):
           '\tFC_4: {}\n'.format(
           config.cuda, config.model_name, config.optimizer,
           config.epochs, config.batch_size, config.seed,
-          config.lr, config.weight_decay, config.patch_size, 
-          config.indianPines_band, config.indianPines_class,
+          config.lr, config.weight_decay, config.patch_size, config.dataset,
+          config.band, config.num_classes,
           config.conv1, config.conv2,config.fc1, config.fc2,
           config.FC_1, config.FC_2, config.FC_3, config.FC_4
           ))

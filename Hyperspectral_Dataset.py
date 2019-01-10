@@ -45,8 +45,9 @@ class Hyperspectral_Dataset(Dataset):
         self.test_image_list = open(self.path+'/'+str(self.config.train_percent)+'/test.txt').read().splitlines()
         self.mat_path = self.path + '/' + self.dataset
         
-        self.input_mat = sio.loadmat(self.mat_path+'.mat')[self.dataset.lower()]
-        self.target_mat = sio.loadmat(self.mat_path+'_gt.mat')[self.dataset.lower()+'_gt']
+        self.mat_name = list(self.dataset); self.mat_name[0] = self.mat_name[0].lower(); self.mat_name = ''.join(self.mat_name)
+        self.input_mat = sio.loadmat(self.mat_path+'.mat')[self.mat_name]
+        self.target_mat = sio.loadmat(self.mat_path+'_gt.mat')[self.mat_name+'_gt']
 
         self.height = self.input_mat.shape[0]
         self.width = self.input_mat.shape[1]
@@ -124,9 +125,10 @@ class Hyperspectral_Dataset(Dataset):
 if __name__ == '__main__':
     train_dataloader = DataLoader(Hyperspectral_Dataset(config,train=True), \
                                     batch_size=config.batch_size,shuffle=True)
-    test_dataloader = DataLoader(Hyperspectral_Dataset(config,train=False), \
-                                    batch_size=config.batch_size,shuffle=False)
     for iter,(train_images,train_labels) in enumerate(train_dataloader):
-        print(iter, train_images.shape, train_labels.shape)
-    for iter,(test_images,test_labels) in enumerate(test_dataloader):
-        print(iter, test_images.shape, test_labels.shape)
+        print(iter, train_images.shape, train_labels.shape, len(train_labels))
+    
+    # test_dataloader = DataLoader(Hyperspectral_Dataset(config,train=False), \
+    #                                 batch_size=config.batch_size,shuffle=False)
+    # for iter,(test_images,test_labels) in enumerate(test_dataloader):
+    #     print(iter, test_images.shape, test_labels.shape)

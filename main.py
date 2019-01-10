@@ -53,9 +53,10 @@ def train(config, kwargs):
     # PRINT PARAMETERS=======================================================================
     config.print_config()
     with open(path_name_current_fold + '.txt', 'a') as f:
-        print('#############################  PARAMETERS  ###################################\n'
+        print('#######################PARAMETERS#######################'
           '# cuda\n'
           '\tcuda: {}\n'
+          
           '# train/test parameters'
           '\tmodel_name: {}\n'
           '\toptimizer: {}\n'
@@ -64,29 +65,31 @@ def train(config, kwargs):
           '\tseed: {}\n'
           '\tlr: {}\n'
           '\tweight_decay: {}\n'
+          
           '# data preparation parameters\n'
           '\tpatch_size: {}\n'
-          '\tindianPines_band: {}\n'
-          '\tindianPines_class: {}\n'
+          '\tdataset: {}\n'
+          '\tband: {}\n'
+          '\tnumber_classes: {}\n'
+          
           '# SimpleNet parameters\n'
           '\tconv1: {}\n'
           '\tconv2: {}\n'
           '\tfc1: {}\n'
           '\tfc2: {}\n'
+          
           '# SimpleFC parameters\n'
           '\tFC_1: {}\n'
           '\tFC_2: {}\n'
           '\tFC_3: {}\n'
-          '\tFC_4: {}\n'
-          '##############################################################################\n'
-          .format(
+          '\tFC_4: {}\n'.format(
           config.cuda, config.model_name, config.optimizer,
           config.epochs, config.batch_size, config.seed,
-          config.lr, config.weight_decay, config.patch_size, 
-          config.indianPines_band, config.indianPines_class,
+          config.lr, config.weight_decay, config.patch_size, config.dataset,
+          config.band, config.num_classes,
           config.conv1, config.conv2,config.fc1, config.fc2,
           config.FC_1, config.FC_2, config.FC_3, config.FC_4
-          ), file=f)
+          ),file=f)
     
     # LOAD TRAINING DATA===================================================================
     # # data_augmentation
@@ -134,6 +137,7 @@ def train(config, kwargs):
         # set model in training mode
         model.train(True)
         train_loss = 0.
+        train_number = 0.
 
         # start training
         for batch_idx, (train_images, train_labels) in enumerate(train_dataloader):
@@ -148,13 +152,14 @@ def train(config, kwargs):
             # calculate loss
             loss = model.calculate_objective(train_images, train_labels)
             train_loss += loss.item()
+            train_number += len(train_labels)
             # backward pass
             loss.backward()
             # optimization
             optimizer.step()
         
         # calculate final loss
-        train_loss /= len(train_dataloader)
+        train_loss = train_loss / train_number * 100
         
         time_end = time.time()
         time_elapsed = time_end - time_start
@@ -192,9 +197,12 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
         with open(path_name_current_fold + '.txt', 'a') as f:
             print('>>--%s model loaded--<<'%(path_name_current_fold + str(epoch) + '.model'), file=f)
     
-    # set loss and classification error to 0
+    # set loss and classification accuracy to 0
     test_loss = 0.
     test_accuary = 0.
+    test_number = 0.
+    accuracy_per_class = np.zeros(config.num_classes)
+    number_per_class = np.zeros(config.num_classes)
 
     # CALCULATE CLASSIFICATION RESULT AND LOSS FOR TEST SET====================================
     # set evaluate_model to evaluation mode
@@ -210,21 +218,28 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
 
         # calculate loss and result
         loss = evaluate_model.calculate_objective(test_images, test_labels).item()
-        accuary = evaluate_model.calculate_classification_accuary(test_images, test_labels)
+        accuary, accuracy_per_class, number_per_class = evaluate_model.calculate_classification_accuary(test_images,test_labels,
+                                                                                            accuracy_per_class,number_per_class)
         test_loss += loss
         test_accuary += accuary
-        print('\tBatch_idx: %d | Loss: %.4f | AccuracyNumber: %d'%(batch_idx, loss, accuary))
+        accuary = accuary / len(test_labels) * 100
+        test_number += len(test_labels)
+        print('\tBatch_idx: %d | Loss: %.4f | Accuracy: %d'%(batch_idx, loss, accuary))
         with open(path_name_current_fold + '.txt', 'a') as f:
-            print('\tBatch_idx: %d | Loss: %.4f | AccuracyNumber: %d'%(batch_idx, loss, accuary), file=f)
+            print('\tBatch_idx: %d | Loss: %.4f | Accuracy: %d'%(batch_idx, loss, accuary), file=f)
     
     t_ll_e = time.time()
     # calculate final loss and accuary
-    test_loss /= len(test_dataloader)
-    test_accuary /= len(test_dataloader)
+    test_loss = test_loss / test_number * 100
+    test_accuary = test_accuary / test_number * 100
 
-    print('Testing Loss: %.4f | Testing Accuracy: %.4f | Time: %.2f'%(test_loss, test_accuary, t_ll_e-t_ll_s))
+    print('Testing Loss: %.4f | OA: %.4f | Time: %.2f'%(test_loss, test_accuary, t_ll_e-t_ll_s))
     with open(path_name_current_fold + '.txt', 'a') as f:
-        print('Testing Loss: %.4f | Testing Accuracy: %.4f | Time: %.2f'%(test_loss, test_accuary, t_ll_e-t_ll_s), file=f)
+        print('Testing Loss: %.4f | OA: %.4f | Time: %.2f'%(test_loss, test_accuary, t_ll_e-t_ll_s), file=f)
+    for i in range(len(accuracy_per_class)):
+        print('\tClass %d, accuracy: %.4f'%(i, accuracy_per_class[i]/number_per_class[i]*100))
+        with open(path_name_current_fold + '.txt', 'a') as f:
+            print('\tClass %d, accuracy: %.4f'%(i, accuracy_per_class[i]/number_per_class[i]*100),file=f)
 
 if __name__ == '__main__':
     train(config, kwargs)

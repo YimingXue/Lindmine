@@ -44,14 +44,18 @@ class SimpleFC(nn.Module):
         output = loss(prob,labels)
         return output
     
-    def calculate_classification_accuary(self, images, labels):
+    def calculate_classification_accuary(self, images, labels, accuracy_per_class, number_per_class):
         # forward pass
         prob, softmax_prob = self.forward(images)
         # calculate classification error
         prediction = torch.argmax(softmax_prob, dim=1).type(torch.cuda.LongTensor)
-        # print('Prediction: {}, Labels: {}'.format(prediction, labels))
         num_correct_classified = torch.sum(torch.eq(prediction, labels)).item()
-        return num_correct_classified
+        # calculate accuracy per class
+        for i in range(len(labels)):
+            if labels[i] == prediction[i]:
+                accuracy_per_class[labels[i]] += 1
+            number_per_class[labels[i]] += 1
+        return num_correct_classified, accuracy_per_class, number_per_class
     
 if __name__ == '__main__':
     model = SimpleFC(config)
