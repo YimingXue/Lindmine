@@ -47,7 +47,10 @@ class Hyperspectral_Dataset(Dataset):
         
         self.mat_name = list(self.dataset); self.mat_name[0] = self.mat_name[0].lower(); self.mat_name = ''.join(self.mat_name)
         self.input_mat = sio.loadmat(self.mat_path+'.mat')[self.mat_name]
-        self.target_mat = sio.loadmat(self.mat_path+'_gt.mat')[self.mat_name+'_gt']
+        if self.dataset == 'Indian_pines_corrected':
+            self.target_mat = sio.loadmat(self.mat_path+'_gt.mat')['indian_pines_gt']
+        else:
+            self.target_mat = sio.loadmat(self.mat_path+'_gt.mat')[self.mat_name+'_gt']
 
         self.height = self.input_mat.shape[0]
         self.width = self.input_mat.shape[1]

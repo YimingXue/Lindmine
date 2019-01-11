@@ -10,7 +10,7 @@ class SimpleFC(nn.Module):
     def __init__(self, config):
         super(SimpleFC, self).__init__()
         self.config = config
-        self.fc_in = self.config.indianPines_band * self.config.patch_size**2
+        self.fc_in = self.config.band * self.config.patch_size**2
 
         self.FC = nn.Sequential(
             nn.Linear(self.fc_in, self.config.FC_1),

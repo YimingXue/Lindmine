@@ -67,16 +67,10 @@ def train(config, kwargs):
           '\tweight_decay: {}\n'
           
           '# data preparation parameters\n'
-          '\tpatch_size: {}\n'
           '\tdataset: {}\n'
+          '\tpatch_size: {}\n'
           '\tband: {}\n'
-          '\tnumber_classes: {}\n'
-          
-          '# SimpleNet parameters\n'
-          '\tconv1: {}\n'
-          '\tconv2: {}\n'
-          '\tfc1: {}\n'
-          '\tfc2: {}\n'
+          '\tnum_classes: {}\n'
           
           '# SimpleFC parameters\n'
           '\tFC_1: {}\n'
@@ -85,9 +79,8 @@ def train(config, kwargs):
           '\tFC_4: {}\n'.format(
           config.cuda, config.model_name, config.optimizer,
           config.epochs, config.batch_size, config.seed,
-          config.lr, config.weight_decay, config.patch_size, config.dataset,
+          config.lr, config.weight_decay, config.dataset, config.patch_size, 
           config.band, config.num_classes,
-          config.conv1, config.conv2,config.fc1, config.fc2,
           config.FC_1, config.FC_2, config.FC_3, config.FC_4
           ),file=f)
     
@@ -233,13 +226,17 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
     test_loss = test_loss / test_number * 100
     test_accuary = test_accuary / test_number * 100
 
-    print('Testing Loss: %.4f | OA: %.4f | Time: %.2f'%(test_loss, test_accuary, t_ll_e-t_ll_s))
-    with open(path_name_current_fold + '.txt', 'a') as f:
-        print('Testing Loss: %.4f | OA: %.4f | Time: %.2f'%(test_loss, test_accuary, t_ll_e-t_ll_s), file=f)
+    AA = 0.
     for i in range(len(accuracy_per_class)):
-        print('\tClass %d, accuracy: %.4f'%(i, accuracy_per_class[i]/number_per_class[i]*100))
+        accuracy_pc = accuracy_per_class[i]/number_per_class[i]*100
+        AA += accuracy_pc
+        print('  Class %d, accuracy: %.4f'%(i, accuracy_pc))
         with open(path_name_current_fold + '.txt', 'a') as f:
-            print('\tClass %d, accuracy: %.4f'%(i, accuracy_per_class[i]/number_per_class[i]*100),file=f)
+            print('  Class %d, accuracy: %.4f'%(i, accuracy_pc),file=f)
+    AA /= config.num_classes
+    print('Testing Loss: %.4f | OA: %.4f | AA: %.4f | Time: %.2f'%(test_loss, test_accuary, AA, t_ll_e-t_ll_s))
+    with open(path_name_current_fold + '.txt', 'a') as f:
+        print('Testing Loss: %.4f | OA: %.4f | AA: %.4f | Time: %.2f'%(test_loss, test_accuary, AA, t_ll_e-t_ll_s), file=f)
 
 if __name__ == '__main__':
     train(config, kwargs)

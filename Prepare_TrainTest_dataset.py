@@ -12,7 +12,10 @@ path = os.path.join(os.getcwd(),'Data',dataset)
 mat_path = path + '/' + dataset + '_gt.mat'
 gt = sio.loadmat(mat_path)
 mat_name = list(dataset); mat_name[0] = mat_name[0].lower(); mat_name = ''.join(mat_name)
-gt = gt[mat_name+'_gt']
+if dataset == 'Indian_pines_corrected':
+	gt = gt['indian_pines_gt']
+else:
+	gt = gt[mat_name+'_gt']
 
 nclass = np.max(gt)
 print('Load dataset: {}'.format(dataset))
