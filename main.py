@@ -40,6 +40,8 @@ def train(config, kwargs):
         from Pyramidal_ResNet import Pyramidal_ResNet as Model
     elif config.model_name == 'SimpleFC':
         from SimpleFC import SimpleFC as Model
+    elif config.model_name == 'C3F4_CNN':
+        from C3F4_CNN import C3F4_CNN as Model
     else:
         raise Exception('Wrong name of the model!')
     

@@ -3,11 +3,11 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'Indian_pines' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia
+    dataset = 'PaviaU' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia
     train_percent = 0.2
 
     # train/test parameters
-    model_name = 'Pyramidal_ResNet' # Pyramidal_ResNet/SimpleFC
+    model_name = 'C3F4_CNN' # Pyramidal_ResNet/SimpleFC/C3F4_CNN
     optimizer = 'SGD' # Adagrad/SGD/Adam
     epochs = 150
     step_size = 40

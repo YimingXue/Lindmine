@@ -1,0 +1,20 @@
+#######################PARAMETERS######################## cuda
+	cuda: True
+# train/test parameters	model_name: C3F4_CNN
+	optimizer: SGD
+	epochs: 150
+	batch_size: 100
+	seed: 75
+	lr: 0.001
+	weight_decay: 0.0001
+# data preparation parameters
+	dataset: PaviaU
+	patch_size: 11
+	band: 103
+	num_classes: 9
+# SimpleFC parameters
+	FC_1: 500
+	FC_2: 350
+	FC_3: 150
+	FC_4: 16
+
