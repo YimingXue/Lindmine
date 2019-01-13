@@ -76,13 +76,14 @@ class Hyperspectral_Dataset(Dataset):
             w = int(patch_center[1])
             patch = self.Patch_Center(h,w)
             label = self.target_mat[h,w]-1
+            # # Data augmentation
             # num = random.randint(0,1)
             # if num == 0 :
-            #     self.train_images[index] = self.train_images[index][:,::-1,:] # Flip patch up-down
+            #     patch = patch[:,::-1,:] # Flip patch up-down
             # if num == 1 :
-            #     self.train_images[index] = self.train_images[index][:,:,::-1] # Flip patch left-right
+            #     patch = patch[:,:,::-1] # Flip patch left-right
             # if num == 2 :
-            #     self.train_images[index] = rotation(self.train_images[index]) # Rotate patch for 90/180/270
+            #     self.patch[index] = rotation(self.patch[index]) # Rotate patch for 90/180/270
         else:
             patch_center = self.test_image_list[index].split(' ')
             h = int(patch_center[0])

@@ -12,6 +12,7 @@ from Hyperspectral_Dataset import Hyperspectral_Dataset
 import time
 import datetime
 import warnings
+import math
 
 def weights_init(m):
     if isinstance(m, nn.Conv2d):
@@ -197,6 +198,7 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
     # set evaluate_model to evaluation mode
     evaluate_model.eval()
 
+    interval = math.ceil((len(test_dataloader)-1) * config.batch_size / 10)
     t_ll_s = time.time()
     for batch_idx, (test_images, test_labels) in enumerate(test_dataloader):
         # data preparation
@@ -213,9 +215,10 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
         test_accuary += accuary
         accuary = accuary / len(test_labels) * 100
         test_number += len(test_labels)
-        print('\tBatch_idx: %d | Loss: %.4f | Accuracy: %d'%(batch_idx, loss, accuary))
-        with open(path_name_current_fold + '.txt', 'a') as f:
-            print('\tBatch_idx: %d | Loss: %.4f | Accuracy: %d'%(batch_idx, loss, accuary), file=f)
+        if batch_idx % interval == 0:
+            print('\tBatch_idx: %d | Loss: %.4f | Accuracy: %d'%(batch_idx, loss, accuary))
+            with open(path_name_current_fold + '.txt', 'a') as f:
+                print('\tBatch_idx: %d | Loss: %.4f | Accuracy: %d'%(batch_idx, loss, accuary), file=f)
     
     t_ll_e = time.time()
     # calculate final loss and accuary
