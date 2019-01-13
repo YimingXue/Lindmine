@@ -52,6 +52,7 @@ class DefaultConfigs(object):
     FC_3 = 150
     FC_4 = 16
 
+    
     def print_config(self):
         print('#######################PARAMETERS#######################'
           '# cuda\n'
