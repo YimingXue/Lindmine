@@ -8,8 +8,8 @@ class C3F4_CNN(nn.Module):
     def __init__(self, config):
         super(C3F4_CNN, self).__init__()
         self.config = config
-        self.input_nc = self.config.band*self.config.patch_size**2
-        self.input_fc1_nc = math.ceil(math.ceil(self.config.patch_size/2)/2)
+        self.input_nc = self.config.band
+        self.input_fc1_nc = 350*math.ceil(math.ceil(self.config.patch_size/2)/2)**2
 
         self.conv1 = nn.Sequential(
         # conv1

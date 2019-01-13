@@ -3,17 +3,16 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'PaviaU' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia
-    train_percent = 0.2
-
+    dataset = 'crop_43' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43
+    
     # train/test parameters
     model_name = 'C3F4_CNN' # Pyramidal_ResNet/SimpleFC/C3F4_CNN
     optimizer = 'SGD' # Adagrad/SGD/Adam
-    epochs = 150
+    epochs = 100
     step_size = 40
     batch_size = 100
     seed = 75
-    lr = 0.001 # 0.1
+    lr = 0.01 # 0.1
     weight_decay = 1e-4 # 1e-4
 
     # IndianPines data preparation parameters
@@ -27,6 +26,10 @@ class DefaultConfigs(object):
     PaviaU_band = 103
     PaviaU_class = 9
 
+    # crop_43 data preparation parameters
+    crop_43_band = 63
+    crop_43_class = 15
+
     # Dataset
     if dataset == 'Indian_pines' or dataset == 'Indian_pines_corrected':
         band = indianPines_band
@@ -34,8 +37,14 @@ class DefaultConfigs(object):
     if dataset == 'PaviaU':
         band = PaviaU_band
         num_classes = PaviaU_class
+    if dataset == 'crop_43':
+        band = crop_43_band
+        num_classes = crop_43_class
     patch_mode = 'Center' # Center/TopLeft/PP(Pixel-Pair)
-    patch_size = 11
+    patch_size = 21
+    train_percent = 0.01
+    val_percent = 0.0
+    test_percent = 0.1
 
     # SimpleFC parameters
     FC_1 = 500
@@ -62,18 +71,12 @@ class DefaultConfigs(object):
           '\tpatch_size: {}\n'
           '\tband: {}\n'
           '\tnum_classes: {}\n'
-          
-          '# SimpleFC parameters\n'
-          '\tFC_1: {}\n'
-          '\tFC_2: {}\n'
-          '\tFC_3: {}\n'
-          '\tFC_4: {}\n'.format(
+          '\ttrain_percent: {}\n'
+          '\tval_percent: {}\n'.format(
           config.cuda, config.model_name, config.optimizer,
           config.epochs, config.batch_size, config.seed,
           config.lr, config.weight_decay, config.dataset, config.patch_size, 
-          config.band, config.num_classes,
-          config.FC_1, config.FC_2, config.FC_3, config.FC_4
-          ))
+          config.band, config.num_classes, config.train_percent, config.val_percent))
         print('#'*60)
         print('\n')
 

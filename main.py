@@ -73,18 +73,12 @@ def train(config, kwargs):
           '\tpatch_size: {}\n'
           '\tband: {}\n'
           '\tnum_classes: {}\n'
-          
-          '# SimpleFC parameters\n'
-          '\tFC_1: {}\n'
-          '\tFC_2: {}\n'
-          '\tFC_3: {}\n'
-          '\tFC_4: {}\n'.format(
+          '\ttrain_percent: {}\n'
+          '\tval_percent: {}\n'.format(
           config.cuda, config.model_name, config.optimizer,
           config.epochs, config.batch_size, config.seed,
           config.lr, config.weight_decay, config.dataset, config.patch_size, 
-          config.band, config.num_classes,
-          config.FC_1, config.FC_2, config.FC_3, config.FC_4
-          ),file=f)
+          config.band, config.num_classes, config.train_percent, config.val_percent),file=f)
     
     # LOAD TRAINING DATA===================================================================
     # # data_augmentation
