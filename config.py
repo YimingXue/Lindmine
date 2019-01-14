@@ -3,48 +3,40 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'crop_43' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43
+    dataset = 'garbage_crop_37' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/garbage_crop_37
     
     # train/test parameters
     model_name = 'C3F4_CNN' # Pyramidal_ResNet/SimpleFC/C3F4_CNN
     optimizer = 'SGD' # Adagrad/SGD/Adam
-    epochs = 100
+    epochs = 150
     step_size = 40
     batch_size = 100
     seed = 75
     lr = 0.01 # 0.1
     weight_decay = 1e-4 # 1e-4
 
-    # IndianPines data preparation parameters
-    if dataset == 'Indian_pines':
-        indianPines_band = 220
-    elif dataset == 'Indian_pines_corrected':
-        indianPines_band = 200
-    indianPines_class = 16
-
-    # PaviaU data preparation parameters
-    PaviaU_band = 103
-    PaviaU_class = 9
-
-    # crop_43 data preparation parameters
-    crop_43_band = 63
-    crop_43_class = 15
-
     # Dataset
-    if dataset == 'Indian_pines' or dataset == 'Indian_pines_corrected':
-        band = indianPines_band
-        num_classes = indianPines_class
+    if dataset == 'Indian_pines':
+        band = 220
+        num_classes = 16
+    if dataset == 'Indian_pines_corrected':
+        band = 200
+        num_classes = 16
     if dataset == 'PaviaU':
-        band = PaviaU_band
-        num_classes = PaviaU_class
+        band = 103
+        num_classes = 9
     if dataset == 'crop_43':
-        band = crop_43_band
-        num_classes = crop_43_class
+        band = 63
+        num_classes = 15
+    if dataset == 'garbage_crop_37':
+        band = 63
+        num_classes = 2
     patch_mode = 'Center' # Center/TopLeft/PP(Pixel-Pair)
-    patch_size = 21
-    train_percent = 0.01
+    patch_size = 31
+    train_percent = 0.2
     val_percent = 0.0
-    test_percent = 0.1
+    test_percent = 0.8
+    inference = True
 
     # SimpleFC parameters
     FC_1 = 500

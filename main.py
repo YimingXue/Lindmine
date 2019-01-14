@@ -13,6 +13,8 @@ import time
 import datetime
 import warnings
 import math
+import scipy.io as sio
+from skimage import io
 
 def weights_init(m):
     if isinstance(m, nn.Conv2d):
@@ -166,7 +168,7 @@ def train(config, kwargs):
             test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False)
 
 def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
-    # LOAD TRAINING DATA========================================================================
+    # LOAD TEST DATA========================================================================
     print('\tload testing data')
     test_dataloader = DataLoader(Hyperspectral_Dataset(config,train=train_assign), \
                                     batch_size=config.batch_size,shuffle=False,**kwargs)
@@ -198,7 +200,6 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
     # set evaluate_model to evaluation mode
     evaluate_model.eval()
 
-    interval = math.ceil((len(test_dataloader)-1) * config.batch_size / 10)
     t_ll_s = time.time()
     for batch_idx, (test_images, test_labels) in enumerate(test_dataloader):
         # data preparation
@@ -215,7 +216,7 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
         test_accuary += accuary
         accuary = accuary / len(test_labels) * 100
         test_number += len(test_labels)
-        if batch_idx % interval == 0:
+        if batch_idx % 200 == 0:
             print('\tBatch_idx: %d | Loss: %.4f | Accuracy: %d'%(batch_idx, loss, accuary))
             with open(path_name_current_fold + '.txt', 'a') as f:
                 print('\tBatch_idx: %d | Loss: %.4f | Accuracy: %d'%(batch_idx, loss, accuary), file=f)
@@ -237,8 +238,66 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
     with open(path_name_current_fold + '.txt', 'a') as f:
         print('Testing Loss: %.4f | OA: %.4f | AA: %.4f | Time: %.2f'%(test_loss, test_accuary, AA, t_ll_e-t_ll_s), file=f)
 
+def inference(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
+    # LOAD INFERENCE DATA========================================================================
+    print('\tload inference data')
+    inference_dataloader = DataLoader(Hyperspectral_Dataset(config,train=train_assign), \
+                                    batch_size=1,shuffle=False,**kwargs)
+    
+    # DIRECTORY FOR LOADING=====================================================================
+    snapshots_path = os.getcwd() + '/snapshots/patch_size' + str(config.patch_size) + '/'
+    dir = snapshots_path + config.model_name + '_' + MODEL_SIGNATURE + '/'
+    path_name_current_fold = dir + config.model_name
+    if evaluate_model_assign != None:
+        evaluate_model = torch.load(snapshots_path + evaluate_model_assign + '/' + config.model_name + str(epoch) + '.model')
+        print('>>--%s model loaded--<<'%(snapshots_path + evaluate_model_assign + '/' + config.model_name + str(epoch) + '.model'))
+        path_name_current_fold = snapshots_path + evaluate_model_assign + '/' + config.model_name + str(epoch) + '.model'
+        with open(path_name_current_fold + '.txt', 'a') as f:
+            print('>>--%s model loaded--<<'%(snapshots_path + evaluate_model_assign + '/' + config.model_name + str(epoch) + '.model'), file=f)
+    else:
+        evaluate_model = torch.load(path_name_current_fold + str(epoch) + '.model')
+        print('>>--%s model loaded--<<'%(path_name_current_fold + str(epoch) + '.model'))
+        with open(path_name_current_fold + '.txt', 'a') as f:
+            print('>>--%s model loaded--<<'%(path_name_current_fold + str(epoch) + '.model'), file=f)
+
+    # CALCULATE CLASSIFICATION RESULT AND LOSS FOR INFERENCE SET====================================
+    # set evaluate_model to evaluation mode
+    evaluate_model.eval()
+
+    t_ll_s = time.time()
+    path = os.path.join(os.getcwd(),'Data',config.dataset)
+    image_path = path + '/' + config.dataset + '_origin.png'
+    image = io.imread(image_path)
+    for batch_idx, (inference_images, inference_labels, h, w) in enumerate(inference_dataloader):
+        # data preparation
+        inference_images, inference_labels = inference_images.type(torch.FloatTensor), inference_labels.type(torch.LongTensor)
+        if CUDA_AVAILABLE:
+            inference_images, inference_labels = inference_images.cuda(), inference_labels.cuda()
+        inference_images, inference_labels = Variable(inference_images), Variable(inference_labels)
+
+        # calculate loss and result
+        prediction = evaluate_model.inference_classification(inference_images,inference_labels)
+        if prediction == 0:
+            image[h,w,0:3] = (255,0,0)
+        if batch_idx % 2000 == 0:
+            print('batch_idx {}'.format(batch_idx))
+    
+    t_ll_e = time.time()
+    print('Using %.2f seconds'%(t_ll_e-t_ll_s))
+    
+    save_path = os.path.join(os.getcwd(),'Data',config.dataset)
+    image_save_path = save_path + '/' + config.dataset + '_inference.png'
+    io.imsave(image_save_path, image)
+    print('Save Inference image')
+
+
 if __name__ == '__main__':
-    train(config, kwargs)
-    # epoch = 10
-    # evaluate_model_assign = 'SimpleFC_2019-01-04_21-34-07'
-    # test(config, kwargs, epoch, evaluate_model_assign)
+    if config.inference == False:
+        train(config, kwargs)
+        # epoch = 10
+        # evaluate_model_assign = 'SimpleFC_2019-01-04_21-34-07'
+        # test(config, kwargs, epoch, evaluate_model_assign)
+    else:
+        epoch = 60
+        evaluate_model_assign = 'C3F4_CNN_2019-01-13_14-52-17'
+        inference(config, kwargs, epoch, evaluate_model_assign)

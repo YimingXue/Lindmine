@@ -1,0 +1,326 @@
+#######################PARAMETERS######################## cuda
+	cuda: True
+# train/test parameters	model_name: C3F4_CNN
+	optimizer: SGD
+	epochs: 150
+	batch_size: 100
+	seed: 75
+	lr: 0.01
+	weight_decay: 0.0001
+# data preparation parameters
+	dataset: garbage_crop_37
+	patch_size: 31
+	band: 63
+	num_classes: 2
+	train_percent: 0.2
+	val_percent: 0.0
+
+#############################  MODEL  ###################################
+
+C3F4_CNN(
+  (conv1): Sequential(
+    (0): Conv2d(63, 380, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+    (1): BatchNorm2d(380, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): Dropout(p=0.2)
+    (3): ReLU(inplace)
+  )
+  (conv2): Sequential(
+    (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=True)
+    (1): Conv2d(380, 350, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    (2): Dropout(p=0.2)
+    (3): ReLU(inplace)
+  )
+  (conv3): Sequential(
+    (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=True)
+    (1): Conv2d(350, 350, kernel_size=(1, 1), stride=(1, 1))
+    (2): ReLU(inplace)
+  )
+  (fc1): Sequential(
+    (0): Linear(in_features=22400, out_features=2048, bias=True)
+    (1): ReLU(inplace)
+  )
+  (fc2): Sequential(
+    (0): Linear(in_features=2048, out_features=2048, bias=True)
+    (1): ReLU(inplace)
+  )
+  (fc3): Sequential(
+    (0): Linear(in_features=2048, out_features=1024, bias=True)
+    (1): ReLU(inplace)
+  )
+  (fc4): Sequential(
+    (0): Linear(in_features=1024, out_features=2, bias=True)
+  )
+  (Softmax): Softmax()
+)
+##############################################################################
+
+Epoch 1/150| Time: 17.85s| Loss: 0.1890
+Epoch 2/150| Time: 17.71s| Loss: 0.0086
+Epoch 3/150| Time: 18.24s| Loss: 0.0044
+Epoch 4/150| Time: 17.83s| Loss: 0.0003
+Epoch 5/150| Time: 17.77s| Loss: 0.0000
+Epoch 6/150| Time: 17.54s| Loss: 0.0000
+Epoch 7/150| Time: 17.81s| Loss: 0.0000
+Epoch 8/150| Time: 17.87s| Loss: 0.0000
+Epoch 9/150| Time: 18.21s| Loss: 0.0000
+Epoch 10/150| Time: 17.60s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN10.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN10.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0009 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0000 | Accuracy: 100
+  Class 0, accuracy: 99.9867
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0003 | OA: 99.9976 | AA: 99.9934 | Time: 90.21
+Epoch 11/150| Time: 17.36s| Loss: 0.0000
+Epoch 12/150| Time: 17.52s| Loss: 0.0000
+Epoch 13/150| Time: 17.74s| Loss: 0.0000
+Epoch 14/150| Time: 17.76s| Loss: 0.0000
+Epoch 15/150| Time: 17.72s| Loss: 0.0000
+Epoch 16/150| Time: 17.57s| Loss: 0.0000
+Epoch 17/150| Time: 17.58s| Loss: 0.0000
+Epoch 18/150| Time: 17.58s| Loss: 0.0000
+Epoch 19/150| Time: 17.71s| Loss: 0.0000
+Epoch 20/150| Time: 17.71s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN20.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN20.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0006 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0000 | Accuracy: 100
+  Class 0, accuracy: 100.0000
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 100.0000 | AA: 100.0000 | Time: 90.42
+Epoch 21/150| Time: 18.02s| Loss: 0.0000
+Epoch 22/150| Time: 17.80s| Loss: 0.0000
+Epoch 23/150| Time: 17.67s| Loss: 0.0000
+Epoch 24/150| Time: 17.60s| Loss: 0.0000
+Epoch 25/150| Time: 17.86s| Loss: 0.0000
+Epoch 26/150| Time: 17.66s| Loss: 0.0000
+Epoch 27/150| Time: 18.08s| Loss: 0.0000
+Epoch 28/150| Time: 17.90s| Loss: 0.0000
+Epoch 29/150| Time: 17.61s| Loss: 0.0000
+Epoch 30/150| Time: 17.59s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN30.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN30.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0006 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0000 | Accuracy: 100
+  Class 0, accuracy: 99.9867
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 99.9976 | AA: 99.9934 | Time: 90.22
+Epoch 31/150| Time: 17.55s| Loss: 0.0000
+Epoch 32/150| Time: 17.54s| Loss: 0.0000
+Epoch 33/150| Time: 17.70s| Loss: 0.0000
+Epoch 34/150| Time: 17.61s| Loss: 0.0000
+Epoch 35/150| Time: 17.66s| Loss: 0.0000
+Epoch 36/150| Time: 17.46s| Loss: 0.0000
+Epoch 37/150| Time: 17.43s| Loss: 0.0000
+Epoch 38/150| Time: 17.78s| Loss: 0.0000
+Epoch 39/150| Time: 17.76s| Loss: 0.0000
+Epoch 40/150| Time: 17.61s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN40.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN40.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0004 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0000 | Accuracy: 100
+  Class 0, accuracy: 100.0000
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 100.0000 | AA: 100.0000 | Time: 90.06
+Epoch 41/150| Time: 17.70s| Loss: 0.0000
+Epoch 42/150| Time: 17.94s| Loss: 0.0000
+Epoch 43/150| Time: 17.72s| Loss: 0.0000
+Epoch 44/150| Time: 17.48s| Loss: 0.0000
+Epoch 45/150| Time: 17.43s| Loss: 0.0000
+Epoch 46/150| Time: 17.49s| Loss: 0.0000
+Epoch 47/150| Time: 17.56s| Loss: 0.0000
+Epoch 48/150| Time: 17.86s| Loss: 0.0000
+Epoch 49/150| Time: 17.83s| Loss: 0.0000
+Epoch 50/150| Time: 17.80s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN50.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN50.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0005 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0000 | Accuracy: 100
+  Class 0, accuracy: 100.0000
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 100.0000 | AA: 100.0000 | Time: 90.32
+Epoch 51/150| Time: 17.85s| Loss: 0.0000
+Epoch 52/150| Time: 17.71s| Loss: 0.0000
+Epoch 53/150| Time: 17.53s| Loss: 0.0000
+Epoch 54/150| Time: 17.60s| Loss: 0.0000
+Epoch 55/150| Time: 17.48s| Loss: 0.0000
+Epoch 56/150| Time: 17.51s| Loss: 0.0000
+Epoch 57/150| Time: 17.50s| Loss: 0.0000
+Epoch 58/150| Time: 17.92s| Loss: 0.0000
+Epoch 59/150| Time: 17.80s| Loss: 0.0000
+Epoch 60/150| Time: 17.55s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN60.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN60.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0006 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0000 | Accuracy: 100
+  Class 0, accuracy: 100.0000
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 100.0000 | AA: 100.0000 | Time: 90.15
+Epoch 61/150| Time: 17.83s| Loss: 0.0000
+Epoch 62/150| Time: 17.63s| Loss: 0.0000
+Epoch 63/150| Time: 17.52s| Loss: 0.0000
+Epoch 64/150| Time: 17.69s| Loss: 0.0000
+Epoch 65/150| Time: 17.68s| Loss: 0.0000
+Epoch 66/150| Time: 17.59s| Loss: 0.0000
+Epoch 67/150| Time: 17.45s| Loss: 0.0000
+Epoch 68/150| Time: 17.57s| Loss: 0.0000
+Epoch 69/150| Time: 17.78s| Loss: 0.0000
+Epoch 70/150| Time: 17.93s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN70.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN70.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0006 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0000 | Accuracy: 100
+  Class 0, accuracy: 99.9867
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 99.9976 | AA: 99.9934 | Time: 90.42
+Epoch 71/150| Time: 17.71s| Loss: 0.0000
+Epoch 72/150| Time: 17.73s| Loss: 0.0000
+Epoch 73/150| Time: 17.62s| Loss: 0.0000
+Epoch 74/150| Time: 17.48s| Loss: 0.0000
+Epoch 75/150| Time: 17.36s| Loss: 0.0001
+Epoch 76/150| Time: 17.43s| Loss: 0.0000
+Epoch 77/150| Time: 17.50s| Loss: 0.0000
+Epoch 78/150| Time: 17.61s| Loss: 0.0000
+Epoch 79/150| Time: 17.50s| Loss: 0.0000
+Epoch 80/150| Time: 17.60s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN80.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN80.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0002 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0001 | Accuracy: 100
+  Class 0, accuracy: 100.0000
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 100.0000 | AA: 100.0000 | Time: 91.42
+Epoch 81/150| Time: 17.51s| Loss: 0.0000
+Epoch 82/150| Time: 17.63s| Loss: 0.0000
+Epoch 83/150| Time: 17.99s| Loss: 0.0000
+Epoch 84/150| Time: 17.70s| Loss: 0.0000
+Epoch 85/150| Time: 17.85s| Loss: 0.0001
+Epoch 86/150| Time: 17.87s| Loss: 0.0000
+Epoch 87/150| Time: 17.55s| Loss: 0.0000
+Epoch 88/150| Time: 17.48s| Loss: 0.0000
+Epoch 89/150| Time: 17.51s| Loss: 0.0000
+Epoch 90/150| Time: 17.56s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN90.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN90.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0003 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0001 | Accuracy: 100
+  Class 0, accuracy: 100.0000
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 100.0000 | AA: 100.0000 | Time: 90.14
+Epoch 91/150| Time: 17.82s| Loss: 0.0000
+Epoch 92/150| Time: 18.14s| Loss: 0.0000
+Epoch 93/150| Time: 17.89s| Loss: 0.0000
+Epoch 94/150| Time: 18.02s| Loss: 0.0000
+Epoch 95/150| Time: 17.84s| Loss: 0.0000
+Epoch 96/150| Time: 18.13s| Loss: 0.0000
+Epoch 97/150| Time: 17.67s| Loss: 0.0000
+Epoch 98/150| Time: 17.73s| Loss: 0.0000
+Epoch 99/150| Time: 17.84s| Loss: 0.0000
+Epoch 100/150| Time: 17.93s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN100.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN100.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0003 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0001 | Accuracy: 100
+  Class 0, accuracy: 100.0000
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 100.0000 | AA: 100.0000 | Time: 91.39
+Epoch 101/150| Time: 17.77s| Loss: 0.0000
+Epoch 102/150| Time: 17.69s| Loss: 0.0000
+Epoch 103/150| Time: 17.80s| Loss: 0.0000
+Epoch 104/150| Time: 17.73s| Loss: 0.0000
+Epoch 105/150| Time: 17.98s| Loss: 0.0000
+Epoch 106/150| Time: 17.61s| Loss: 0.0000
+Epoch 107/150| Time: 18.11s| Loss: 0.0000
+Epoch 108/150| Time: 17.78s| Loss: 0.0000
+Epoch 109/150| Time: 17.46s| Loss: 0.0000
+Epoch 110/150| Time: 17.47s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN110.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN110.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0003 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0001 | Accuracy: 100
+  Class 0, accuracy: 100.0000
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 100.0000 | AA: 100.0000 | Time: 90.33
+Epoch 111/150| Time: 17.62s| Loss: 0.0000
+Epoch 112/150| Time: 17.63s| Loss: 0.0000
+Epoch 113/150| Time: 17.62s| Loss: 0.0000
+Epoch 114/150| Time: 17.69s| Loss: 0.0000
+Epoch 115/150| Time: 17.81s| Loss: 0.0000
+Epoch 116/150| Time: 18.00s| Loss: 0.0000
+Epoch 117/150| Time: 17.62s| Loss: 0.0000
+Epoch 118/150| Time: 17.58s| Loss: 0.0000
+Epoch 119/150| Time: 17.81s| Loss: 0.0000
+Epoch 120/150| Time: 17.59s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN120.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN120.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0003 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0001 | Accuracy: 100
+  Class 0, accuracy: 100.0000
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 100.0000 | AA: 100.0000 | Time: 89.87
+Epoch 121/150| Time: 17.61s| Loss: 0.0000
+Epoch 122/150| Time: 17.90s| Loss: 0.0000
+Epoch 123/150| Time: 17.79s| Loss: 0.0000
+Epoch 124/150| Time: 17.87s| Loss: 0.0000
+Epoch 125/150| Time: 17.51s| Loss: 0.0000
+Epoch 126/150| Time: 17.70s| Loss: 0.0000
+Epoch 127/150| Time: 17.63s| Loss: 0.0000
+Epoch 128/150| Time: 17.66s| Loss: 0.0000
+Epoch 129/150| Time: 17.45s| Loss: 0.0000
+Epoch 130/150| Time: 17.59s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN130.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN130.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0004 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0000 | Accuracy: 100
+  Class 0, accuracy: 100.0000
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 100.0000 | AA: 100.0000 | Time: 106.38
+Epoch 131/150| Time: 17.44s| Loss: 0.0000
+Epoch 132/150| Time: 17.59s| Loss: 0.0000
+Epoch 133/150| Time: 17.65s| Loss: 0.0000
+Epoch 134/150| Time: 17.54s| Loss: 0.0000
+Epoch 135/150| Time: 17.48s| Loss: 0.0000
+Epoch 136/150| Time: 17.41s| Loss: 0.0000
+Epoch 137/150| Time: 17.67s| Loss: 0.0000
+Epoch 138/150| Time: 17.66s| Loss: 0.0000
+Epoch 139/150| Time: 17.26s| Loss: 0.0000
+Epoch 140/150| Time: 17.24s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN140.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN140.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0003 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0001 | Accuracy: 100
+  Class 0, accuracy: 100.0000
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 100.0000 | AA: 100.0000 | Time: 90.02
+Epoch 141/150| Time: 17.77s| Loss: 0.0000
+Epoch 142/150| Time: 17.45s| Loss: 0.0000
+Epoch 143/150| Time: 17.44s| Loss: 0.0000
+Epoch 144/150| Time: 17.38s| Loss: 0.0000
+Epoch 145/150| Time: 17.38s| Loss: 0.0000
+Epoch 146/150| Time: 17.72s| Loss: 0.0000
+Epoch 147/150| Time: 17.79s| Loss: 0.0000
+Epoch 148/150| Time: 18.10s| Loss: 0.0000
+Epoch 149/150| Time: 18.81s| Loss: 0.0000
+Epoch 150/150| Time: 18.43s| Loss: 0.0000
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN150.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_2019-01-13_16-10-42/C3F4_CNN150.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0003 | Accuracy: 100
+	Batch_idx: 200 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 400 | Loss: 0.0001 | Accuracy: 100
+  Class 0, accuracy: 100.0000
+  Class 1, accuracy: 100.0000
+Testing Loss: 0.0002 | OA: 100.0000 | AA: 100.0000 | Time: 91.16

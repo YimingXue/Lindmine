@@ -43,14 +43,22 @@ class Hyperspectral_Dataset(Dataset):
         self.path = os.path.join(os.getcwd(),'Data',self.dataset)
         self.train_image_list = open(self.path+'/'+str(self.config.train_percent)+'/train.txt').read().splitlines()
         self.test_image_list = open(self.path+'/'+str(self.config.train_percent)+'/test.txt').read().splitlines()
+        self.inference_image_list = open(self.path+'/Inference/inference.txt').read().splitlines()
         self.mat_path = self.path + '/' + self.dataset
+        self.image_path = self.path + '/' + self.config.dataset + '_origin.png'
         
         self.mat_name = list(self.dataset); self.mat_name[0] = self.mat_name[0].lower(); self.mat_name = ''.join(self.mat_name)
         self.input_mat = sio.loadmat(self.mat_path+'.mat')[self.mat_name]
-        if self.dataset == 'Indian_pines_corrected':
-            self.target_mat = sio.loadmat(self.mat_path+'_gt.mat')['indian_pines_gt']
+        if self.config.inference == False:
+            if self.dataset == 'Indian_pines_corrected':
+                self.target_mat = sio.loadmat(self.mat_path+'_gt.mat')['indian_pines_gt']
+            else:
+                self.target_mat = sio.loadmat(self.mat_path+'_gt.mat')[self.mat_name+'_gt']
         else:
-            self.target_mat = sio.loadmat(self.mat_path+'_gt.mat')[self.mat_name+'_gt']
+            if self.dataset == 'Indian_pines_corrected':
+                self.target_inference_mat = sio.loadmat(self.mat_path+'_inference_gt.mat')['indian_pines_inference_gt']
+            else:
+                self.target_inference_mat = sio.loadmat(self.mat_path+'_inference_gt.mat')[self.mat_name+'_inference_gt']
 
         self.height = self.input_mat.shape[0]
         self.width = self.input_mat.shape[1]
@@ -67,36 +75,51 @@ class Hyperspectral_Dataset(Dataset):
             self.mean_array[i] = np.mean(self.input_mat[:,:,i])
         
         self.transpose_array = np.transpose(self.input_mat,(2,0,1))
-        print('\tNumber of train data:{}, Number of test data:{}'.format(len(self.train_image_list), len(self.test_image_list)))
+        
+        if self.config.inference == False:
+            print('\tNumber of train data:{}, Number of test data:{}'.format(len(self.train_image_list), len(self.test_image_list)))
+        else:
+            print('\tNumber of inference data:{}'.format(len(self.inference_image_list)))
 
     def __getitem__(self,index):
-        if self.train == True:
-            patch_center = self.train_image_list[index].split(' ')
-            h = int(patch_center[0])
-            w = int(patch_center[1])
-            patch = self.Patch_Center(h,w)
-            label = self.target_mat[h,w]-1
-            # # Data augmentation
-            # num = random.randint(0,1)
-            # if num == 0 :
-            #     patch = patch[:,::-1,:] # Flip patch up-down
-            # if num == 1 :
-            #     patch = patch[:,:,::-1] # Flip patch left-right
-            # if num == 2 :
-            #     self.patch[index] = rotation(self.patch[index]) # Rotate patch for 90/180/270
+        if self.config.inference == False:
+            if self.train == True:
+                patch_center = self.train_image_list[index].split(' ')
+                h = int(patch_center[0])
+                w = int(patch_center[1])
+                patch = self.Patch_Center(h,w)
+                label = self.target_mat[h,w]-1
+                # # Data augmentation
+                # num = random.randint(0,1)
+                # if num == 0 :
+                #     patch = patch[:,::-1,:] # Flip patch up-down
+                # if num == 1 :
+                #     patch = patch[:,:,::-1] # Flip patch left-right
+                # if num == 2 :
+                #     self.patch[index] = rotation(self.patch[index]) # Rotate patch for 90/180/270
+            else:
+                patch_center = self.test_image_list[index].split(' ')
+                h = int(patch_center[0])
+                w = int(patch_center[1])
+                patch = self.Patch_Center(h,w)
+                label = self.target_mat[h,w]-1
         else:
-            patch_center = self.test_image_list[index].split(' ')
+            patch_center = self.inference_image_list[index].split(' ')
             h = int(patch_center[0])
             w = int(patch_center[1])
             patch = self.Patch_Center(h,w)
-            label = self.target_mat[h,w]-1
+            label = self.target_inference_mat[h,w]-1
+            return patch, label.astype(np.int64), h, w
         return patch, label.astype(np.int64)
 
     def __len__(self):
-        if self.train == True:
-            return len(self.train_image_list)
+        if self.config.inference == False:
+            if self.train == True:
+                return len(self.train_image_list)
+            else:
+                return len(self.test_image_list)
         else:
-            return len(self.test_image_list)
+            return len(self.inference_image_list)
 
     def Patch_Center(self,height_index,width_index):
         """
@@ -127,12 +150,17 @@ class Hyperspectral_Dataset(Dataset):
 
     
 if __name__ == '__main__':
-    train_dataloader = DataLoader(Hyperspectral_Dataset(config,train=True), \
-                                    batch_size=config.batch_size,shuffle=True)
-    for iter,(train_images,train_labels) in enumerate(train_dataloader):
-        print(iter, train_images.shape, train_labels.shape, len(train_labels))
+    # train_dataloader = DataLoader(Hyperspectral_Dataset(config,train=True), \
+    #                                 batch_size=config.batch_size,shuffle=True)
+    # for iter,(train_images,train_labels) in enumerate(train_dataloader):
+    #     print(iter, train_images.shape, train_labels.shape, len(train_labels))
     
     # test_dataloader = DataLoader(Hyperspectral_Dataset(config,train=False), \
     #                                 batch_size=config.batch_size,shuffle=False)
     # for iter,(test_images,test_labels) in enumerate(test_dataloader):
     #     print(iter, test_images.shape, test_labels.shape)
+
+    inference_dataloader = DataLoader(Hyperspectral_Dataset(config,train=True), \
+                                    batch_size=config.batch_size,shuffle=False)
+    for iter,(inference_images,inference_labels) in enumerate(inference_dataloader):
+        print(iter, inference_images.shape, inference_labels.shape, len(inference_labels))

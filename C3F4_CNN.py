@@ -3,6 +3,8 @@ import math
 import torch
 import torch.nn.functional as F
 from config import config
+import os
+from skimage import io
 
 class C3F4_CNN(nn.Module):
     def __init__(self, config):
@@ -14,6 +16,7 @@ class C3F4_CNN(nn.Module):
         self.conv1 = nn.Sequential(
         # conv1
         nn.Conv2d(self.input_nc, 380, 7, padding=3),
+        nn.BatchNorm2d(380),
         nn.Dropout(p=0.2),
         nn.ReLU(inplace=True)
         )
@@ -30,24 +33,28 @@ class C3F4_CNN(nn.Module):
         # conv3
         nn.MaxPool2d(2, stride=2, ceil_mode=True),  # 1/4
         nn.Conv2d(350, 350, 1),
+        nn.Dropout(0.2),
         nn.ReLU(inplace=True)                                                                  
         )
 
         self.fc1 = nn.Sequential(
         # fc1
         nn.Linear(self.input_fc1_nc, 2048),
+        nn.Dropout(0.2),
         nn.ReLU(inplace=True)
         )
 
         self.fc2 = nn.Sequential(
         # fc2
         nn.Linear(2048, 2048),
+        nn.Dropout(0.2),
         nn.ReLU(inplace=True)
         )
 
         self.fc3 = nn.Sequential(
         # fc3
         nn.Linear(2048, 1024),
+        nn.Dropout(0.2),
         nn.ReLU(inplace=True)
         )
 
@@ -93,6 +100,14 @@ class C3F4_CNN(nn.Module):
                 accuracy_per_class[labels[i]] += 1
             number_per_class[labels[i]] += 1
         return num_correct_classified, accuracy_per_class, number_per_class
+    
+    def inference_classification(self, images, labels):
+        # forward pass
+        prob, softmax_prob = self.forward(images)
+        # calculate classification error
+        prediction = torch.argmax(softmax_prob, dim=1).type(torch.cuda.LongTensor)
+
+        return prediction.item()
 
 
 if __name__ == "__main__":
