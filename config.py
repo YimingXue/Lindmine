@@ -4,6 +4,7 @@ class DefaultConfigs(object):
 
     # Dataset selection
     dataset = 'garbage_crop_37' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/garbage_crop_37
+    inference = True # For garbage_crop_37 inference
     
     # train/test parameters
     model_name = 'C3F4_CNN' # Pyramidal_ResNet/SimpleFC/C3F4_CNN
@@ -32,11 +33,10 @@ class DefaultConfigs(object):
         band = 63
         num_classes = 2
     patch_mode = 'Center' # Center/TopLeft/PP(Pixel-Pair)
-    patch_size = 31
-    train_percent = 0.2
+    patch_size = 11
+    train_percent = 1.0
     val_percent = 0.0
-    test_percent = 0.8
-    inference = True
+    test_percent = 0.0
 
     # SimpleFC parameters
     FC_1 = 500

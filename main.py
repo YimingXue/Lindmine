@@ -164,8 +164,9 @@ def train(config, kwargs):
             print('>>--{} model saved--<<'.format(path_name_current_fold+str(epoch)+'.model'))
             with open(path_name_current_fold + '.txt', 'a') as f:
                 print('>>--{} model saved--<<'.format(path_name_current_fold+str(epoch)+'.model'), file=f)
-            # Calculate accuary of training dataset
-            test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False)
+            # Calculate accuary of testing dataset
+            if config.dataset != 'garbage_crop_37':
+                test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False)
 
 def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
     # LOAD TEST DATA========================================================================
@@ -252,13 +253,9 @@ def inference(config, kwargs, epoch, evaluate_model_assign=None, train_assign=Fa
         evaluate_model = torch.load(snapshots_path + evaluate_model_assign + '/' + config.model_name + str(epoch) + '.model')
         print('>>--%s model loaded--<<'%(snapshots_path + evaluate_model_assign + '/' + config.model_name + str(epoch) + '.model'))
         path_name_current_fold = snapshots_path + evaluate_model_assign + '/' + config.model_name + str(epoch) + '.model'
-        with open(path_name_current_fold + '.txt', 'a') as f:
-            print('>>--%s model loaded--<<'%(snapshots_path + evaluate_model_assign + '/' + config.model_name + str(epoch) + '.model'), file=f)
     else:
         evaluate_model = torch.load(path_name_current_fold + str(epoch) + '.model')
         print('>>--%s model loaded--<<'%(path_name_current_fold + str(epoch) + '.model'))
-        with open(path_name_current_fold + '.txt', 'a') as f:
-            print('>>--%s model loaded--<<'%(path_name_current_fold + str(epoch) + '.model'), file=f)
 
     # CALCULATE CLASSIFICATION RESULT AND LOSS FOR INFERENCE SET====================================
     # set evaluate_model to evaluation mode
@@ -286,7 +283,7 @@ def inference(config, kwargs, epoch, evaluate_model_assign=None, train_assign=Fa
     print('Using %.2f seconds'%(t_ll_e-t_ll_s))
     
     save_path = os.path.join(os.getcwd(),'Data',config.dataset)
-    image_save_path = save_path + '/' + config.dataset + '_inference.png'
+    image_save_path = save_path + '/' + config.dataset + '_inference_PS' + str(config.patch_size) + '_epoch' + str(epoch) + '.png'
     io.imsave(image_save_path, image)
     print('Save Inference image')
 
@@ -298,6 +295,6 @@ if __name__ == '__main__':
         # evaluate_model_assign = 'SimpleFC_2019-01-04_21-34-07'
         # test(config, kwargs, epoch, evaluate_model_assign)
     else:
-        epoch = 60
-        evaluate_model_assign = 'C3F4_CNN_2019-01-13_14-52-17'
+        epoch = 10
+        evaluate_model_assign = 'C3F4_CNN_2019-01-14_15-43-42'
         inference(config, kwargs, epoch, evaluate_model_assign)
