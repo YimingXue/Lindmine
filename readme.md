@@ -1,4 +1,4 @@
-#### PaviaU
+### PaviaU
 
 - C3F4_CNN网络处理PaviaU数据集，20%训练、80%测试，patch_size=11，lr=0.001
 
@@ -20,7 +20,7 @@
   
 
 
-#### Indian_pines
+### Indian_pines
 
 - C3F4_CNN网络处理Indian_pines数据集，20%训练、80%测试，patch_size=21，lr=0.01
 
@@ -72,7 +72,7 @@
 
 
 
-#### Indian_pines_corrected
+### Indian_pines_corrected
 
 - C3F4_CNN网络处理Indian_pines_corrected数据集，20%训练、10%验证、70%测试，patch_size=21，lr=0.01
 
@@ -176,7 +176,7 @@
 
 
 
-#### Garbage_crop_37
+### Garbage_crop_37
 
 |  GT  |          Class           |     Count      |
 | :--: | :----------------------: | :------------: |
