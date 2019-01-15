@@ -1,1 +1,0 @@
->>--/home/xueyiming/TEST/snapshots/patch_size21/C3F4_CNN_2019-01-14_15-43-58/C3F4_CNN10.model model loaded--<<

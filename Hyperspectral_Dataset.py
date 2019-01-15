@@ -43,7 +43,6 @@ class Hyperspectral_Dataset(Dataset):
         self.path = os.path.join(os.getcwd(),'Data',self.dataset)
         self.train_image_list = open(self.path+'/'+str(self.config.train_percent)+'/train.txt').read().splitlines()
         self.test_image_list = open(self.path+'/'+str(self.config.train_percent)+'/test.txt').read().splitlines()
-        self.inference_image_list = open(self.path+'/Inference/inference.txt').read().splitlines()
         self.mat_path = self.path + '/' + self.dataset
         self.image_path = self.path + '/' + self.config.dataset + '_origin.png'
         
@@ -55,11 +54,9 @@ class Hyperspectral_Dataset(Dataset):
             else:
                 self.target_mat = sio.loadmat(self.mat_path+'_gt.mat')[self.mat_name+'_gt']
         else:
-            if self.dataset == 'Indian_pines_corrected':
-                self.target_inference_mat = sio.loadmat(self.mat_path+'_inference_gt.mat')['indian_pines_inference_gt']
-            else:
-                self.target_inference_mat = sio.loadmat(self.mat_path+'_inference_gt.mat')[self.mat_name+'_inference_gt']
+            self.inference_image_list = open(self.path+'/Inference/inference.txt').read().splitlines()
 
+        # if config.dataset != 'garbage':
         self.height = self.input_mat.shape[0]
         self.width = self.input_mat.shape[1]
         self.band = self.config.band
@@ -85,8 +82,9 @@ class Hyperspectral_Dataset(Dataset):
         if self.config.inference == False:
             if self.train == True:
                 patch_center = self.train_image_list[index].split(' ')
-                h = int(patch_center[0])
-                w = int(patch_center[1])
+                data_name = patch_center[0]
+                h = int(patch_center[1])
+                w = int(patch_center[2])
                 patch = self.Patch_Center(h,w)
                 label = self.target_mat[h,w]-1
                 # # Data augmentation
@@ -99,17 +97,16 @@ class Hyperspectral_Dataset(Dataset):
                 #     self.patch[index] = rotation(self.patch[index]) # Rotate patch for 90/180/270
             else:
                 patch_center = self.test_image_list[index].split(' ')
-                h = int(patch_center[0])
-                w = int(patch_center[1])
+                h = int(patch_center[1])
+                w = int(patch_center[2])
                 patch = self.Patch_Center(h,w)
                 label = self.target_mat[h,w]-1
         else:
             patch_center = self.inference_image_list[index].split(' ')
-            h = int(patch_center[0])
-            w = int(patch_center[1])
+            h = int(patch_center[1])
+            w = int(patch_center[2])
             patch = self.Patch_Center(h,w)
-            label = self.target_inference_mat[h,w]-1
-            return patch, label.astype(np.int64), h, w
+            return patch, h, w
         return patch, label.astype(np.int64)
 
     def __len__(self):
@@ -162,5 +159,5 @@ if __name__ == '__main__':
 
     inference_dataloader = DataLoader(Hyperspectral_Dataset(config,train=True), \
                                     batch_size=config.batch_size,shuffle=False)
-    for iter,(inference_images,inference_labels) in enumerate(inference_dataloader):
-        print(iter, inference_images.shape, inference_labels.shape, len(inference_labels))
+    for iter,(inference_images) in enumerate(inference_dataloader):
+        print(iter, inference_images.shape)

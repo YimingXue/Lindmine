@@ -243,7 +243,7 @@ def inference(config, kwargs, epoch, evaluate_model_assign=None, train_assign=Fa
     # LOAD INFERENCE DATA========================================================================
     print('\tload inference data')
     inference_dataloader = DataLoader(Hyperspectral_Dataset(config,train=train_assign), \
-                                    batch_size=1,shuffle=False,**kwargs)
+                                    batch_size=500,shuffle=False,**kwargs)
     
     # DIRECTORY FOR LOADING=====================================================================
     snapshots_path = os.getcwd() + '/snapshots/patch_size' + str(config.patch_size) + '/'
@@ -265,18 +265,19 @@ def inference(config, kwargs, epoch, evaluate_model_assign=None, train_assign=Fa
     path = os.path.join(os.getcwd(),'Data',config.dataset)
     image_path = path + '/' + config.dataset + '_origin.png'
     image = io.imread(image_path)
-    for batch_idx, (inference_images, inference_labels, h, w) in enumerate(inference_dataloader):
+    for batch_idx, (inference_images, h, w) in enumerate(inference_dataloader):
         # data preparation
-        inference_images, inference_labels = inference_images.type(torch.FloatTensor), inference_labels.type(torch.LongTensor)
+        inference_images = inference_images.type(torch.FloatTensor)
         if CUDA_AVAILABLE:
-            inference_images, inference_labels = inference_images.cuda(), inference_labels.cuda()
-        inference_images, inference_labels = Variable(inference_images), Variable(inference_labels)
+            inference_images = inference_images.cuda()
+        inference_images = Variable(inference_images)
 
         # calculate loss and result
-        prediction = evaluate_model.inference_classification(inference_images,inference_labels)
-        if prediction == 0:
-            image[h,w,0:3] = (255,0,0)
-        if batch_idx % 2000 == 0:
+        prediction = evaluate_model.inference_classification(inference_images)
+        for i in range(len(prediction)):
+            if prediction[i] == 0:
+                image[h[i],w[i],0:3] = (255,0,0)
+        if batch_idx % 200 == 0:
             print('batch_idx {}'.format(batch_idx))
     
     t_ll_e = time.time()
@@ -295,6 +296,6 @@ if __name__ == '__main__':
         # evaluate_model_assign = 'SimpleFC_2019-01-04_21-34-07'
         # test(config, kwargs, epoch, evaluate_model_assign)
     else:
-        epoch = 10
-        evaluate_model_assign = 'C3F4_CNN_2019-01-14_15-43-42'
+        epoch = 40
+        evaluate_model_assign = 'C3F4_CNN_2019-01-15_14-44-14'
         inference(config, kwargs, epoch, evaluate_model_assign)

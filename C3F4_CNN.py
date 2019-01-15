@@ -15,8 +15,8 @@ class C3F4_CNN(nn.Module):
 
         self.conv1 = nn.Sequential(
         # conv1
-        nn.Conv2d(self.input_nc, 380, 7, padding=3),
-        nn.BatchNorm2d(380),
+        nn.Conv2d(self.input_nc, 360, 7, padding=3, groups=9),
+        # nn.BatchNorm2d(380),
         nn.Dropout(p=0.2),
         nn.ReLU(inplace=True)
         )
@@ -24,7 +24,7 @@ class C3F4_CNN(nn.Module):
         self.conv2 = nn.Sequential(
         # conv2
         nn.MaxPool2d(2, stride=2, ceil_mode=True),  # 1/2
-        nn.Conv2d(380, 350, 5, padding=2),
+        nn.Conv2d(360, 350, 5, padding=2),
         nn.Dropout(p=0.2),
         nn.ReLU(inplace=True)
         )
@@ -101,13 +101,13 @@ class C3F4_CNN(nn.Module):
             number_per_class[labels[i]] += 1
         return num_correct_classified, accuracy_per_class, number_per_class
     
-    def inference_classification(self, images, labels):
+    def inference_classification(self, images):
         # forward pass
         prob, softmax_prob = self.forward(images)
         # calculate classification error
         prediction = torch.argmax(softmax_prob, dim=1).type(torch.cuda.LongTensor)
 
-        return prediction.item()
+        return prediction
 
 
 if __name__ == "__main__":
