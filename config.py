@@ -3,7 +3,7 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'Indian_pines' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/crop_59/garbage_crop_37/garbage
+    dataset = 'crop_59' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/crop_59/garbage_crop_37/garbage
     inference = False # For garbage_crop_37 inference
     
     # train/test parameters
@@ -37,9 +37,9 @@ class DefaultConfigs(object):
         num_classes = 2
     patch_mode = 'Center' # Center/TopLeft/PP(Pixel-Pair)
     patch_size = 31
-    train_percent = 0.2
+    train_percent = 0.01
     val_percent = 0.0
-    test_percent = 0.8
+    test_percent = 0.1
 
     # SimpleFC parameters
     FC_1 = 500
