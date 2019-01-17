@@ -221,3 +221,34 @@ Epoch 52/150| Time: 6.79s| Loss: 0.0016
 Epoch 53/150| Time: 6.84s| Loss: 0.0016
 Epoch 54/150| Time: 6.80s| Loss: 0.0015
 Epoch 55/150| Time: 7.20s| Loss: 0.0015
+Epoch 56/150| Time: 6.86s| Loss: 0.0022
+Epoch 57/150| Time: 6.85s| Loss: 0.0014
+Epoch 58/150| Time: 6.78s| Loss: 0.0020
+Epoch 59/150| Time: 6.88s| Loss: 0.0008
+Epoch 60/150| Time: 7.26s| Loss: 0.0009
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_RON_2019-01-17_09-11-48/C3F4_CNN_RON60.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size31/C3F4_CNN_RON_2019-01-17_09-11-48/C3F4_CNN_RON60.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0134 | Accuracy: 100
+  Class 0, accuracy: 100.0000
+  Class 1, accuracy: 99.2119
+  Class 2, accuracy: 99.6988
+  Class 3, accuracy: 100.0000
+  Class 4, accuracy: 97.4093
+  Class 5, accuracy: 100.0000
+  Class 6, accuracy: 95.4545
+  Class 7, accuracy: 100.0000
+  Class 8, accuracy: 100.0000
+  Class 9, accuracy: 99.2278
+  Class 10, accuracy: 99.7963
+  Class 11, accuracy: 99.3671
+  Class 12, accuracy: 99.3902
+  Class 13, accuracy: 99.5059
+  Class 14, accuracy: 99.6753
+  Class 15, accuracy: 100.0000
+Testing Loss: 0.0178 | OA: 99.4874 | AA: 99.2961 | Time: 31.97
+Epoch 61/150| Time: 6.86s| Loss: 0.0011
+Epoch 62/150| Time: 6.89s| Loss: 0.0015
+Epoch 63/150| Time: 6.87s| Loss: 0.0011
+Epoch 64/150| Time: 6.80s| Loss: 0.0010
+Epoch 65/150| Time: 6.78s| Loss: 0.0029
+Epoch 66/150| Time: 7.10s| Loss: 0.0016
