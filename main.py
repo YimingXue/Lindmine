@@ -45,6 +45,10 @@ def train(config, kwargs):
         from SimpleFC import SimpleFC as Model
     elif config.model_name == 'C3F4_CNN':
         from C3F4_CNN import C3F4_CNN as Model
+    elif config.model_name == 'C3F4_CNN_RON':
+        from C3F4_CNN_RON import C3F4_CNN_RON as Model
+    elif config.model_name == 'C3F4_CNN_FPN':
+        from C3F4_CNN_FPN import C3F4_CNN_FPN as Model
     else:
         raise Exception('Wrong name of the model!')
     
@@ -77,11 +81,12 @@ def train(config, kwargs):
           '\tband: {}\n'
           '\tnum_classes: {}\n'
           '\ttrain_percent: {}\n'
-          '\tval_percent: {}\n'.format(
+          '\tval_percent: {}\n'
+          '\ttest_percent: {}\n'.format(
           config.cuda, config.model_name, config.optimizer,
           config.epochs, config.batch_size, config.seed,
           config.lr, config.weight_decay, config.dataset, config.patch_size, 
-          config.band, config.num_classes, config.train_percent, config.val_percent),file=f)
+          config.band, config.num_classes, config.train_percent, config.val_percent, config.test_percent),file=f)
     
     # LOAD TRAINING DATA===================================================================
     # # data_augmentation
@@ -228,13 +233,16 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
     test_accuary = test_accuary / test_number * 100
 
     AA = 0.
+    exist_classes = 0
     for i in range(len(accuracy_per_class)):
-        accuracy_pc = accuracy_per_class[i]/number_per_class[i]*100
-        AA += accuracy_pc
-        print('  Class %d, accuracy: %.4f'%(i, accuracy_pc))
-        with open(path_name_current_fold + '.txt', 'a') as f:
-            print('  Class %d, accuracy: %.4f'%(i, accuracy_pc),file=f)
-    AA /= config.num_classes
+        if number_per_class[i] != 0:
+            exist_classes += 1
+            accuracy_pc = accuracy_per_class[i]/number_per_class[i]*100
+            AA += accuracy_pc
+            print('  Class %d, accuracy: %.4f'%(i, accuracy_pc))
+            with open(path_name_current_fold + '.txt', 'a') as f:
+                print('  Class %d, accuracy: %.4f'%(i, accuracy_pc),file=f)
+    AA /= exist_classes
     print('Testing Loss: %.4f | OA: %.4f | AA: %.4f | Time: %.2f'%(test_loss, test_accuary, AA, t_ll_e-t_ll_s))
     with open(path_name_current_fold + '.txt', 'a') as f:
         print('Testing Loss: %.4f | OA: %.4f | AA: %.4f | Time: %.2f'%(test_loss, test_accuary, AA, t_ll_e-t_ll_s), file=f)
@@ -296,6 +304,6 @@ if __name__ == '__main__':
         # evaluate_model_assign = 'SimpleFC_2019-01-04_21-34-07'
         # test(config, kwargs, epoch, evaluate_model_assign)
     else:
-        epoch = 40
-        evaluate_model_assign = 'C3F4_CNN_2019-01-15_14-44-14'
+        epoch = 10
+        evaluate_model_assign = 'C3F4_CNN_2019-01-16_09-50-55'
         inference(config, kwargs, epoch, evaluate_model_assign)

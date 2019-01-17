@@ -15,8 +15,8 @@ class C3F4_CNN(nn.Module):
 
         self.conv1 = nn.Sequential(
         # conv1
-        nn.Conv2d(self.input_nc, 360, 7, padding=3, groups=9),
-        # nn.BatchNorm2d(380),
+        nn.Conv2d(self.input_nc, 360, 7, padding=3),
+        # nn.BatchNorm2d(360),
         nn.Dropout(p=0.2),
         nn.ReLU(inplace=True)
         )
