@@ -3,13 +3,15 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'crop_59' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/crop_59/garbage_crop_37/garbage
+    dataset = 'Indian_pines' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/crop_59/garbage_crop_37/garbage
     inference = False # For garbage_crop_37 inference
+    maxTrain = True # Whether use limited data to train
+    max_trainData = 200
     
     # train/test parameters
     model_name = 'C3F4_CNN_RON' # Pyramidal_ResNet/SimpleFC/C3F4_CNN/C3F4_CNN_RON/C3F4_CNN_FPN
     optimizer = 'SGD' # Adagrad/SGD/Adam
-    epochs = 150
+    epochs = 80
     step_size = 20
     batch_size = 100
     seed = 75
@@ -36,10 +38,10 @@ class DefaultConfigs(object):
         band = 63
         num_classes = 2
     patch_mode = 'Center' # Center/TopLeft/PP(Pixel-Pair)
-    patch_size = 31
+    patch_size = 29
     train_percent = 0.01
     val_percent = 0.0
-    test_percent = 0.1
+    test_percent = 0.25
 
     # SimpleFC parameters
     FC_1 = 500

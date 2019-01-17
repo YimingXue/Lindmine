@@ -41,8 +41,12 @@ class Hyperspectral_Dataset(Dataset):
         self.train = train
         self.dataset = self.config.dataset
         self.path = os.path.join(os.getcwd(),'Data',self.dataset)
-        self.train_image_list = open(self.path+'/'+str(self.config.train_percent)+'/train.txt').read().splitlines()
-        self.test_image_list = open(self.path+'/'+str(self.config.train_percent)+'/test.txt').read().splitlines()
+        if self.config.maxTrain == False:
+            self.train_image_list = open(self.path+'/'+str(self.config.train_percent)+'/train.txt').read().splitlines()
+            self.test_image_list = open(self.path+'/'+str(self.config.train_percent)+'/test.txt').read().splitlines()
+        else:
+            self.train_image_list = open(self.path+'/'+str(self.config.max_trainData)+'/train.txt').read().splitlines()
+            self.test_image_list = open(self.path+'/'+str(self.config.max_trainData)+'/test.txt').read().splitlines()
         self.mat_path = self.path + '/' + self.dataset
         self.image_path = self.path + '/' + self.config.dataset + '_origin.png'
         

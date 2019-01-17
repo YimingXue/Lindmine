@@ -127,6 +127,7 @@ def train(config, kwargs):
     # PERFORM TRAINING EXPERIMENT==========================================================
     print('\tperform experiment\n')
 
+    loss_batchSize = []
     for epoch in range(1, config.epochs+1):
         time_start = time.time()
         scheduler.step()
@@ -148,6 +149,7 @@ def train(config, kwargs):
             optimizer.zero_grad()
             # calculate loss
             loss = model.calculate_objective(train_images, train_labels)
+            loss_batchSize.append(loss)
             train_loss += loss.item()
             train_number += len(train_labels)
             # backward pass
@@ -172,6 +174,7 @@ def train(config, kwargs):
             # Calculate accuary of testing dataset
             if config.dataset != 'garbage_crop_37':
                 test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False)
+    sio.savemat(path_name_current_fold + '.mat', {'loss': loss_batchSize})
 
 def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
     # LOAD TEST DATA========================================================================
@@ -232,20 +235,26 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
     test_loss = test_loss / test_number * 100
     test_accuary = test_accuary / test_number * 100
 
+    Pe = 0.
     AA = 0.
     exist_classes = 0
     for i in range(len(accuracy_per_class)):
         if number_per_class[i] != 0:
+            Pe += accuracy_per_class[i] * number_per_class[i]
+
             exist_classes += 1
             accuracy_pc = accuracy_per_class[i]/number_per_class[i]*100
             AA += accuracy_pc
             print('  Class %d, accuracy: %.4f'%(i, accuracy_pc))
             with open(path_name_current_fold + '.txt', 'a') as f:
                 print('  Class %d, accuracy: %.4f'%(i, accuracy_pc),file=f)
+    P0 = test_accuary / 100
+    Pe = Pe / (test_number**2)
+    Kappa = (P0 - Pe) / (1 - Pe) * 100
     AA /= exist_classes
-    print('Testing Loss: %.4f | OA: %.4f | AA: %.4f | Time: %.2f'%(test_loss, test_accuary, AA, t_ll_e-t_ll_s))
+    print('Testing Loss: %.4f | OA: %.4f | AA: %.4f | Kappa: %.4f | Time: %.2f'%(test_loss, test_accuary, AA, Kappa, t_ll_e-t_ll_s))
     with open(path_name_current_fold + '.txt', 'a') as f:
-        print('Testing Loss: %.4f | OA: %.4f | AA: %.4f | Time: %.2f'%(test_loss, test_accuary, AA, t_ll_e-t_ll_s), file=f)
+        print('Testing Loss: %.4f | OA: %.4f | AA: %.4f | Kappa: %.4f | Time: %.2f'%(test_loss, test_accuary, AA, Kappa, t_ll_e-t_ll_s), file=f)
 
 def inference(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
     # LOAD INFERENCE DATA========================================================================
@@ -301,9 +310,9 @@ if __name__ == '__main__':
     if config.inference == False:
         train(config, kwargs)
         # epoch = 10
-        # evaluate_model_assign = 'SimpleFC_2019-01-04_21-34-07'
+        # evaluate_model_assign = 'C3F4_CNN_RON_2019-01-17_15-32-27'
         # test(config, kwargs, epoch, evaluate_model_assign)
     else:
         epoch = 10
-        evaluate_model_assign = 'C3F4_CNN_2019-01-16_09-50-55'
+        evaluate_model_assign = 'C3F4_CNN_RON_2019-01-17_15-32-27'
         inference(config, kwargs, epoch, evaluate_model_assign)
