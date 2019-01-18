@@ -15,17 +15,19 @@ import warnings
 import math
 import scipy.io as sio
 from skimage import io
+import sys
+sys.path.insert(0, os.getcwd() + '/Model/')
 
 def weights_init(m):
     if isinstance(m, nn.Conv2d):
         init.xavier_uniform(m.weight.data)
-        init.constant(m.bias.data, 0)
+        # init.constant(m.bias.data, 0)
     elif isinstance(m, nn.Linear):
         init.xavier_uniform(m.weight.data)
         init.constant(m.bias.data, 0)
-    # elif isinstance(m, nn.BatchNorm2d):
-    #     m.weight.data.normal_(1.0, 0.02)
-    #     m.bias.data.fill_(0)
+    elif isinstance(m, nn.BatchNorm2d):
+        m.weight.data.normal_(1.0, 0.02)
+        m.bias.data.fill_(0)
 
 warnings.filterwarnings("ignore")
 CUDA_AVAILABLE = config.cuda and torch.cuda.is_available()
@@ -49,6 +51,10 @@ def train(config, kwargs):
         from C3F4_CNN_RON import C3F4_CNN_RON as Model
     elif config.model_name == 'C3F4_CNN_FPN':
         from C3F4_CNN_FPN import C3F4_CNN_FPN as Model
+    elif config.model_name == 'ResNet':
+        from ResNet import ResNet as Model
+    elif config.model_name == 'ResNetv2':
+        from ResNetv2 import ResNetv2 as Model
     else:
         raise Exception('Wrong name of the model!')
     
