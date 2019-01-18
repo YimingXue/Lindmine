@@ -63,8 +63,9 @@ def train(config, kwargs):
     config.print_config()
     with open(path_name_current_fold + '.txt', 'a') as f:
         print('#######################PARAMETERS#######################'
-          '# cuda\n'
-          '\tcuda: {}\n'
+          '# Dataset selection\n'
+          '\tmaxTrain: {}\n'
+          '\tmax_trainData: {}\n'
           
           '# train/test parameters'
           '\tmodel_name: {}\n'
@@ -83,7 +84,7 @@ def train(config, kwargs):
           '\ttrain_percent: {}\n'
           '\tval_percent: {}\n'
           '\ttest_percent: {}\n'.format(
-          config.cuda, config.model_name, config.optimizer,
+          config.maxTrain, config.max_trainData, config.model_name, config.optimizer,
           config.epochs, config.batch_size, config.seed,
           config.lr, config.weight_decay, config.dataset, config.patch_size, 
           config.band, config.num_classes, config.train_percent, config.val_percent, config.test_percent),file=f)
@@ -225,7 +226,7 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
         test_accuary += accuary
         accuary = accuary / len(test_labels) * 100
         test_number += len(test_labels)
-        if batch_idx % 200 == 0:
+        if batch_idx % 50 == 0:
             print('\tBatch_idx: %d | Loss: %.4f | Accuracy: %d'%(batch_idx, loss, accuary))
             with open(path_name_current_fold + '.txt', 'a') as f:
                 print('\tBatch_idx: %d | Loss: %.4f | Accuracy: %d'%(batch_idx, loss, accuary), file=f)
@@ -245,16 +246,16 @@ def test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
             exist_classes += 1
             accuracy_pc = accuracy_per_class[i]/number_per_class[i]*100
             AA += accuracy_pc
-            print('  Class %d, accuracy: %.4f'%(i, accuracy_pc))
+            print('  Class %d, accuracy: %.2f'%(i, accuracy_pc))
             with open(path_name_current_fold + '.txt', 'a') as f:
-                print('  Class %d, accuracy: %.4f'%(i, accuracy_pc),file=f)
+                print('  Class %d, accuracy: %.2f'%(i, accuracy_pc),file=f)
     P0 = test_accuary / 100
     Pe = Pe / (test_number**2)
     Kappa = (P0 - Pe) / (1 - Pe) * 100
     AA /= exist_classes
-    print('Testing Loss: %.4f | OA: %.4f | AA: %.4f | Kappa: %.4f | Time: %.2f'%(test_loss, test_accuary, AA, Kappa, t_ll_e-t_ll_s))
+    print('Testing Loss: %.4f | OA: %.2f | AA: %.2f | Kappa: %.2f | Time: %.2f'%(test_loss, test_accuary, AA, Kappa, t_ll_e-t_ll_s))
     with open(path_name_current_fold + '.txt', 'a') as f:
-        print('Testing Loss: %.4f | OA: %.4f | AA: %.4f | Kappa: %.4f | Time: %.2f'%(test_loss, test_accuary, AA, Kappa, t_ll_e-t_ll_s), file=f)
+        print('Testing Loss: %.4f | OA: %.2f | AA: %.2f | Kappa: %.2f | Time: %.2f'%(test_loss, test_accuary, AA, Kappa, t_ll_e-t_ll_s), file=f)
 
 def inference(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False):
     # LOAD INFERENCE DATA========================================================================

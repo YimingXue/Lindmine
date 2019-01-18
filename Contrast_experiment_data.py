@@ -6,6 +6,10 @@ import sys
 import os
 import math
 
+# set random seed
+random.seed(config.seed)
+np.random.seed(config.seed)
+
 if __name__ == '__main__':
 	dataset = config.dataset
 	train_percent = config.train_percent
@@ -44,9 +48,12 @@ if __name__ == '__main__':
 		index = np.array([y, x]).T
 		np.random.shuffle(index)
 		
-		nTrain = max_trainData
 		nVal = int(math.floor(y.shape[0] * val_percent))
 		nTest = int(math.floor(y.shape[0] * test_percent))
+		nTrain = min(max_trainData, len(y)-nTest)
+
+		print('Class {}: nTrain {}, nVal {}, nTest {}'.format(c, nTrain, nVal, nTest))
+
 		train = index[0:nTrain, :]
 		val = index[nTrain:nTrain+nVal, :]
 		test = index[nTrain+nVal:nTrain+nVal+nTest, :]

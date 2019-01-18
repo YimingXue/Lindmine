@@ -1,0 +1,309 @@
+#######################PARAMETERS######################## Dataset selection
+	maxTrain: True
+	max_trainData: 50
+# train/test parameters	model_name: C3F4_CNN_RON
+	optimizer: SGD
+	epochs: 80
+	batch_size: 100
+	seed: 75
+	lr: 0.01
+	weight_decay: 0.0001
+# data preparation parameters
+	dataset: Indian_pines
+	patch_size: 9
+	band: 220
+	num_classes: 16
+	train_percent: 0.01
+	val_percent: 0.0
+	test_percent: 0.25
+
+#############################  MODEL  ###################################
+
+C3F4_CNN_RON(
+  (conv1): Sequential(
+    (0): Conv2d(220, 380, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+    (1): Dropout(p=0.2)
+    (2): ReLU(inplace)
+  )
+  (conv2_fpn): Sequential(
+    (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=True)
+    (1): Conv2d(380, 350, kernel_size=(1, 1), stride=(1, 1))
+  )
+  (conv2): Sequential(
+    (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=True)
+    (1): Conv2d(380, 350, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    (2): Dropout(p=0.2)
+    (3): ReLU(inplace)
+  )
+  (conv3_fpn): Sequential(
+    (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=True)
+    (1): Conv2d(350, 350, kernel_size=(1, 1), stride=(1, 1))
+  )
+  (conv3): Sequential(
+    (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=True)
+    (1): Conv2d(350, 350, kernel_size=(1, 1), stride=(1, 1))
+    (2): Dropout(p=0.2)
+    (3): ReLU(inplace)
+  )
+  (fc1): Sequential(
+    (0): Linear(in_features=3150, out_features=2048, bias=True)
+    (1): Dropout(p=0.2)
+    (2): ReLU(inplace)
+  )
+  (fc2): Sequential(
+    (0): Linear(in_features=2048, out_features=2048, bias=True)
+    (1): Dropout(p=0.2)
+    (2): ReLU(inplace)
+  )
+  (fc3): Sequential(
+    (0): Linear(in_features=2048, out_features=1024, bias=True)
+    (1): Dropout(p=0.2)
+    (2): ReLU(inplace)
+  )
+  (fc4): Sequential(
+    (0): Linear(in_features=1024, out_features=16, bias=True)
+  )
+  (Softmax): Softmax()
+)
+##############################################################################
+
+Epoch 1/80| Time: 0.51s| Loss: 3.06
+Epoch 2/80| Time: 0.50s| Loss: 2.93
+Epoch 3/80| Time: 0.47s| Loss: 2.61
+Epoch 4/80| Time: 0.47s| Loss: 2.39
+Epoch 5/80| Time: 0.47s| Loss: 2.08
+Epoch 6/80| Time: 0.47s| Loss: 1.91
+Epoch 7/80| Time: 0.47s| Loss: 1.64
+Epoch 8/80| Time: 0.48s| Loss: 1.46
+Epoch 9/80| Time: 0.47s| Loss: 1.24
+Epoch 10/80| Time: 0.47s| Loss: 1.13
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON10.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON10.model model loaded--<<
+	Batch_idx: 0 | Loss: 1.68 | Accuracy: 31
+  Class 0, accuracy: 18.18
+  Class 1, accuracy: 33.89
+  Class 2, accuracy: 1.45
+  Class 3, accuracy: 100.00
+  Class 4, accuracy: 60.00
+  Class 5, accuracy: 84.07
+  Class 6, accuracy: 14.29
+  Class 7, accuracy: 100.00
+  Class 8, accuracy: 100.00
+  Class 9, accuracy: 34.57
+  Class 10, accuracy: 4.40
+  Class 11, accuracy: 41.22
+  Class 12, accuracy: 100.00
+  Class 13, accuracy: 59.81
+  Class 14, accuracy: 32.29
+  Class 15, accuracy: 100.00
+Testing Loss: 1.51 | OA: 39.15 | AA: 55.26 | Kappa: 37.13 | Time: 1.87
+Epoch 11/80| Time: 0.45s| Loss: 1.11
+Epoch 12/80| Time: 0.46s| Loss: 0.94
+Epoch 13/80| Time: 0.46s| Loss: 0.86
+Epoch 14/80| Time: 0.48s| Loss: 0.81
+Epoch 15/80| Time: 0.46s| Loss: 0.86
+Epoch 16/80| Time: 0.48s| Loss: 0.71
+Epoch 17/80| Time: 0.47s| Loss: 0.61
+Epoch 18/80| Time: 0.47s| Loss: 0.62
+Epoch 19/80| Time: 0.47s| Loss: 0.63
+Epoch 20/80| Time: 0.50s| Loss: 0.66
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON20.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON20.model model loaded--<<
+	Batch_idx: 0 | Loss: 1.10 | Accuracy: 48
+  Class 0, accuracy: 90.91
+  Class 1, accuracy: 45.10
+  Class 2, accuracy: 30.43
+  Class 3, accuracy: 96.61
+  Class 4, accuracy: 34.17
+  Class 5, accuracy: 96.70
+  Class 6, accuracy: 85.71
+  Class 7, accuracy: 100.00
+  Class 8, accuracy: 100.00
+  Class 9, accuracy: 29.63
+  Class 10, accuracy: 86.79
+  Class 11, accuracy: 39.19
+  Class 12, accuracy: 100.00
+  Class 13, accuracy: 91.46
+  Class 14, accuracy: 96.88
+  Class 15, accuracy: 95.65
+Testing Loss: 0.84 | OA: 68.64 | AA: 76.20 | Kappa: 65.58 | Time: 1.82
+Epoch 21/80| Time: 0.46s| Loss: 0.51
+Epoch 22/80| Time: 0.47s| Loss: 0.44
+Epoch 23/80| Time: 0.47s| Loss: 0.42
+Epoch 24/80| Time: 0.47s| Loss: 0.39
+Epoch 25/80| Time: 0.47s| Loss: 0.38
+Epoch 26/80| Time: 0.47s| Loss: 0.38
+Epoch 27/80| Time: 0.46s| Loss: 0.37
+Epoch 28/80| Time: 0.47s| Loss: 0.37
+Epoch 29/80| Time: 0.47s| Loss: 0.36
+Epoch 30/80| Time: 0.46s| Loss: 0.36
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON30.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON30.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.95 | Accuracy: 59
+  Class 0, accuracy: 100.00
+  Class 1, accuracy: 59.10
+  Class 2, accuracy: 61.35
+  Class 3, accuracy: 96.61
+  Class 4, accuracy: 74.17
+  Class 5, accuracy: 95.60
+  Class 6, accuracy: 100.00
+  Class 7, accuracy: 100.00
+  Class 8, accuracy: 100.00
+  Class 9, accuracy: 76.54
+  Class 10, accuracy: 65.42
+  Class 11, accuracy: 56.76
+  Class 12, accuracy: 100.00
+  Class 13, accuracy: 81.96
+  Class 14, accuracy: 94.79
+  Class 15, accuracy: 100.00
+Testing Loss: 0.79 | OA: 74.11 | AA: 85.14 | Kappa: 71.69 | Time: 2.01
+Epoch 31/80| Time: 0.57s| Loss: 0.36
+Epoch 32/80| Time: 0.57s| Loss: 0.36
+Epoch 33/80| Time: 0.56s| Loss: 0.33
+Epoch 34/80| Time: 0.55s| Loss: 0.33
+Epoch 35/80| Time: 0.54s| Loss: 0.33
+Epoch 36/80| Time: 0.53s| Loss: 0.32
+Epoch 37/80| Time: 0.52s| Loss: 0.32
+Epoch 38/80| Time: 0.57s| Loss: 0.35
+Epoch 39/80| Time: 0.52s| Loss: 0.32
+Epoch 40/80| Time: 0.55s| Loss: 0.30
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON40.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON40.model model loaded--<<
+	Batch_idx: 0 | Loss: 1.09 | Accuracy: 53
+  Class 0, accuracy: 100.00
+  Class 1, accuracy: 50.42
+  Class 2, accuracy: 59.90
+  Class 3, accuracy: 96.61
+  Class 4, accuracy: 76.67
+  Class 5, accuracy: 96.70
+  Class 6, accuracy: 100.00
+  Class 7, accuracy: 100.00
+  Class 8, accuracy: 100.00
+  Class 9, accuracy: 78.60
+  Class 10, accuracy: 74.06
+  Class 11, accuracy: 63.51
+  Class 12, accuracy: 100.00
+  Class 13, accuracy: 80.38
+  Class 14, accuracy: 96.88
+  Class 15, accuracy: 100.00
+Testing Loss: 0.73 | OA: 75.52 | AA: 85.86 | Kappa: 73.13 | Time: 2.12
+Epoch 41/80| Time: 0.53s| Loss: 0.30
+Epoch 42/80| Time: 0.56s| Loss: 0.31
+Epoch 43/80| Time: 0.53s| Loss: 0.31
+Epoch 44/80| Time: 0.56s| Loss: 0.30
+Epoch 45/80| Time: 0.53s| Loss: 0.30
+Epoch 46/80| Time: 0.55s| Loss: 0.31
+Epoch 47/80| Time: 0.47s| Loss: 0.30
+Epoch 48/80| Time: 0.47s| Loss: 0.30
+Epoch 49/80| Time: 0.48s| Loss: 0.31
+Epoch 50/80| Time: 0.47s| Loss: 0.32
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON50.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON50.model model loaded--<<
+	Batch_idx: 0 | Loss: 1.00 | Accuracy: 56
+  Class 0, accuracy: 100.00
+  Class 1, accuracy: 52.94
+  Class 2, accuracy: 64.73
+  Class 3, accuracy: 96.61
+  Class 4, accuracy: 79.17
+  Class 5, accuracy: 96.70
+  Class 6, accuracy: 100.00
+  Class 7, accuracy: 100.00
+  Class 8, accuracy: 100.00
+  Class 9, accuracy: 77.78
+  Class 10, accuracy: 71.13
+  Class 11, accuracy: 62.16
+  Class 12, accuracy: 100.00
+  Class 13, accuracy: 79.11
+  Class 14, accuracy: 93.75
+  Class 15, accuracy: 100.00
+Testing Loss: 0.74 | OA: 75.24 | AA: 85.88 | Kappa: 72.86 | Time: 2.36
+Epoch 51/80| Time: 0.49s| Loss: 0.30
+Epoch 52/80| Time: 0.46s| Loss: 0.31
+Epoch 53/80| Time: 0.55s| Loss: 0.30
+Epoch 54/80| Time: 0.56s| Loss: 0.31
+Epoch 55/80| Time: 0.58s| Loss: 0.31
+Epoch 56/80| Time: 0.59s| Loss: 0.29
+Epoch 57/80| Time: 0.53s| Loss: 0.31
+Epoch 58/80| Time: 0.58s| Loss: 0.28
+Epoch 59/80| Time: 0.55s| Loss: 0.31
+Epoch 60/80| Time: 0.53s| Loss: 0.28
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON60.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON60.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.98 | Accuracy: 56
+  Class 0, accuracy: 100.00
+  Class 1, accuracy: 55.46
+  Class 2, accuracy: 64.73
+  Class 3, accuracy: 96.61
+  Class 4, accuracy: 80.83
+  Class 5, accuracy: 96.70
+  Class 6, accuracy: 100.00
+  Class 7, accuracy: 100.00
+  Class 8, accuracy: 100.00
+  Class 9, accuracy: 77.37
+  Class 10, accuracy: 70.64
+  Class 11, accuracy: 62.16
+  Class 12, accuracy: 100.00
+  Class 13, accuracy: 78.80
+  Class 14, accuracy: 93.75
+  Class 15, accuracy: 100.00
+Testing Loss: 0.74 | OA: 75.48 | AA: 86.07 | Kappa: 73.11 | Time: 2.09
+Epoch 61/80| Time: 0.55s| Loss: 0.31
+Epoch 62/80| Time: 0.53s| Loss: 0.30
+Epoch 63/80| Time: 0.54s| Loss: 0.31
+Epoch 64/80| Time: 0.58s| Loss: 0.30
+Epoch 65/80| Time: 0.53s| Loss: 0.30
+Epoch 66/80| Time: 0.53s| Loss: 0.30
+Epoch 67/80| Time: 0.52s| Loss: 0.30
+Epoch 68/80| Time: 0.53s| Loss: 0.29
+Epoch 69/80| Time: 0.52s| Loss: 0.29
+Epoch 70/80| Time: 0.49s| Loss: 0.31
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON70.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON70.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.99 | Accuracy: 56
+  Class 0, accuracy: 100.00
+  Class 1, accuracy: 54.90
+  Class 2, accuracy: 64.73
+  Class 3, accuracy: 96.61
+  Class 4, accuracy: 80.83
+  Class 5, accuracy: 96.70
+  Class 6, accuracy: 100.00
+  Class 7, accuracy: 100.00
+  Class 8, accuracy: 100.00
+  Class 9, accuracy: 78.19
+  Class 10, accuracy: 70.47
+  Class 11, accuracy: 62.16
+  Class 12, accuracy: 100.00
+  Class 13, accuracy: 78.48
+  Class 14, accuracy: 93.75
+  Class 15, accuracy: 100.00
+Testing Loss: 0.74 | OA: 75.40 | AA: 86.05 | Kappa: 73.03 | Time: 2.46
+Epoch 71/80| Time: 0.50s| Loss: 0.29
+Epoch 72/80| Time: 0.53s| Loss: 0.32
+Epoch 73/80| Time: 0.49s| Loss: 0.30
+Epoch 74/80| Time: 0.51s| Loss: 0.30
+Epoch 75/80| Time: 0.52s| Loss: 0.28
+Epoch 76/80| Time: 0.53s| Loss: 0.29
+Epoch 77/80| Time: 0.54s| Loss: 0.29
+Epoch 78/80| Time: 0.57s| Loss: 0.33
+Epoch 79/80| Time: 0.56s| Loss: 0.31
+Epoch 80/80| Time: 0.58s| Loss: 0.29
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON80.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size9/C3F4_CNN_RON_2019-01-17_16-39-22/C3F4_CNN_RON80.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.99 | Accuracy: 56
+  Class 0, accuracy: 100.00
+  Class 1, accuracy: 54.06
+  Class 2, accuracy: 64.73
+  Class 3, accuracy: 96.61
+  Class 4, accuracy: 80.83
+  Class 5, accuracy: 96.70
+  Class 6, accuracy: 100.00
+  Class 7, accuracy: 100.00
+  Class 8, accuracy: 100.00
+  Class 9, accuracy: 78.19
+  Class 10, accuracy: 70.64
+  Class 11, accuracy: 62.16
+  Class 12, accuracy: 100.00
+  Class 13, accuracy: 78.80
+  Class 14, accuracy: 93.75
+  Class 15, accuracy: 100.00
+Testing Loss: 0.73 | OA: 75.36 | AA: 86.03 | Kappa: 72.99 | Time: 2.56
