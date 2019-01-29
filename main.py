@@ -15,6 +15,7 @@ import warnings
 import math
 import scipy.io as sio
 from skimage import io
+import matplotlib.pyplot as plt
 import sys
 sys.path.insert(0, os.getcwd() + '/Model/')
 
@@ -55,6 +56,8 @@ def train(config, kwargs):
         from ResNet import ResNet as Model
     elif config.model_name == 'ResNetv2':
         from ResNetv2 import ResNetv2 as Model
+    elif config.model_name == 'ResNet50':
+        from ResNet50 import ResNet50 as Model
     else:
         raise Exception('Wrong name of the model!')
     
@@ -179,7 +182,7 @@ def train(config, kwargs):
             with open(path_name_current_fold + '.txt', 'a') as f:
                 print('>>--{} model saved--<<'.format(path_name_current_fold+str(epoch)+'.model'), file=f)
             # Calculate accuary of testing dataset
-            if config.dataset != 'garbage_crop_37':
+            if config.dataset != 'garbage_crop_37' and config.dataset != 'img_crop_37_pool':
                 test(config, kwargs, epoch, evaluate_model_assign=None, train_assign=False)
     sio.savemat(path_name_current_fold + '.mat', {'loss': loss_batchSize})
 
@@ -287,8 +290,16 @@ def inference(config, kwargs, epoch, evaluate_model_assign=None, train_assign=Fa
 
     t_ll_s = time.time()
     path = os.path.join(os.getcwd(),'Data',config.dataset)
-    image_path = path + '/' + config.dataset + '_origin.png'
-    image = io.imread(image_path)
+    mat_path = path + '/' + config.dataset + '.mat'
+    mat_data = sio.loadmat(mat_path)
+    mat_name = list(config.dataset); mat_name[0] = mat_name[0].lower(); mat_name = ''.join(mat_name)
+    gt = mat_data[mat_name]
+    Height, Width = gt.shape[0], gt.shape[1]
+    image = np.zeros([Height, Width, 3], dtype=np.uint8)
+    for h in range(Height):
+        for w in range(Width):
+            image[h,w,0:3] = (255,255,255)
+    
     for batch_idx, (inference_images, h, w) in enumerate(inference_dataloader):
         # data preparation
         inference_images = inference_images.type(torch.FloatTensor)
@@ -299,17 +310,60 @@ def inference(config, kwargs, epoch, evaluate_model_assign=None, train_assign=Fa
         # calculate loss and result
         prediction = evaluate_model.inference_classification(inference_images)
         for i in range(len(prediction)):
-            if prediction[i] == 0:
+            if prediction[i] == 1:
+                image[h[i],w[i],0:3] = (0,255,0)
+            elif prediction[i] == 2:
+                image[h[i],w[i],0:3] = (0,128,0)
+            elif prediction[i] == 3:
+                image[h[i],w[i],0:3] = (255,255,0)
+            elif prediction[i] == 4:
+                image[h[i],w[i],0:3] = (255,174,200)
+            elif prediction[i] == 5:
+                image[h[i],w[i],0:3] = (128,0,0)
+            elif prediction[i] == 6:
+                image[h[i],w[i],0:3] = (0,128,192)
+            elif prediction[i] == 7:
+                image[h[i],w[i],0:3] = (0,0,255)
+            elif prediction[i] == 8:
+                image[h[i],w[i],0:3] = (253,236,166)
+            elif prediction[i] == 9:
+                image[h[i],w[i],0:3] = (255,202,24)
+            elif prediction[i] == 10:
+                image[h[i],w[i],0:3] = (255,127,39)
+            elif prediction[i] == 11:
+                image[h[i],w[i],0:3] = (185,122,86)
+            elif prediction[i] == 12:
                 image[h[i],w[i],0:3] = (255,0,0)
-        if batch_idx % 200 == 0:
+            elif prediction[i] == 13:
+                image[h[i],w[i],0:3] = (255,128,128)
+            elif prediction[i] == 14:
+                image[h[i],w[i],0:3] = (200,100,100)
+            elif prediction[i] == 15:
+                image[h[i],w[i],0:3] = (72,30,7)
+            elif prediction[i] == 16:
+                image[h[i],w[i],0:3] = (0,168,243)
+            elif prediction[i] == 17:
+                image[h[i],w[i],0:3] = (63,72,204)
+            elif prediction[i] == 18:
+                image[h[i],w[i],0:3] = (196,255,14)
+            elif prediction[i] == 19:
+                image[h[i],w[i],0:3] = (74,85,38)
+            else:
+                image[h[i],w[i],0:3] = (255,255,255)
+        if batch_idx % 1 == 0:
             print('batch_idx {}'.format(batch_idx))
     
     t_ll_e = time.time()
     print('Using %.2f seconds'%(t_ll_e-t_ll_s))
     
     save_path = os.path.join(os.getcwd(),'Data',config.dataset)
-    image_save_path = save_path + '/' + config.dataset + '_inference_PS' + str(config.patch_size) + '_epoch' + str(epoch) + '.png'
-    io.imsave(image_save_path, image)
+    image_save_path = save_path + '/' + config.dataset + '_inference_PS' + str(config.patch_size) + '_epoch' + str(epoch) + '.eps'
+    # Using plt save GT figure
+    plt.figure(config.dataset)
+    plt.imshow(image)
+    figure = plt.gcf() # gtf:Get Current Figure
+    figure.savefig(image_save_path, format='eps', dpi=600)
+    plt.show()
     print('Save Inference image')
 
 
@@ -320,6 +374,6 @@ if __name__ == '__main__':
         # evaluate_model_assign = 'C3F4_CNN_RON_2019-01-17_15-32-27'
         # test(config, kwargs, epoch, evaluate_model_assign)
     else:
-        epoch = 10
-        evaluate_model_assign = 'C3F4_CNN_RON_2019-01-17_15-32-27'
+        epoch = 40
+        evaluate_model_assign = 'ResNetv2_2019-01-29_23-11-23'
         inference(config, kwargs, epoch, evaluate_model_assign)

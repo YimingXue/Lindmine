@@ -1,8 +1,9 @@
 import numpy as np
 import random
 import scipy.io as sio
-from config import config
 import sys
+sys.path.insert(0,'/home/xueyiming/TEST/')
+from config import config
 import os
 import math
 

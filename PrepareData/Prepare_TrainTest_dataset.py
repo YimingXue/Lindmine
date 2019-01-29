@@ -1,8 +1,9 @@
 import numpy as np
 import random
 import scipy.io as sio
-from config import config
 import sys
+sys.path.insert(0,'/home/xueyiming/TEST/')
+from config import config
 import os
 import math
 
@@ -20,7 +21,7 @@ if __name__ == '__main__':
 	# else:
 	# 	gt = gt[mat_name+'_gt']
 
-	if dataset == 'garbage' or dataset == 'garbage_crop_37':
+	if dataset == 'garbage' or dataset == 'garbage_crop_37' or dataset == 'img_crop_27' or dataset == 'img_crop_27_pool' or dataset == 'img_crop_37_pool':
 		if config.inference == False:
 			print('Load dataset: {}'.format(dataset))
 			print('Train percent: {}'.format(train_percent))
@@ -38,7 +39,7 @@ if __name__ == '__main__':
 			# garbageImgList = ['garbage_crop_2', 'garbage_crop_4', 'garbage_crop_15', 'garbage_crop_23',
 			# 			      'garbage_crop_27', 'garbage_crop_37', 'garbage_crop_38', 'garbage_crop_40',
 			# 				  'garbage_crop_43', 'garbage_crop_60', 'garbage_crop_61', 'garbage_crop_75']
-			garbageImgList = ['garbage_crop_37']
+			garbageImgList = ['garbage_crop_37_pool']
 			for name in garbageImgList:
 				print(name)
 				gt = sio.loadmat(path + '/' + name + '_gt.mat')
@@ -71,12 +72,14 @@ if __name__ == '__main__':
 						test_txt.write(name + ' ' + str(test[i, 0]) + ' ' + str(test[i, 1]) + '\n')
 
 		else:
+			mat_path = path + '/' + dataset + '.mat'
 			gt = sio.loadmat(mat_path)
 			mat_name = list(dataset); mat_name[0] = mat_name[0].lower(); mat_name = ''.join(mat_name)
 			if dataset == 'Indian_pines_corrected':
 				gt = gt['indian_pines_gt']
 			else:
-				gt = gt[mat_name+'_gt']
+				# gt = gt[mat_name+'_gt']
+				gt = gt[mat_name]
 			
 			print('Inference:')
 			print('Load dataset: {}'.format(dataset))
@@ -144,4 +147,31 @@ if __name__ == '__main__':
 		train_txt.close()
 		test_txt.close()
 		val_txt.close()
+
+
+		# mat_path = path + '/' + dataset + '.mat'
+		# gt = sio.loadmat(mat_path)
+		# mat_name = list(dataset); mat_name[0] = mat_name[0].lower(); mat_name = ''.join(mat_name)
+		# if dataset == 'Indian_pines_corrected':
+		# 	gt = gt['indian_pines_gt']
+		# else:
+		# 	# gt = gt[mat_name+'_gt']
+		# 	gt = gt[mat_name]
+		
+		# print('Inference:')
+		# print('Load dataset: {}'.format(dataset))
+		# print('Number of classes is :{}'.format(config.num_classes))
+
+		# Height, Width = gt.shape[0], gt.shape[1]
+
+		# save_path = path + '/Inference/'
+		# if not os.path.exists(save_path):
+		# 	os.makedirs(save_path)
+		# inference_txt = open(save_path + 'inference.txt', 'w')
+		
+		# for h in range(Height):
+		# 	for w in range(Width):
+		# 		inference_txt.write(config.dataset + ' ' + str(h) + ' ' + str(w) + '\n')
+		
+		# inference_txt.close()
 
