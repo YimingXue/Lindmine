@@ -3,8 +3,8 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'Indian_pines' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/crop_59/garbage_crop_37/garbage
-    inference = True # For garbage_crop_37 inference
+    dataset = 'PaviaU' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/crop_59/garbage_crop_37/garbage
+    inference = False # For garbage_crop_37 inference
     maxTrain = True # Whether use limited data to train
     max_trainData = 200
     
@@ -38,7 +38,7 @@ class DefaultConfigs(object):
         band = 63
         num_classes = 2
     patch_mode = 'Center' # Center/TopLeft/PP(Pixel-Pair)
-    patch_size = 29
+    patch_size = 27
     train_percent = 1.0
     val_percent = 0.0
     test_percent = 0.0
