@@ -3,8 +3,9 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'PaviaU' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/crop_59/garbage_crop_37/garbage
-    inference = False # For garbage_crop_37 inference
+    dataset = 'crop_59' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/crop_59/garbage_crop_37/garbage
+    inference = True # For garbage_crop_37 inference
+    inference_onlyTrainData = False 
     maxTrain = True # Whether use limited data to train
     max_trainData = 200
     
@@ -13,7 +14,7 @@ class DefaultConfigs(object):
     optimizer = 'SGD' # Adagrad/SGD/Adam
     epochs = 80
     step_size = 20
-    batch_size = 500
+    batch_size = 100
     seed = 80 # 75
     lr = 0.01 # 0.1
     weight_decay = 1e-4 # 1e-4
@@ -38,7 +39,7 @@ class DefaultConfigs(object):
         band = 63
         num_classes = 2
     patch_mode = 'Center' # Center/TopLeft/PP(Pixel-Pair)
-    patch_size = 27
+    patch_size = 29
     train_percent = 1.0
     val_percent = 0.0
     test_percent = 0.0
