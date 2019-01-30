@@ -58,6 +58,8 @@ def train(config, kwargs):
         from ResNetv2 import ResNetv2 as Model
     elif config.model_name == 'ResNet50':
         from ResNet50 import ResNet50 as Model
+    elif config.model_name == 'ResNetv2_withoutFC':
+        from ResNetv2_withoutFC import ResNetv2_withoutFC as Model
     else:
         raise Exception('Wrong name of the model!')
     

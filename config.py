@@ -3,16 +3,16 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'crop_59' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/crop_59/garbage_crop_37/garbage
-    inference = True # For garbage_crop_37 inference
+    dataset = 'Indian_pines' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/crop_59/garbage_crop_37/garbage
+    inference = False # For garbage_crop_37 inference
     inference_onlyTrainData = False 
     maxTrain = True # Whether use limited data to train
     max_trainData = 200
     
     # train/test parameters
-    model_name = 'ResNetv2' # Pyramidal_ResNet/SimpleFC/C3F4_CNN/C3F4_CNN_RON/C3F4_CNN_FPN/ResNet/ResNetv2/ResNet50
+    model_name = 'ResNetv2_withoutFC' # Pyramidal_ResNet/SimpleFC/C3F4_CNN/C3F4_CNN_RON/C3F4_CNN_FPN/ResNet/ResNetv2/ResNet50/ResNetv2_withoutFC
     optimizer = 'SGD' # Adagrad/SGD/Adam
-    epochs = 80
+    epochs = 50
     step_size = 20
     batch_size = 100
     seed = 80 # 75
@@ -35,7 +35,9 @@ class DefaultConfigs(object):
     if dataset == 'crop_59':
         band = 63
         num_classes = 19
-    if dataset == 'garbage_crop_37' or dataset == 'garbage' or dataset == 'img_crop_27' or dataset == 'img_crop_27_pool' or dataset == 'img_crop_37_pool':
+    if dataset == 'garbage_crop_37' or dataset == 'garbage' or \
+       dataset == 'img_crop_27' or dataset == 'img_crop_27_pool' or \
+       dataset == 'img_crop_37_pool':
         band = 63
         num_classes = 2
     patch_mode = 'Center' # Center/TopLeft/PP(Pixel-Pair)
