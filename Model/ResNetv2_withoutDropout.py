@@ -6,9 +6,9 @@ from config import config
 import os
 from skimage import io
 
-class ResNetv2(nn.Module):
+class ResNetv2_withoutDropout(nn.Module):
     def __init__(self, config):
-        super(ResNetv2, self).__init__()
+        super(ResNetv2_withoutDropout, self).__init__()
         self.config = config
         self.input_conv = self.config.band
         self.input_fc = 512 * (math.ceil((math.floor((config.patch_size-7+2*3)/2+1)-3+2*1)/2+1))**2
@@ -51,10 +51,10 @@ class ResNetv2(nn.Module):
         )
         self.fc = nn.Sequential(
         nn.Linear(self.input_fc, 2048),
-        nn.Dropout(0.2),
+        # nn.Dropout(0.2),
         nn.ReLU(inplace=True),
         nn.Linear(2048, 1024),
-        nn.Dropout(0.2),
+        # nn.Dropout(0.2),
         nn.ReLU(inplace=True),
         nn.Linear(1024, config.num_classes)
         )
