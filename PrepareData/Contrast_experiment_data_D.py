@@ -51,8 +51,59 @@ if __name__ == '__main__':
 		
 		nVal = int(math.floor(y.shape[0] * val_percent))
 		nTest = int(math.floor(y.shape[0] * test_percent))
-		nTrain = min(max_trainData, len(y)-nTest)
-
+		# nTrain = min(max_trainData, len(y)-nTest)
+		if dataset == 'Indian_pines':
+			if c == 1:
+				nTrain = 30
+			elif c == 2:
+				nTrain = 150
+			elif c == 3:
+				nTrain = 150
+			elif c == 4:
+				nTrain = 200
+			elif c == 5:
+				nTrain = 150
+			elif c == 6:
+				nTrain = 150
+			elif c == 7:
+				nTrain = 20
+			elif c == 8:
+				nTrain = 150
+			elif c == 9:
+				nTrain = 15
+			elif c == 10:
+				nTrain = 150
+			elif c == 11:
+				nTrain = 150
+			elif c == 12:
+				nTrain = 150
+			elif c == 13:
+				nTrain = 150
+			elif c == 14:
+				nTrain = 150
+			elif c == 15:
+				nTrain = 50
+			elif c == 16:
+				nTrain = 50
+		elif dataset == 'PaviaU':
+			if c == 1:
+				nTrain = 548
+			elif c == 2:
+				nTrain = 540
+			elif c == 3:
+				nTrain = 392
+			elif c == 4:
+				nTrain = 542
+			elif c == 5:
+				nTrain = 256
+			elif c == 6:
+				nTrain = 532
+			elif c == 7:
+				nTrain = 375
+			elif c == 8:
+				nTrain = 514
+			elif c == 9:
+				nTrain = 231
 		print('Class {}: nTrain {}, nVal {}, nTest {}'.format(c, nTrain, nVal, nTest))
 
 		train = index[0:nTrain, :]
