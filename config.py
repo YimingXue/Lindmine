@@ -3,11 +3,11 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'PaviaU' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/crop_59/garbage_crop_37/garbage
-    inference = False # For garbage_crop_37 inference
-    inference_onlyTrainData = False 
+    dataset = 'crop_59' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/crop_59/garbage_crop_37/garbage
+    inference = True # For garbage_crop_37 inference
+    inference_onlyTrainData = True 
     maxTrain = True # Whether use limited data to train
-    max_trainData = 150
+    max_trainData = 200
     
     # train/test parameters
     model_name = 'ResNetv2' # Pyramidal_ResNet/SimpleFC/C3F4_CNN/C3F4_CNN_RON/C3F4_CNN_FPN/ResNet/ResNetv2/ResNet50/ResNetv2_withoutFC/ResNetv2_withoutDropout

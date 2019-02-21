@@ -7,6 +7,7 @@ from config import config
 import os
 import math
 
+# split the training and test dataset with exact percent
 if __name__ == '__main__':
 	dataset = config.dataset
 	train_percent = config.train_percent

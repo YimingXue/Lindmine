@@ -378,6 +378,6 @@ if __name__ == '__main__':
         # evaluate_model_assign = 'C3F4_CNN_RON_2019-01-17_15-32-27'
         # test(config, kwargs, epoch, evaluate_model_assign)
     else:
-        epoch = 20
-        evaluate_model_assign = 'ResNetv2_2019-01-30_00-20-33'
+        epoch = 50
+        evaluate_model_assign = 'ResNetv2_2019-02-21_14-53-28'
         inference(config, kwargs, epoch, evaluate_model_assign)

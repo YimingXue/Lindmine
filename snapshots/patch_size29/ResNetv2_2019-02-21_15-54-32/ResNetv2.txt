@@ -1,0 +1,109 @@
+#######################PARAMETERS######################## Dataset selection
+	maxTrain: True
+	max_trainData: 200
+# train/test parameters	model_name: ResNetv2
+	optimizer: SGD
+	epochs: 50
+	batch_size: 100
+	seed: 80
+	lr: 0.01
+	weight_decay: 0.0001
+# data preparation parameters
+	dataset: crop_59
+	patch_size: 29
+	band: 63
+	num_classes: 19
+	train_percent: 0.75
+	val_percent: 0.0
+	test_percent: 0.25
+
+#############################  MODEL  ###################################
+
+ResNetv2(
+  (conv): Sequential(
+    (0): Conv2d(63, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace)
+    (3): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=True)
+  )
+  (relu): ReLU()
+  (block1): Sequential(
+    (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU()
+    (6): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (7): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (downsample1): Sequential(
+    (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (block2): Sequential(
+    (0): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU()
+    (6): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (7): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (downsample2): Sequential(
+    (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (fc): Sequential(
+    (0): Linear(in_features=32768, out_features=2048, bias=True)
+    (1): Dropout(p=0.2)
+    (2): ReLU(inplace)
+    (3): Linear(in_features=2048, out_features=1024, bias=True)
+    (4): Dropout(p=0.2)
+    (5): ReLU(inplace)
+    (6): Linear(in_features=1024, out_features=19, bias=True)
+  )
+  (Softmax): Softmax()
+)
+##############################################################################
+
+Epoch 1/50| Time: 1.65s| Loss: 2.4923
+Epoch 2/50| Time: 1.65s| Loss: 0.4909
+Epoch 3/50| Time: 1.61s| Loss: 0.3234
+Epoch 4/50| Time: 1.62s| Loss: 0.2265
+Epoch 5/50| Time: 1.61s| Loss: 0.1878
+Epoch 6/50| Time: 1.62s| Loss: 0.1701
+Epoch 7/50| Time: 1.63s| Loss: 0.1469
+Epoch 8/50| Time: 1.64s| Loss: 0.1323
+Epoch 9/50| Time: 1.62s| Loss: 0.1417
+Epoch 10/50| Time: 1.65s| Loss: 0.1506
+>>--/home/xueyiming/TEST/snapshots/patch_size29/ResNetv2_2019-02-21_15-54-32/ResNetv210.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/ResNetv2_2019-02-21_15-54-32/ResNetv210.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.7700 | Accuracy: 63
+	Batch_idx: 50 | Loss: 0.9302 | Accuracy: 67
+	Batch_idx: 100 | Loss: 0.6718 | Accuracy: 61
+	Batch_idx: 150 | Loss: 0.7812 | Accuracy: 67
+	Batch_idx: 200 | Loss: 0.6453 | Accuracy: 68
+	Batch_idx: 250 | Loss: 0.6753 | Accuracy: 69
+	Batch_idx: 300 | Loss: 0.5174 | Accuracy: 77
+	Batch_idx: 350 | Loss: 0.6598 | Accuracy: 72
+	Batch_idx: 400 | Loss: 0.6208 | Accuracy: 71
+	Batch_idx: 450 | Loss: 0.5959 | Accuracy: 71
+	Batch_idx: 500 | Loss: 0.5929 | Accuracy: 75
+	Batch_idx: 550 | Loss: 0.6044 | Accuracy: 69
+	Batch_idx: 600 | Loss: 0.6691 | Accuracy: 63
+	Batch_idx: 650 | Loss: 0.6589 | Accuracy: 70
+	Batch_idx: 700 | Loss: 0.4268 | Accuracy: 82
+	Batch_idx: 750 | Loss: 0.3824 | Accuracy: 86
+	Batch_idx: 800 | Loss: 0.4584 | Accuracy: 72
+	Batch_idx: 850 | Loss: 0.0000 | Accuracy: 100
+	Batch_idx: 900 | Loss: 0.0000 | Accuracy: 100
+	Batch_idx: 950 | Loss: 0.0000 | Accuracy: 100
+	Batch_idx: 1000 | Loss: 0.0000 | Accuracy: 100
+	Batch_idx: 1050 | Loss: 0.0000 | Accuracy: 100
+	Batch_idx: 1100 | Loss: 0.0001 | Accuracy: 100
+	Batch_idx: 1150 | Loss: 0.0000 | Accuracy: 100
+	Batch_idx: 1200 | Loss: 0.0000 | Accuracy: 100
+	Batch_idx: 1250 | Loss: 0.0160 | Accuracy: 99
+	Batch_idx: 1300 | Loss: 0.0000 | Accuracy: 100

@@ -11,6 +11,7 @@ import math
 random.seed(config.seed)
 np.random.seed(config.seed)
 
+# split the training and testing dataset with max train data
 if __name__ == '__main__':
 	dataset = config.dataset
 	train_percent = config.train_percent

@@ -11,6 +11,7 @@ import math
 random.seed(config.seed)
 np.random.seed(config.seed)
 
+# aplit the training and test dataset with the exact number of each class to do the contrast experiment
 if __name__ == '__main__':
 	dataset = config.dataset
 	train_percent = config.train_percent
