@@ -379,5 +379,5 @@ if __name__ == '__main__':
         # test(config, kwargs, epoch, evaluate_model_assign)
     else:
         epoch = 50
-        evaluate_model_assign = 'ResNetv2_2019-02-21_14-53-28'
+        evaluate_model_assign = 'ResNetv2_2019-02-21_15-54-32'
         inference(config, kwargs, epoch, evaluate_model_assign)

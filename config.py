@@ -41,7 +41,7 @@ class DefaultConfigs(object):
         band = 63
         num_classes = 2
     patch_mode = 'Center' # Center/TopLeft/PP(Pixel-Pair)
-    patch_size = 23
+    patch_size = 29
     train_percent = 0.75
     val_percent = 0.0
     test_percent = 0.25
