@@ -1,0 +1,795 @@
+#######################PARAMETERS######################## Dataset selection
+	maxTrain: True
+	max_trainData: 200
+# train/test parameters	model_name: CNN_1D
+	optimizer: SGD
+	epochs: 300
+	batch_size: 100
+	seed: 80
+	lr: 0.1
+	weight_decay: 0.0001
+# data preparation parameters
+	dataset: PaviaU_1D
+	patch_size: 29
+	band: 103
+	num_classes: 9
+	train_percent: 0.75
+	val_percent: 0.0
+	test_percent: 0.25
+
+#############################  MODEL  ###################################
+
+CNN_1D(
+  (conv1): Sequential(
+    (0): Conv2d(1, 6, kernel_size=(1, 8), stride=(1, 1))
+    (1): ReLU(inplace)
+    (2): MaxPool2d(kernel_size=(1, 2), stride=(1, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (conv2): Sequential(
+    (0): Conv2d(6, 12, kernel_size=(1, 7), stride=(1, 1))
+    (1): ReLU(inplace)
+    (2): MaxPool2d(kernel_size=(1, 2), stride=(1, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (conv3): Sequential(
+    (0): Conv2d(12, 24, kernel_size=(1, 7), stride=(1, 1))
+    (1): ReLU(inplace)
+    (2): MaxPool2d(kernel_size=(1, 2), stride=(1, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc1): Sequential(
+    (0): Linear(in_features=168, out_features=9, bias=True)
+    (1): ReLU(inplace)
+  )
+  (Softmax): Softmax()
+)
+##############################################################################
+
+Epoch 1/300| Time: 0.34s| Loss: 2.1975
+Epoch 2/300| Time: 0.35s| Loss: 2.1839
+Epoch 3/300| Time: 0.40s| Loss: 2.1047
+Epoch 4/300| Time: 0.39s| Loss: 1.9298
+Epoch 5/300| Time: 0.37s| Loss: 1.8168
+Epoch 6/300| Time: 0.39s| Loss: 1.7984
+Epoch 7/300| Time: 0.38s| Loss: 1.7561
+Epoch 8/300| Time: 0.39s| Loss: 1.6913
+Epoch 9/300| Time: 0.40s| Loss: 1.6755
+Epoch 10/300| Time: 0.39s| Loss: 1.5877
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D10.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D10.model model loaded--<<
+	Batch_idx: 0 | Loss: 2.5887 | Accuracy: 26
+	Batch_idx: 50 | Loss: 1.0845 | Accuracy: 42
+	Batch_idx: 100 | Loss: 3.0556 | Accuracy: 0
+  Class 0, accuracy: 26.67
+  Class 1, accuracy: 33.59
+  Class 2, accuracy: 97.90
+  Class 3, accuracy: 96.21
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 86.16
+  Class 6, accuracy: 92.47
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 0.00
+Testing Loss: 1.4437 | OA: 43.48 | AA: 48.11 | Kappa: 37.86 | Time: 2.45
+Epoch 11/300| Time: 0.40s| Loss: 1.4466
+Epoch 12/300| Time: 0.39s| Loss: 1.4296
+Epoch 13/300| Time: 0.38s| Loss: 1.4829
+Epoch 14/300| Time: 0.39s| Loss: 1.4526
+Epoch 15/300| Time: 0.39s| Loss: 1.5008
+Epoch 16/300| Time: 0.40s| Loss: 1.4048
+Epoch 17/300| Time: 0.38s| Loss: 1.3958
+Epoch 18/300| Time: 0.39s| Loss: 1.4401
+Epoch 19/300| Time: 0.40s| Loss: 1.4100
+Epoch 20/300| Time: 0.39s| Loss: 1.3799
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D20.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D20.model model loaded--<<
+	Batch_idx: 0 | Loss: 2.5571 | Accuracy: 33
+	Batch_idx: 50 | Loss: 0.5198 | Accuracy: 75
+	Batch_idx: 100 | Loss: 2.3561 | Accuracy: 0
+  Class 0, accuracy: 28.42
+  Class 1, accuracy: 72.59
+  Class 2, accuracy: 94.47
+  Class 3, accuracy: 89.30
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 75.97
+  Class 6, accuracy: 96.08
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 0.00
+Testing Loss: 1.1154 | OA: 59.01 | AA: 50.76 | Kappa: 51.02 | Time: 2.49
+Epoch 21/300| Time: 0.39s| Loss: 1.3567
+Epoch 22/300| Time: 0.39s| Loss: 1.3146
+Epoch 23/300| Time: 0.39s| Loss: 1.3673
+Epoch 24/300| Time: 0.39s| Loss: 1.3229
+Epoch 25/300| Time: 0.39s| Loss: 1.3094
+Epoch 26/300| Time: 0.40s| Loss: 1.2957
+Epoch 27/300| Time: 0.40s| Loss: 1.2872
+Epoch 28/300| Time: 0.39s| Loss: 1.2765
+Epoch 29/300| Time: 0.41s| Loss: 1.3417
+Epoch 30/300| Time: 0.39s| Loss: 1.2297
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D30.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D30.model model loaded--<<
+	Batch_idx: 0 | Loss: 2.4421 | Accuracy: 27
+	Batch_idx: 50 | Loss: 0.9439 | Accuracy: 52
+	Batch_idx: 100 | Loss: 2.6021 | Accuracy: 0
+  Class 0, accuracy: 25.47
+  Class 1, accuracy: 55.23
+  Class 2, accuracy: 95.99
+  Class 3, accuracy: 95.04
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 87.19
+  Class 6, accuracy: 97.89
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 1.2103 | OA: 55.05 | AA: 61.87 | Kappa: 48.23 | Time: 2.47
+Epoch 31/300| Time: 0.40s| Loss: 0.9690
+Epoch 32/300| Time: 0.39s| Loss: 0.9034
+Epoch 33/300| Time: 0.39s| Loss: 0.8581
+Epoch 34/300| Time: 0.39s| Loss: 0.8600
+Epoch 35/300| Time: 0.41s| Loss: 0.8225
+Epoch 36/300| Time: 0.40s| Loss: 0.8347
+Epoch 37/300| Time: 0.40s| Loss: 0.8628
+Epoch 38/300| Time: 0.39s| Loss: 0.8492
+Epoch 39/300| Time: 0.40s| Loss: 0.8511
+Epoch 40/300| Time: 0.37s| Loss: 0.8389
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D40.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D40.model model loaded--<<
+	Batch_idx: 0 | Loss: 1.1486 | Accuracy: 51
+	Batch_idx: 50 | Loss: 0.9628 | Accuracy: 44
+	Batch_idx: 100 | Loss: 2.3387 | Accuracy: 0
+  Class 0, accuracy: 48.22
+  Class 1, accuracy: 46.29
+  Class 2, accuracy: 90.08
+  Class 3, accuracy: 95.04
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 84.57
+  Class 6, accuracy: 98.49
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 1.0044 | OA: 54.10 | AA: 62.52 | Kappa: 47.85 | Time: 2.50
+Epoch 41/300| Time: 0.40s| Loss: 0.8853
+Epoch 42/300| Time: 0.40s| Loss: 0.8510
+Epoch 43/300| Time: 0.41s| Loss: 0.8393
+Epoch 44/300| Time: 0.40s| Loss: 0.8119
+Epoch 45/300| Time: 0.44s| Loss: 0.8584
+Epoch 46/300| Time: 0.43s| Loss: 0.8587
+Epoch 47/300| Time: 0.40s| Loss: 0.8350
+Epoch 48/300| Time: 0.40s| Loss: 0.8732
+Epoch 49/300| Time: 0.41s| Loss: 0.8785
+Epoch 50/300| Time: 0.40s| Loss: 0.8438
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D50.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D50.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.3705 | Accuracy: 94
+	Batch_idx: 50 | Loss: 0.5736 | Accuracy: 72
+	Batch_idx: 100 | Loss: 2.4720 | Accuracy: 0
+  Class 0, accuracy: 90.77
+  Class 1, accuracy: 69.65
+  Class 2, accuracy: 84.73
+  Class 3, accuracy: 84.73
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 84.01
+  Class 6, accuracy: 85.24
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.7678 | OA: 69.40 | AA: 66.57 | Kappa: 62.97 | Time: 2.58
+Epoch 51/300| Time: 0.40s| Loss: 0.8108
+Epoch 52/300| Time: 0.40s| Loss: 0.8273
+Epoch 53/300| Time: 0.40s| Loss: 0.8091
+Epoch 54/300| Time: 0.40s| Loss: 0.8559
+Epoch 55/300| Time: 0.40s| Loss: 0.8533
+Epoch 56/300| Time: 0.40s| Loss: 0.8302
+Epoch 57/300| Time: 0.41s| Loss: 0.8905
+Epoch 58/300| Time: 0.40s| Loss: 0.8834
+Epoch 59/300| Time: 0.41s| Loss: 0.8481
+Epoch 60/300| Time: 0.41s| Loss: 0.8163
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D60.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D60.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6261 | Accuracy: 76
+	Batch_idx: 50 | Loss: 0.7487 | Accuracy: 59
+	Batch_idx: 100 | Loss: 2.7191 | Accuracy: 0
+  Class 0, accuracy: 70.79
+  Class 1, accuracy: 54.87
+  Class 2, accuracy: 97.14
+  Class 3, accuracy: 96.74
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 91.17
+  Class 6, accuracy: 95.78
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.8655 | OA: 62.50 | AA: 67.39 | Kappa: 56.26 | Time: 2.62
+Epoch 61/300| Time: 0.42s| Loss: 0.8204
+Epoch 62/300| Time: 0.43s| Loss: 0.8063
+Epoch 63/300| Time: 0.41s| Loss: 0.8346
+Epoch 64/300| Time: 0.40s| Loss: 0.8036
+Epoch 65/300| Time: 0.40s| Loss: 0.8593
+Epoch 66/300| Time: 0.41s| Loss: 0.8024
+Epoch 67/300| Time: 0.42s| Loss: 0.8026
+Epoch 68/300| Time: 0.40s| Loss: 0.7826
+Epoch 69/300| Time: 0.39s| Loss: 0.7681
+Epoch 70/300| Time: 0.41s| Loss: 0.7825
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D70.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D70.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.3580 | Accuracy: 94
+	Batch_idx: 50 | Loss: 0.4710 | Accuracy: 79
+	Batch_idx: 100 | Loss: 2.5679 | Accuracy: 0
+  Class 0, accuracy: 87.69
+  Class 1, accuracy: 75.14
+  Class 2, accuracy: 88.74
+  Class 3, accuracy: 79.90
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 78.92
+  Class 6, accuracy: 88.25
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.7385 | OA: 70.66 | AA: 66.52 | Kappa: 64.12 | Time: 2.69
+Epoch 71/300| Time: 0.40s| Loss: 0.7849
+Epoch 72/300| Time: 0.40s| Loss: 0.7698
+Epoch 73/300| Time: 0.41s| Loss: 0.7942
+Epoch 74/300| Time: 0.40s| Loss: 0.7994
+Epoch 75/300| Time: 0.41s| Loss: 0.8186
+Epoch 76/300| Time: 0.41s| Loss: 0.8354
+Epoch 77/300| Time: 0.40s| Loss: 0.8329
+Epoch 78/300| Time: 0.39s| Loss: 0.8341
+Epoch 79/300| Time: 0.40s| Loss: 0.7838
+Epoch 80/300| Time: 0.40s| Loss: 0.8003
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D80.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D80.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.7260 | Accuracy: 72
+	Batch_idx: 50 | Loss: 0.7476 | Accuracy: 69
+	Batch_idx: 100 | Loss: 2.5768 | Accuracy: 0
+  Class 0, accuracy: 69.64
+  Class 1, accuracy: 67.07
+  Class 2, accuracy: 94.27
+  Class 3, accuracy: 97.26
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 84.96
+  Class 6, accuracy: 96.08
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.8439 | OA: 66.82 | AA: 67.70 | Kappa: 60.28 | Time: 2.61
+Epoch 81/300| Time: 0.41s| Loss: 0.8004
+Epoch 82/300| Time: 0.41s| Loss: 0.8416
+Epoch 83/300| Time: 0.41s| Loss: 0.8069
+Epoch 84/300| Time: 0.40s| Loss: 0.8183
+Epoch 85/300| Time: 0.41s| Loss: 0.7876
+Epoch 86/300| Time: 0.40s| Loss: 0.8390
+Epoch 87/300| Time: 0.40s| Loss: 0.8267
+Epoch 88/300| Time: 0.39s| Loss: 0.8079
+Epoch 89/300| Time: 0.41s| Loss: 0.7891
+Epoch 90/300| Time: 0.41s| Loss: 0.7972
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D90.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D90.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.5718 | Accuracy: 86
+	Batch_idx: 50 | Loss: 0.4502 | Accuracy: 80
+	Batch_idx: 100 | Loss: 2.3146 | Accuracy: 0
+  Class 0, accuracy: 81.29
+  Class 1, accuracy: 72.72
+  Class 2, accuracy: 76.53
+  Class 3, accuracy: 96.87
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 86.08
+  Class 6, accuracy: 96.08
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.7380 | OA: 70.32 | AA: 67.73 | Kappa: 63.89 | Time: 2.59
+Epoch 91/300| Time: 0.36s| Loss: 0.7786
+Epoch 92/300| Time: 0.39s| Loss: 0.7731
+Epoch 93/300| Time: 0.40s| Loss: 0.7599
+Epoch 94/300| Time: 0.41s| Loss: 0.7760
+Epoch 95/300| Time: 0.42s| Loss: 0.7643
+Epoch 96/300| Time: 0.42s| Loss: 0.7759
+Epoch 97/300| Time: 0.41s| Loss: 0.8197
+Epoch 98/300| Time: 0.42s| Loss: 0.7789
+Epoch 99/300| Time: 0.41s| Loss: 0.7596
+Epoch 100/300| Time: 0.39s| Loss: 0.7535
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D100.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D100.model model loaded--<<
+	Batch_idx: 0 | Loss: 1.1176 | Accuracy: 60
+	Batch_idx: 50 | Loss: 0.4852 | Accuracy: 79
+	Batch_idx: 100 | Loss: 2.4996 | Accuracy: 0
+  Class 0, accuracy: 56.37
+  Class 1, accuracy: 75.98
+  Class 2, accuracy: 94.47
+  Class 3, accuracy: 94.52
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 85.20
+  Class 6, accuracy: 96.99
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.8200 | OA: 68.51 | AA: 67.06 | Kappa: 61.68 | Time: 2.61
+Epoch 101/300| Time: 0.41s| Loss: 0.7689
+Epoch 102/300| Time: 0.40s| Loss: 0.9865
+Epoch 103/300| Time: 0.41s| Loss: 1.0996
+Epoch 104/300| Time: 0.40s| Loss: 0.9796
+Epoch 105/300| Time: 0.41s| Loss: 0.9189
+Epoch 106/300| Time: 0.41s| Loss: 0.8064
+Epoch 107/300| Time: 0.41s| Loss: 0.7931
+Epoch 108/300| Time: 0.42s| Loss: 0.8509
+Epoch 109/300| Time: 0.41s| Loss: 0.8200
+Epoch 110/300| Time: 0.40s| Loss: 0.7947
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D110.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D110.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.3336 | Accuracy: 95
+	Batch_idx: 50 | Loss: 0.8234 | Accuracy: 57
+	Batch_idx: 100 | Loss: 3.3178 | Accuracy: 0
+  Class 0, accuracy: 88.59
+  Class 1, accuracy: 54.76
+  Class 2, accuracy: 83.59
+  Class 3, accuracy: 94.91
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 83.93
+  Class 6, accuracy: 78.31
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.9854 | OA: 63.02 | AA: 64.90 | Kappa: 56.74 | Time: 2.64
+Epoch 111/300| Time: 0.41s| Loss: 0.8724
+Epoch 112/300| Time: 0.41s| Loss: 0.8049
+Epoch 113/300| Time: 0.41s| Loss: 0.7786
+Epoch 114/300| Time: 0.41s| Loss: 0.7460
+Epoch 115/300| Time: 0.41s| Loss: 0.7696
+Epoch 116/300| Time: 0.42s| Loss: 0.7846
+Epoch 117/300| Time: 0.40s| Loss: 0.7746
+Epoch 118/300| Time: 0.41s| Loss: 0.7436
+Epoch 119/300| Time: 0.41s| Loss: 0.7330
+Epoch 120/300| Time: 0.41s| Loss: 0.7177
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D120.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D120.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.3908 | Accuracy: 92
+	Batch_idx: 50 | Loss: 0.4829 | Accuracy: 82
+	Batch_idx: 100 | Loss: 2.4308 | Accuracy: 0
+  Class 0, accuracy: 87.02
+  Class 1, accuracy: 77.54
+  Class 2, accuracy: 87.60
+  Class 3, accuracy: 94.13
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 85.76
+  Class 6, accuracy: 93.67
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6831 | OA: 73.55 | AA: 69.52 | Kappa: 67.40 | Time: 2.61
+Epoch 121/300| Time: 0.41s| Loss: 0.7092
+Epoch 122/300| Time: 0.41s| Loss: 0.7461
+Epoch 123/300| Time: 0.41s| Loss: 0.7237
+Epoch 124/300| Time: 0.41s| Loss: 0.7445
+Epoch 125/300| Time: 0.42s| Loss: 0.7371
+Epoch 126/300| Time: 0.44s| Loss: 0.7259
+Epoch 127/300| Time: 0.45s| Loss: 0.7477
+Epoch 128/300| Time: 0.43s| Loss: 0.7822
+Epoch 129/300| Time: 0.42s| Loss: 0.7438
+Epoch 130/300| Time: 0.43s| Loss: 0.7767
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D130.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D130.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.9905 | Accuracy: 71
+	Batch_idx: 50 | Loss: 0.3327 | Accuracy: 84
+	Batch_idx: 100 | Loss: 2.4410 | Accuracy: 0
+  Class 0, accuracy: 65.60
+  Class 1, accuracy: 82.84
+  Class 2, accuracy: 90.08
+  Class 3, accuracy: 81.20
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 79.95
+  Class 6, accuracy: 98.49
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.7797 | OA: 71.20 | AA: 66.46 | Kappa: 64.35 | Time: 2.58
+Epoch 131/300| Time: 0.40s| Loss: 0.7472
+Epoch 132/300| Time: 0.39s| Loss: 0.7900
+Epoch 133/300| Time: 0.38s| Loss: 0.7530
+Epoch 134/300| Time: 0.40s| Loss: 0.7043
+Epoch 135/300| Time: 0.40s| Loss: 0.7504
+Epoch 136/300| Time: 0.40s| Loss: 0.7371
+Epoch 137/300| Time: 0.41s| Loss: 0.7260
+Epoch 138/300| Time: 0.41s| Loss: 0.7359
+Epoch 139/300| Time: 0.42s| Loss: 0.7381
+Epoch 140/300| Time: 0.43s| Loss: 0.7154
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D140.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D140.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.8307 | Accuracy: 72
+	Batch_idx: 50 | Loss: 0.5518 | Accuracy: 73
+	Batch_idx: 100 | Loss: 2.4184 | Accuracy: 0
+  Class 0, accuracy: 70.37
+  Class 1, accuracy: 74.80
+  Class 2, accuracy: 94.66
+  Class 3, accuracy: 95.43
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 82.42
+  Class 6, accuracy: 97.29
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.7890 | OA: 69.93 | AA: 68.33 | Kappa: 63.36 | Time: 2.72
+Epoch 141/300| Time: 0.40s| Loss: 0.7873
+Epoch 142/300| Time: 0.40s| Loss: 0.7647
+Epoch 143/300| Time: 0.42s| Loss: 0.7342
+Epoch 144/300| Time: 0.41s| Loss: 0.7075
+Epoch 145/300| Time: 0.41s| Loss: 0.7127
+Epoch 146/300| Time: 0.41s| Loss: 0.6866
+Epoch 147/300| Time: 0.42s| Loss: 0.6881
+Epoch 148/300| Time: 0.42s| Loss: 0.7192
+Epoch 149/300| Time: 0.40s| Loss: 0.7178
+Epoch 150/300| Time: 0.42s| Loss: 0.7125
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D150.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D150.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.5023 | Accuracy: 90
+	Batch_idx: 50 | Loss: 0.3069 | Accuracy: 86
+	Batch_idx: 100 | Loss: 2.2846 | Accuracy: 0
+  Class 0, accuracy: 85.94
+  Class 1, accuracy: 85.76
+  Class 2, accuracy: 80.15
+  Class 3, accuracy: 92.95
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 79.95
+  Class 6, accuracy: 95.18
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6506 | OA: 75.87 | AA: 68.88 | Kappa: 69.73 | Time: 2.62
+Epoch 151/300| Time: 0.39s| Loss: 0.7310
+Epoch 152/300| Time: 0.39s| Loss: 0.7258
+Epoch 153/300| Time: 0.40s| Loss: 0.7243
+Epoch 154/300| Time: 0.40s| Loss: 0.7441
+Epoch 155/300| Time: 0.40s| Loss: 0.7213
+Epoch 156/300| Time: 0.37s| Loss: 0.7231
+Epoch 157/300| Time: 0.37s| Loss: 0.7547
+Epoch 158/300| Time: 0.42s| Loss: 0.7223
+Epoch 159/300| Time: 0.41s| Loss: 0.7145
+Epoch 160/300| Time: 0.41s| Loss: 0.7363
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D160.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D160.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.6129 | Accuracy: 84
+	Batch_idx: 50 | Loss: 0.7511 | Accuracy: 75
+	Batch_idx: 100 | Loss: 2.3952 | Accuracy: 0
+  Class 0, accuracy: 82.50
+  Class 1, accuracy: 70.72
+  Class 2, accuracy: 91.41
+  Class 3, accuracy: 98.04
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 88.54
+  Class 6, accuracy: 85.84
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.8416 | OA: 70.42 | AA: 68.56 | Kappa: 64.14 | Time: 2.59
+Epoch 161/300| Time: 0.41s| Loss: 0.7310
+Epoch 162/300| Time: 0.41s| Loss: 0.7239
+Epoch 163/300| Time: 0.40s| Loss: 0.7681
+Epoch 164/300| Time: 0.41s| Loss: 0.7639
+Epoch 165/300| Time: 0.40s| Loss: 0.7005
+Epoch 166/300| Time: 0.41s| Loss: 0.6880
+Epoch 167/300| Time: 0.40s| Loss: 0.7236
+Epoch 168/300| Time: 0.41s| Loss: 0.7149
+Epoch 169/300| Time: 0.41s| Loss: 0.7234
+Epoch 170/300| Time: 0.40s| Loss: 0.7007
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D170.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D170.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.5192 | Accuracy: 88
+	Batch_idx: 50 | Loss: 0.7476 | Accuracy: 71
+	Batch_idx: 100 | Loss: 2.4078 | Accuracy: 0
+  Class 0, accuracy: 84.85
+  Class 1, accuracy: 72.05
+  Class 2, accuracy: 88.74
+  Class 3, accuracy: 97.65
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 82.98
+  Class 6, accuracy: 95.78
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.8323 | OA: 70.86 | AA: 69.12 | Kappa: 64.57 | Time: 2.63
+Epoch 171/300| Time: 0.41s| Loss: 0.7389
+Epoch 172/300| Time: 0.41s| Loss: 0.7105
+Epoch 173/300| Time: 0.41s| Loss: 0.8401
+Epoch 174/300| Time: 0.41s| Loss: 0.7424
+Epoch 175/300| Time: 0.41s| Loss: 0.7224
+Epoch 176/300| Time: 0.41s| Loss: 0.7132
+Epoch 177/300| Time: 0.41s| Loss: 0.6848
+Epoch 178/300| Time: 0.41s| Loss: 0.7137
+Epoch 179/300| Time: 0.41s| Loss: 0.7559
+Epoch 180/300| Time: 0.42s| Loss: 0.7207
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D180.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D180.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.5360 | Accuracy: 85
+	Batch_idx: 50 | Loss: 0.4549 | Accuracy: 83
+	Batch_idx: 100 | Loss: 2.5370 | Accuracy: 0
+  Class 0, accuracy: 83.34
+  Class 1, accuracy: 81.49
+  Class 2, accuracy: 92.37
+  Class 3, accuracy: 92.17
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 84.65
+  Class 6, accuracy: 94.88
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6925 | OA: 74.70 | AA: 69.88 | Kappa: 68.56 | Time: 2.63
+Epoch 181/300| Time: 0.41s| Loss: 0.6988
+Epoch 182/300| Time: 0.40s| Loss: 0.6744
+Epoch 183/300| Time: 0.41s| Loss: 0.6617
+Epoch 184/300| Time: 0.42s| Loss: 0.6571
+Epoch 185/300| Time: 0.42s| Loss: 0.6582
+Epoch 186/300| Time: 0.42s| Loss: 0.6784
+Epoch 187/300| Time: 0.42s| Loss: 0.6596
+Epoch 188/300| Time: 0.41s| Loss: 0.6715
+Epoch 189/300| Time: 0.41s| Loss: 0.7868
+Epoch 190/300| Time: 0.42s| Loss: 0.8071
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D190.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D190.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.3708 | Accuracy: 92
+	Batch_idx: 50 | Loss: 0.4105 | Accuracy: 85
+	Batch_idx: 100 | Loss: 2.6185 | Accuracy: 0
+  Class 0, accuracy: 89.68
+  Class 1, accuracy: 83.55
+  Class 2, accuracy: 89.31
+  Class 3, accuracy: 84.33
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 80.91
+  Class 6, accuracy: 92.17
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6841 | OA: 75.34 | AA: 68.88 | Kappa: 69.20 | Time: 2.68
+Epoch 191/300| Time: 0.41s| Loss: 0.7183
+Epoch 192/300| Time: 0.42s| Loss: 0.6936
+Epoch 193/300| Time: 0.39s| Loss: 0.7233
+Epoch 194/300| Time: 0.42s| Loss: 0.7122
+Epoch 195/300| Time: 0.42s| Loss: 0.7341
+Epoch 196/300| Time: 0.42s| Loss: 0.7341
+Epoch 197/300| Time: 0.42s| Loss: 0.7145
+Epoch 198/300| Time: 0.42s| Loss: 0.6577
+Epoch 199/300| Time: 0.42s| Loss: 0.6709
+Epoch 200/300| Time: 0.43s| Loss: 0.7054
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D200.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D200.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.7399 | Accuracy: 78
+	Batch_idx: 50 | Loss: 0.4167 | Accuracy: 86
+	Batch_idx: 100 | Loss: 2.3739 | Accuracy: 0
+  Class 0, accuracy: 76.52
+  Class 1, accuracy: 78.83
+  Class 2, accuracy: 86.45
+  Class 3, accuracy: 92.43
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 85.60
+  Class 6, accuracy: 97.59
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.7303 | OA: 72.40 | AA: 68.60 | Kappa: 66.00 | Time: 2.67
+Epoch 201/300| Time: 0.42s| Loss: 0.6760
+Epoch 202/300| Time: 0.42s| Loss: 0.6382
+Epoch 203/300| Time: 0.42s| Loss: 0.6227
+Epoch 204/300| Time: 0.41s| Loss: 0.6218
+Epoch 205/300| Time: 0.42s| Loss: 0.6174
+Epoch 206/300| Time: 0.43s| Loss: 0.6164
+Epoch 207/300| Time: 0.42s| Loss: 0.6138
+Epoch 208/300| Time: 0.42s| Loss: 0.6152
+Epoch 209/300| Time: 0.42s| Loss: 0.6121
+Epoch 210/300| Time: 0.43s| Loss: 0.6125
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D210.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D210.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.4856 | Accuracy: 89
+	Batch_idx: 50 | Loss: 0.3483 | Accuracy: 84
+	Batch_idx: 100 | Loss: 2.4451 | Accuracy: 0
+  Class 0, accuracy: 86.30
+  Class 1, accuracy: 83.59
+  Class 2, accuracy: 93.51
+  Class 3, accuracy: 95.17
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 85.84
+  Class 6, accuracy: 94.88
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6258 | OA: 76.48 | AA: 71.03 | Kappa: 70.60 | Time: 2.66
+Epoch 211/300| Time: 0.42s| Loss: 0.6118
+Epoch 212/300| Time: 0.42s| Loss: 0.6101
+Epoch 213/300| Time: 0.43s| Loss: 0.6104
+Epoch 214/300| Time: 0.42s| Loss: 0.6099
+Epoch 215/300| Time: 0.42s| Loss: 0.6082
+Epoch 216/300| Time: 0.42s| Loss: 0.6095
+Epoch 217/300| Time: 0.42s| Loss: 0.6101
+Epoch 218/300| Time: 0.42s| Loss: 0.6055
+Epoch 219/300| Time: 0.42s| Loss: 0.6059
+Epoch 220/300| Time: 0.42s| Loss: 0.6053
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D220.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D220.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.4942 | Accuracy: 90
+	Batch_idx: 50 | Loss: 0.3886 | Accuracy: 83
+	Batch_idx: 100 | Loss: 2.5093 | Accuracy: 0
+  Class 0, accuracy: 86.90
+  Class 1, accuracy: 82.88
+  Class 2, accuracy: 93.89
+  Class 3, accuracy: 95.04
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 86.95
+  Class 6, accuracy: 96.08
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6438 | OA: 76.45 | AA: 71.31 | Kappa: 70.59 | Time: 2.70
+Epoch 221/300| Time: 0.42s| Loss: 0.6069
+Epoch 222/300| Time: 0.42s| Loss: 0.6066
+Epoch 223/300| Time: 0.41s| Loss: 0.6058
+Epoch 224/300| Time: 0.42s| Loss: 0.6041
+Epoch 225/300| Time: 0.42s| Loss: 0.6027
+Epoch 226/300| Time: 0.42s| Loss: 0.6034
+Epoch 227/300| Time: 0.42s| Loss: 0.6028
+Epoch 228/300| Time: 0.42s| Loss: 0.6025
+Epoch 229/300| Time: 0.43s| Loss: 0.6014
+Epoch 230/300| Time: 0.42s| Loss: 0.6039
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D230.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D230.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.4709 | Accuracy: 90
+	Batch_idx: 50 | Loss: 0.3705 | Accuracy: 85
+	Batch_idx: 100 | Loss: 2.4217 | Accuracy: 0
+  Class 0, accuracy: 87.93
+  Class 1, accuracy: 83.46
+  Class 2, accuracy: 92.18
+  Class 3, accuracy: 95.04
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 86.00
+  Class 6, accuracy: 93.67
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6314 | OA: 76.59 | AA: 70.92 | Kappa: 70.72 | Time: 2.67
+Epoch 231/300| Time: 0.42s| Loss: 0.6035
+Epoch 232/300| Time: 0.41s| Loss: 0.6030
+Epoch 233/300| Time: 0.42s| Loss: 0.6034
+Epoch 234/300| Time: 0.42s| Loss: 0.6007
+Epoch 235/300| Time: 0.42s| Loss: 0.5999
+Epoch 236/300| Time: 0.43s| Loss: 0.6005
+Epoch 237/300| Time: 0.42s| Loss: 0.5995
+Epoch 238/300| Time: 0.43s| Loss: 0.5989
+Epoch 239/300| Time: 0.42s| Loss: 0.6009
+Epoch 240/300| Time: 0.42s| Loss: 0.5990
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D240.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D240.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.4981 | Accuracy: 90
+	Batch_idx: 50 | Loss: 0.3869 | Accuracy: 84
+	Batch_idx: 100 | Loss: 2.4807 | Accuracy: 0
+  Class 0, accuracy: 87.75
+  Class 1, accuracy: 83.63
+  Class 2, accuracy: 93.70
+  Class 3, accuracy: 95.04
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 86.56
+  Class 6, accuracy: 95.18
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6416 | OA: 76.82 | AA: 71.32 | Kappa: 71.00 | Time: 2.66
+Epoch 241/300| Time: 0.40s| Loss: 0.5992
+Epoch 242/300| Time: 0.39s| Loss: 0.6003
+Epoch 243/300| Time: 0.42s| Loss: 0.5984
+Epoch 244/300| Time: 0.42s| Loss: 0.5990
+Epoch 245/300| Time: 0.41s| Loss: 0.5984
+Epoch 246/300| Time: 0.40s| Loss: 0.5968
+Epoch 247/300| Time: 0.41s| Loss: 0.5978
+Epoch 248/300| Time: 0.43s| Loss: 0.5974
+Epoch 249/300| Time: 0.42s| Loss: 0.5978
+Epoch 250/300| Time: 0.43s| Loss: 0.5962
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D250.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D250.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.5199 | Accuracy: 89
+	Batch_idx: 50 | Loss: 0.3865 | Accuracy: 84
+	Batch_idx: 100 | Loss: 2.4835 | Accuracy: 0
+  Class 0, accuracy: 86.78
+  Class 1, accuracy: 83.46
+  Class 2, accuracy: 94.66
+  Class 3, accuracy: 94.91
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 86.71
+  Class 6, accuracy: 95.48
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6454 | OA: 76.66 | AA: 71.33 | Kappa: 70.82 | Time: 2.89
+Epoch 251/300| Time: 0.47s| Loss: 0.5957
+Epoch 252/300| Time: 0.43s| Loss: 0.5971
+Epoch 253/300| Time: 0.42s| Loss: 0.5973
+Epoch 254/300| Time: 0.43s| Loss: 0.5969
+Epoch 255/300| Time: 0.41s| Loss: 0.5956
+Epoch 256/300| Time: 0.42s| Loss: 0.5946
+Epoch 257/300| Time: 0.42s| Loss: 0.5949
+Epoch 258/300| Time: 0.42s| Loss: 0.5968
+Epoch 259/300| Time: 0.43s| Loss: 0.5947
+Epoch 260/300| Time: 0.43s| Loss: 0.5950
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D260.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D260.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.5073 | Accuracy: 90
+	Batch_idx: 50 | Loss: 0.4038 | Accuracy: 86
+	Batch_idx: 100 | Loss: 2.5172 | Accuracy: 0
+  Class 0, accuracy: 87.63
+  Class 1, accuracy: 83.12
+  Class 2, accuracy: 95.23
+  Class 3, accuracy: 94.78
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 87.19
+  Class 6, accuracy: 94.88
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6551 | OA: 76.70 | AA: 71.43 | Kappa: 70.88 | Time: 2.75
+Epoch 261/300| Time: 0.42s| Loss: 0.5952
+Epoch 262/300| Time: 0.42s| Loss: 0.5953
+Epoch 263/300| Time: 0.42s| Loss: 0.5940
+Epoch 264/300| Time: 0.44s| Loss: 0.5945
+Epoch 265/300| Time: 0.42s| Loss: 0.5943
+Epoch 266/300| Time: 0.41s| Loss: 0.5949
+Epoch 267/300| Time: 0.43s| Loss: 0.5950
+Epoch 268/300| Time: 0.44s| Loss: 0.5932
+Epoch 269/300| Time: 0.42s| Loss: 0.5947
+Epoch 270/300| Time: 0.42s| Loss: 0.5933
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D270.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D270.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.5312 | Accuracy: 88
+	Batch_idx: 50 | Loss: 0.3898 | Accuracy: 85
+	Batch_idx: 100 | Loss: 2.4825 | Accuracy: 0
+  Class 0, accuracy: 86.84
+  Class 1, accuracy: 83.89
+  Class 2, accuracy: 93.89
+  Class 3, accuracy: 94.78
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 86.71
+  Class 6, accuracy: 95.48
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6487 | OA: 76.81 | AA: 71.29 | Kappa: 70.98 | Time: 2.78
+Epoch 271/300| Time: 0.43s| Loss: 0.5930
+Epoch 272/300| Time: 0.44s| Loss: 0.5918
+Epoch 273/300| Time: 0.39s| Loss: 0.5925
+Epoch 274/300| Time: 0.42s| Loss: 0.5927
+Epoch 275/300| Time: 0.43s| Loss: 0.5919
+Epoch 276/300| Time: 0.42s| Loss: 0.5923
+Epoch 277/300| Time: 0.43s| Loss: 0.5918
+Epoch 278/300| Time: 0.43s| Loss: 0.5921
+Epoch 279/300| Time: 0.43s| Loss: 0.5916
+Epoch 280/300| Time: 0.43s| Loss: 0.5918
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D280.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D280.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.5203 | Accuracy: 90
+	Batch_idx: 50 | Loss: 0.4003 | Accuracy: 86
+	Batch_idx: 100 | Loss: 2.4814 | Accuracy: 0
+  Class 0, accuracy: 87.45
+  Class 1, accuracy: 83.89
+  Class 2, accuracy: 93.70
+  Class 3, accuracy: 94.91
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 86.79
+  Class 6, accuracy: 95.48
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6537 | OA: 76.91 | AA: 71.36 | Kappa: 71.10 | Time: 2.73
+Epoch 281/300| Time: 0.43s| Loss: 0.5903
+Epoch 282/300| Time: 0.43s| Loss: 0.5910
+Epoch 283/300| Time: 0.42s| Loss: 0.5920
+Epoch 284/300| Time: 0.43s| Loss: 0.5918
+Epoch 285/300| Time: 0.43s| Loss: 0.5903
+Epoch 286/300| Time: 0.43s| Loss: 0.5904
+Epoch 287/300| Time: 0.45s| Loss: 0.5903
+Epoch 288/300| Time: 0.43s| Loss: 0.5917
+Epoch 289/300| Time: 0.43s| Loss: 0.5915
+Epoch 290/300| Time: 0.41s| Loss: 0.5898
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D290.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D290.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.5141 | Accuracy: 90
+	Batch_idx: 50 | Loss: 0.4060 | Accuracy: 85
+	Batch_idx: 100 | Loss: 2.4596 | Accuracy: 0
+  Class 0, accuracy: 87.69
+  Class 1, accuracy: 83.83
+  Class 2, accuracy: 93.51
+  Class 3, accuracy: 94.78
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 86.63
+  Class 6, accuracy: 94.58
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6506 | OA: 76.86 | AA: 71.22 | Kappa: 71.04 | Time: 2.85
+Epoch 291/300| Time: 0.43s| Loss: 0.5912
+Epoch 292/300| Time: 0.44s| Loss: 0.5904
+Epoch 293/300| Time: 0.43s| Loss: 0.5899
+Epoch 294/300| Time: 0.43s| Loss: 0.5905
+Epoch 295/300| Time: 0.42s| Loss: 0.5894
+Epoch 296/300| Time: 0.43s| Loss: 0.5929
+Epoch 297/300| Time: 0.44s| Loss: 0.5930
+Epoch 298/300| Time: 0.42s| Loss: 0.5901
+Epoch 299/300| Time: 0.44s| Loss: 0.5894
+Epoch 300/300| Time: 0.43s| Loss: 0.5890
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D300.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size29/CNN_1D_2019-02-22_13-45-24/CNN_1D300.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.5664 | Accuracy: 86
+	Batch_idx: 50 | Loss: 0.3786 | Accuracy: 85
+	Batch_idx: 100 | Loss: 2.5046 | Accuracy: 0
+  Class 0, accuracy: 85.70
+  Class 1, accuracy: 84.66
+  Class 2, accuracy: 94.47
+  Class 3, accuracy: 95.30
+  Class 4, accuracy: 0.00
+  Class 5, accuracy: 86.16
+  Class 6, accuracy: 95.48
+  Class 7, accuracy: 0.00
+  Class 8, accuracy: 100.00
+Testing Loss: 0.6562 | OA: 76.97 | AA: 71.31 | Kappa: 71.14 | Time: 2.83

@@ -33,28 +33,28 @@ class C3F4_CNN(nn.Module):
         # conv3
         nn.MaxPool2d(2, stride=2, ceil_mode=True),  # 1/4
         nn.Conv2d(350, 350, 1),
-        nn.Dropout(0.2),
+        # nn.Dropout(0.2),
         nn.ReLU(inplace=True)                                                                  
         )
 
         self.fc1 = nn.Sequential(
         # fc1
         nn.Linear(self.input_fc1_nc, 2048),
-        nn.Dropout(0.2),
+        # nn.Dropout(0.2),
         nn.ReLU(inplace=True)
         )
 
         self.fc2 = nn.Sequential(
         # fc2
         nn.Linear(2048, 2048),
-        nn.Dropout(0.2),
+        # nn.Dropout(0.2),
         nn.ReLU(inplace=True)
         )
 
         self.fc3 = nn.Sequential(
         # fc3
         nn.Linear(2048, 1024),
-        nn.Dropout(0.2),
+        # nn.Dropout(0.2),
         nn.ReLU(inplace=True)
         )
 

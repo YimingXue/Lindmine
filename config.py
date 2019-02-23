@@ -3,21 +3,47 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'crop_59' # Indian_pines/Indian_pines_corrected/PaviaU/Pavia/crop_43/crop_59/garbage_crop_37/garbage
-    inference = True # For garbage_crop_37 inference
-    inference_onlyTrainData = True 
+    dataset = 'crop_43_3D' # Indian_pines/Indian_pines_corrected/PaviaU/garbage_crop_37/garbage/
+                          # Pavia/PaviaU_1D/PaviaU_2D/PaviaU_3D
+                          # crop_43/crop_43_1D/crop_43_2D/crop_43_3D
+                          # crop_59/crop_59_1D/crop_59_2D/crop_59_3D
+    inference = False # For garbage_crop_37 inference
+    inference_onlyTrainData = False 
     maxTrain = True # Whether use limited data to train
     max_trainData = 200
     
     # train/test parameters
-    model_name = 'ResNetv2' # Pyramidal_ResNet/SimpleFC/C3F4_CNN/C3F4_CNN_RON/C3F4_CNN_FPN/ResNet/ResNetv2/ResNet50/ResNetv2_withoutFC/ResNetv2_withoutDropout
+    model_name = 'CNN_3D' # Pyramidal_ResNet/SimpleFC/C3F4_CNN/C3F4_CNN_RON/C3F4_CNN_FPN/ResNet/ResNetv2/ResNet50/ResNetv2_withoutFC/ResNetv2_withoutDropout
+                            # CNN_1D/CNN_2D/CNN_3D
     optimizer = 'SGD' # Adagrad/SGD/Adam
-    epochs = 50
-    step_size = 20
-    batch_size = 100
-    seed = 80 # 75
-    lr = 0.01 # 0.1
-    weight_decay = 1e-4 # 1e-4
+    if model_name == 'CNN_1D':
+        epochs = 300 
+        step_size = 100 
+        batch_size = 100
+        seed = 80 
+        lr = 0.1 
+        weight_decay = 1e-4 
+    elif model_name == 'CNN_2D':
+        epochs = 200
+        step_size = 100 
+        batch_size = 100
+        seed = 80 
+        lr = 0.1 
+        weight_decay = 1e-4 
+    elif model_name == 'CNN_3D':
+        epochs = 400
+        step_size = 100 
+        batch_size = 50
+        seed = 80 
+        lr = 0.01
+        weight_decay = 1e-4 
+    else:
+        epochs = 50
+        step_size = 20
+        batch_size = 100
+        seed = 80 
+        lr = 0.01
+        weight_decay = 1e-4
 
     # Dataset
     if dataset == 'Indian_pines':
@@ -26,13 +52,13 @@ class DefaultConfigs(object):
     if dataset == 'Indian_pines_corrected':
         band = 200
         num_classes = 16
-    if dataset == 'PaviaU':
+    if dataset == 'PaviaU' or dataset == 'PaviaU_1D' or dataset == 'PaviaU_2D' or dataset == 'PaviaU_3D':
         band = 103
         num_classes = 9
-    if dataset == 'crop_43':
+    if dataset == 'crop_43' or dataset == 'crop_43_1D' or dataset == 'crop_43_2D' or dataset == 'crop_43_3D':
         band = 63
         num_classes = 15
-    if dataset == 'crop_59':
+    if dataset == 'crop_59' or dataset == 'crop_59_1D' or dataset == 'crop_59_2D' or dataset == 'crop_59_3D':
         band = 63
         num_classes = 19
     if dataset == 'garbage_crop_37' or dataset == 'garbage' or \

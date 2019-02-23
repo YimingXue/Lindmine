@@ -62,6 +62,12 @@ def train(config, kwargs):
         from ResNetv2_withoutFC import ResNetv2_withoutFC as Model
     elif config.model_name == 'ResNetv2_withoutDropout':
         from ResNetv2_withoutDropout import ResNetv2_withoutDropout as Model
+    elif config.model_name == 'CNN_1D':
+        from CNN_1D import CNN_1D as Model
+    elif config.model_name == 'CNN_2D':
+        from CNN_2D import CNN_2D as Model
+    elif config.model_name == 'CNN_3D':
+        from CNN_3D import CNN_3D as Model
     else:
         raise Exception('Wrong name of the model!')
     

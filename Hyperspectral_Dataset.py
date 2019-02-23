@@ -49,7 +49,6 @@ class Hyperspectral_Dataset(Dataset):
                 self.train_image_list = open(self.path+'/'+str(self.config.max_trainData)+'/train.txt').read().splitlines()
                 self.test_image_list = open(self.path+'/'+str(self.config.max_trainData)+'/test.txt').read().splitlines()
         self.mat_path = self.path + '/' + self.dataset
-        self.image_path = self.path + '/' + self.config.dataset + '_origin.png'
         
         self.mat_name = list(self.dataset); self.mat_name[0] = self.mat_name[0].lower(); self.mat_name = ''.join(self.mat_name)
         self.input_mat = sio.loadmat(self.mat_path+'.mat')[self.mat_name]
@@ -61,15 +60,19 @@ class Hyperspectral_Dataset(Dataset):
         else:
             self.inference_image_list = open(self.path+'/Inference/inference.txt').read().splitlines()
 
-        # if config.dataset != 'garbage':
         self.height = self.input_mat.shape[0]
         self.width = self.input_mat.shape[1]
-        self.band = self.config.band
+        if self.config.model_name == 'CNN_2D':
+            self.band = 1
+        else:
+            self.band = self.config.band
 
         # Scale the input between [0,1]
         self.input_mat = self.input_mat.astype(float)
         self.input_mat -= np.min(self.input_mat)
         self.input_mat /= np.max(self.input_mat)
+        if self.config.model_name == 'CNN_3D':
+            self.input_mat -= 0.5
 
         # Calculate the mean of each channel for normalization
         self.mean_array = np.ndarray(shape=(self.band,),dtype=np.float32)
@@ -86,26 +89,62 @@ class Hyperspectral_Dataset(Dataset):
     def __getitem__(self,index):
         if self.config.inference == False:
             if self.train == True:
-                patch_center = self.train_image_list[index].split(' ')
-                data_name = patch_center[0]
-                h = int(patch_center[1])
-                w = int(patch_center[2])
-                patch = self.Patch_Center(h,w)
-                label = self.target_mat[h,w]-1
-                # # Data augmentation
-                # num = random.randint(0,1)
-                # if num == 0 :
-                #     patch = patch[:,::-1,:] # Flip patch up-down
-                # if num == 1 :
-                #     patch = patch[:,:,::-1] # Flip patch left-right
-                # if num == 2 :
-                #     self.patch[index] = rotation(self.patch[index]) # Rotate patch for 90/180/270
+                if self.config.model_name == 'CNN_1D':
+                    patch_center = self.train_image_list[index].split(' ')
+                    data_name = patch_center[0]
+                    h = int(patch_center[1])
+                    w = int(patch_center[2])
+                    patch = self.Patch_Center_1D(h,w)
+                    patch = np.squeeze(patch)
+                    patch = np.expand_dims(patch, axis=0)
+                    patch = np.expand_dims(patch, axis=0)
+                    label = self.target_mat[h,w]-1
+                elif self.config.model_name == 'CNN_3D':
+                    patch_center = self.train_image_list[index].split(' ')
+                    data_name = patch_center[0]
+                    h = int(patch_center[1])
+                    w = int(patch_center[2])
+                    patch = self.Patch_Center(h,w)
+                    patch = np.expand_dims(patch, axis=0)
+                    label = self.target_mat[h,w]-1
+                else:
+                    patch_center = self.train_image_list[index].split(' ')
+                    data_name = patch_center[0]
+                    h = int(patch_center[1])
+                    w = int(patch_center[2])
+                    patch = self.Patch_Center(h,w)
+                    label = self.target_mat[h,w]-1
+                    # # Data augmentation
+                    # num = random.randint(0,1)
+                    # if num == 0 :
+                    #     patch = patch[:,::-1,:] # Flip patch up-down
+                    # if num == 1 :
+                    #     patch = patch[:,:,::-1] # Flip patch left-right
+                    # if num == 2 :
+                    #     self.patch[index] = rotation(self.patch[index]) # Rotate patch for 90/180/270
             else:
-                patch_center = self.test_image_list[index].split(' ')
-                h = int(patch_center[1])
-                w = int(patch_center[2])
-                patch = self.Patch_Center(h,w)
-                label = self.target_mat[h,w]-1
+                if self.config.model_name == 'CNN_1D':
+                    patch_center = self.test_image_list[index].split(' ')
+                    h = int(patch_center[1])
+                    w = int(patch_center[2])
+                    patch = self.Patch_Center_1D(h,w)
+                    patch = np.squeeze(patch)
+                    patch = np.expand_dims(patch, axis=0)
+                    patch = np.expand_dims(patch, axis=0)
+                    label = self.target_mat[h,w]-1
+                elif self.config.model_name == 'CNN_3D':
+                    patch_center = self.test_image_list[index].split(' ')
+                    h = int(patch_center[1])
+                    w = int(patch_center[2])
+                    patch = self.Patch_Center(h,w)
+                    patch = np.expand_dims(patch, axis=0)
+                    label = self.target_mat[h,w]-1
+                else:
+                    patch_center = self.test_image_list[index].split(' ')
+                    h = int(patch_center[1])
+                    w = int(patch_center[2])
+                    patch = self.Patch_Center(h,w)
+                    label = self.target_mat[h,w]-1
         else:
             patch_center = self.inference_image_list[index].split(' ')
             h = int(patch_center[1])
@@ -138,6 +177,34 @@ class Hyperspectral_Dataset(Dataset):
         """
         patch = np.zeros((self.band, self.patch_size, self.patch_size))
         offset = (self.patch_size-1)//2
+        h_index = 0; w_index = 0
+        for h in range(height_index-offset, height_index+offset+1):
+            for w in range(width_index-offset, width_index+offset+1):
+                if h<0 or h>=self.height or w<0 or w>=self.width:
+                    continue
+                else:
+                    patch[:,h-height_index+offset,w-width_index+offset] = self.transpose_array[:,h,w]
+        mean_normalized_patch = []
+        for i in range(patch.shape[0]):
+            mean_normalized_patch.append(patch[i] - self.mean_array[i]) 
+        return np.array(mean_normalized_patch)
+    
+    def Patch_Center_1D(self,height_index,width_index):
+        # when input dataset is crop_43_1D or crop_59_1D, then only use the spectral information to classify pixels.
+        """
+        Returns a mean-normalized patch, the center corner of which 
+        is at (height_index, width_index)
+        
+        Inputs: 
+        height_index - row index of the top left corner of the image patch
+        width_index - column index of the top left corner of the image patch
+        
+        Outputs:
+        mean_normalized_patch - mean normalized patch of size (PATCH_SIZE, PATCH_SIZE) 
+        whose top left corner is at (height_index, width_index)
+        """
+        patch = np.zeros((self.band, 1, 1))
+        offset = (1-1)//2
         h_index = 0; w_index = 0
         for h in range(height_index-offset, height_index+offset+1):
             for w in range(width_index-offset, width_index+offset+1):
