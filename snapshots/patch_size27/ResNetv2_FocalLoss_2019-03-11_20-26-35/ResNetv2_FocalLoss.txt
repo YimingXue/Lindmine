@@ -1,0 +1,196 @@
+#######################PARAMETERS######################## Dataset selection
+	maxTrain: True
+	max_trainData: 200
+	focalLoss_gamma: 2.5
+# train/test parameters	model_name: ResNetv2_FocalLoss
+	optimizer: SGD
+	epochs: 50
+	batch_size: 100
+	seed: 80
+	lr: 0.01
+	weight_decay: 0.0001
+# data preparation parameters
+	dataset: PaviaU
+	patch_size: 27
+	band: 103
+	num_classes: 9
+	train_percent: 0.75
+	val_percent: 0.0
+	test_percent: 0.25
+
+#############################  MODEL  ###################################
+
+ResNetv2_FocalLoss(
+  (conv): Sequential(
+    (0): Conv2d(103, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace)
+    (3): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=True)
+  )
+  (relu): ReLU()
+  (block1): Sequential(
+    (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU()
+    (6): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (7): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (downsample1): Sequential(
+    (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (block2): Sequential(
+    (0): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU()
+    (6): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (7): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (downsample2): Sequential(
+    (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (fc): Sequential(
+    (0): Linear(in_features=32768, out_features=2048, bias=True)
+    (1): Dropout(p=0.2)
+    (2): ReLU(inplace)
+    (3): Linear(in_features=2048, out_features=1024, bias=True)
+    (4): Dropout(p=0.2)
+    (5): ReLU(inplace)
+    (6): Linear(in_features=1024, out_features=9, bias=True)
+  )
+  (Softmax): Softmax()
+)
+##############################################################################
+
+Epoch 1/50| Time: 3.68s| Loss: 1.0529
+Epoch 2/50| Time: 4.76s| Loss: 0.2145
+Epoch 3/50| Time: 4.50s| Loss: 0.1129
+Epoch 4/50| Time: 4.67s| Loss: 0.0481
+Epoch 5/50| Time: 3.58s| Loss: 0.0258
+Epoch 6/50| Time: 3.51s| Loss: 0.0245
+Epoch 7/50| Time: 4.18s| Loss: 0.0208
+Epoch 8/50| Time: 4.66s| Loss: 0.0120
+Epoch 9/50| Time: 4.57s| Loss: 0.0040
+Epoch 10/50| Time: 4.51s| Loss: 0.0045
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-11_20-26-35/ResNetv2_FocalLoss10.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-11_20-26-35/ResNetv2_FocalLoss10.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0160 | Accuracy: 96
+	Batch_idx: 50 | Loss: 0.0040 | Accuracy: 100
+	Batch_idx: 100 | Loss: 0.0100 | Accuracy: 98
+  Class 0, accuracy: 98.13
+  Class 1, accuracy: 99.12
+  Class 2, accuracy: 99.05
+  Class 3, accuracy: 97.78
+  Class 4, accuracy: 100.00
+  Class 5, accuracy: 99.84
+  Class 6, accuracy: 100.00
+  Class 7, accuracy: 97.83
+  Class 8, accuracy: 98.73
+Testing Loss: 0.0157 | OA: 98.89 | AA: 98.94 | Kappa: 98.53 | Time: 28.95
+Epoch 11/50| Time: 4.40s| Loss: 0.0042
+Epoch 12/50| Time: 4.50s| Loss: 0.0020
+Epoch 13/50| Time: 4.37s| Loss: 0.0027
+Epoch 14/50| Time: 3.76s| Loss: 0.0016
+Epoch 15/50| Time: 4.11s| Loss: 0.0014
+Epoch 16/50| Time: 4.51s| Loss: 0.0013
+Epoch 17/50| Time: 4.53s| Loss: 0.0015
+Epoch 18/50| Time: 4.53s| Loss: 0.0023
+Epoch 19/50| Time: 4.53s| Loss: 0.0011
+Epoch 20/50| Time: 4.59s| Loss: 0.0012
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-11_20-26-35/ResNetv2_FocalLoss20.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-11_20-26-35/ResNetv2_FocalLoss20.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0125 | Accuracy: 97
+	Batch_idx: 50 | Loss: 0.0011 | Accuracy: 100
+	Batch_idx: 100 | Loss: 0.0049 | Accuracy: 99
+  Class 0, accuracy: 98.49
+  Class 1, accuracy: 99.44
+  Class 2, accuracy: 98.85
+  Class 3, accuracy: 97.78
+  Class 4, accuracy: 99.70
+  Class 5, accuracy: 99.84
+  Class 6, accuracy: 100.00
+  Class 7, accuracy: 98.59
+  Class 8, accuracy: 98.73
+Testing Loss: 0.0127 | OA: 99.13 | AA: 99.05 | Kappa: 98.85 | Time: 32.91
+Epoch 21/50| Time: 4.87s| Loss: 0.0011
+Epoch 22/50| Time: 3.58s| Loss: 0.0010
+Epoch 23/50| Time: 3.88s| Loss: 0.0007
+Epoch 24/50| Time: 5.04s| Loss: 0.0010
+Epoch 25/50| Time: 5.25s| Loss: 0.0008
+Epoch 26/50| Time: 5.28s| Loss: 0.0008
+Epoch 27/50| Time: 5.33s| Loss: 0.0020
+Epoch 28/50| Time: 5.36s| Loss: 0.0012
+Epoch 29/50| Time: 5.18s| Loss: 0.0014
+Epoch 30/50| Time: 4.68s| Loss: 0.0008
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-11_20-26-35/ResNetv2_FocalLoss30.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-11_20-26-35/ResNetv2_FocalLoss30.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0159 | Accuracy: 96
+	Batch_idx: 50 | Loss: 0.0014 | Accuracy: 100
+	Batch_idx: 100 | Loss: 0.0028 | Accuracy: 99
+  Class 0, accuracy: 98.19
+  Class 1, accuracy: 99.31
+  Class 2, accuracy: 99.05
+  Class 3, accuracy: 97.39
+  Class 4, accuracy: 100.00
+  Class 5, accuracy: 99.84
+  Class 6, accuracy: 100.00
+  Class 7, accuracy: 98.70
+  Class 8, accuracy: 98.73
+Testing Loss: 0.0134 | OA: 99.03 | AA: 99.02 | Kappa: 98.71 | Time: 28.45
+Epoch 31/50| Time: 3.76s| Loss: 0.0006
+Epoch 32/50| Time: 5.01s| Loss: 0.0008
+Epoch 33/50| Time: 5.25s| Loss: 0.0007
+Epoch 34/50| Time: 5.30s| Loss: 0.0007
+Epoch 35/50| Time: 5.27s| Loss: 0.0011
+Epoch 36/50| Time: 5.24s| Loss: 0.0007
+Epoch 37/50| Time: 5.16s| Loss: 0.0009
+Epoch 38/50| Time: 3.88s| Loss: 0.0010
+Epoch 39/50| Time: 3.86s| Loss: 0.0005
+Epoch 40/50| Time: 5.08s| Loss: 0.0010
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-11_20-26-35/ResNetv2_FocalLoss40.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-11_20-26-35/ResNetv2_FocalLoss40.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0159 | Accuracy: 97
+	Batch_idx: 50 | Loss: 0.0010 | Accuracy: 100
+	Batch_idx: 100 | Loss: 0.0019 | Accuracy: 100
+  Class 0, accuracy: 98.25
+  Class 1, accuracy: 99.40
+  Class 2, accuracy: 99.05
+  Class 3, accuracy: 97.26
+  Class 4, accuracy: 100.00
+  Class 5, accuracy: 99.84
+  Class 6, accuracy: 100.00
+  Class 7, accuracy: 99.02
+  Class 8, accuracy: 98.73
+Testing Loss: 0.0125 | OA: 99.09 | AA: 99.06 | Kappa: 98.80 | Time: 32.49
+Epoch 41/50| Time: 3.50s| Loss: 0.0008
+Epoch 42/50| Time: 3.27s| Loss: 0.0007
+Epoch 43/50| Time: 3.15s| Loss: 0.0006
+Epoch 44/50| Time: 3.25s| Loss: 0.0016
+Epoch 45/50| Time: 3.14s| Loss: 0.0006
+Epoch 46/50| Time: 2.94s| Loss: 0.0009
+Epoch 47/50| Time: 2.95s| Loss: 0.0008
+Epoch 48/50| Time: 2.94s| Loss: 0.0008
+Epoch 49/50| Time: 2.79s| Loss: 0.0008
+Epoch 50/50| Time: 2.66s| Loss: 0.0008
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-11_20-26-35/ResNetv2_FocalLoss50.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-11_20-26-35/ResNetv2_FocalLoss50.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0156 | Accuracy: 97
+	Batch_idx: 50 | Loss: 0.0010 | Accuracy: 100
+	Batch_idx: 100 | Loss: 0.0018 | Accuracy: 100
+  Class 0, accuracy: 98.25
+  Class 1, accuracy: 99.40
+  Class 2, accuracy: 99.05
+  Class 3, accuracy: 97.26
+  Class 4, accuracy: 100.00
+  Class 5, accuracy: 99.84
+  Class 6, accuracy: 100.00
+  Class 7, accuracy: 99.02
+  Class 8, accuracy: 98.73
+Testing Loss: 0.0126 | OA: 99.09 | AA: 99.06 | Kappa: 98.80 | Time: 18.01

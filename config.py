@@ -3,18 +3,20 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'crop_43_3D' # Indian_pines/Indian_pines_corrected/PaviaU/garbage_crop_37/garbage/
-                          # Pavia/PaviaU_1D/PaviaU_2D/PaviaU_3D
-                          # crop_43/crop_43_1D/crop_43_2D/crop_43_3D
-                          # crop_59/crop_59_1D/crop_59_2D/crop_59_3D
+    dataset = 'PaviaU' # Indian_pines/Indian_pines_corrected/PaviaU/
+                           # PaviaU/PaviaU_1D/PaviaU_2D/PaviaU_3D
+                           # crop_43/crop_43_1D/crop_43_2D/crop_43_3D
+                           # crop_59/crop_59_1D/crop_59_2D/crop_59_3D
     inference = False # For garbage_crop_37 inference
     inference_onlyTrainData = False 
     maxTrain = True # Whether use limited data to train
     max_trainData = 200
     
     # train/test parameters
-    model_name = 'CNN_3D' # Pyramidal_ResNet/SimpleFC/C3F4_CNN/C3F4_CNN_RON/C3F4_CNN_FPN/ResNet/ResNetv2/ResNet50/ResNetv2_withoutFC/ResNetv2_withoutDropout
+    model_name = 'ResNetv2_FocalLoss' # ResNetv2/ResNetv2_FocalLoss
+                            # Pyramidal_ResNet/SimpleFC/C3F4_CNN/C3F4_CNN_RON/C3F4_CNN_FPN/ResNet/ResNet50/ResNetv2_withoutFC/ResNetv2_withoutDropout
                             # CNN_1D/CNN_2D/CNN_3D
+    focalLoss_gamma = 3
     optimizer = 'SGD' # Adagrad/SGD/Adam
     if model_name == 'CNN_1D':
         epochs = 300 
@@ -67,7 +69,7 @@ class DefaultConfigs(object):
         band = 63
         num_classes = 2
     patch_mode = 'Center' # Center/TopLeft/PP(Pixel-Pair)
-    patch_size = 29
+    patch_size = 27
     train_percent = 0.75
     val_percent = 0.0
     test_percent = 0.25

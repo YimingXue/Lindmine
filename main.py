@@ -68,6 +68,8 @@ def train(config, kwargs):
         from CNN_2D import CNN_2D as Model
     elif config.model_name == 'CNN_3D':
         from CNN_3D import CNN_3D as Model
+    elif config.model_name == 'ResNetv2_FocalLoss':
+        from ResNetv2_FocalLoss import ResNetv2_FocalLoss as Model
     else:
         raise Exception('Wrong name of the model!')
     
@@ -85,6 +87,7 @@ def train(config, kwargs):
           '# Dataset selection\n'
           '\tmaxTrain: {}\n'
           '\tmax_trainData: {}\n'
+          '\tfocalLoss_gamma: {}\n'
           
           '# train/test parameters'
           '\tmodel_name: {}\n'
@@ -103,7 +106,7 @@ def train(config, kwargs):
           '\ttrain_percent: {}\n'
           '\tval_percent: {}\n'
           '\ttest_percent: {}\n'.format(
-          config.maxTrain, config.max_trainData, config.model_name, config.optimizer,
+          config.maxTrain, config.max_trainData, config.focalLoss_gamma, config.model_name, config.optimizer,
           config.epochs, config.batch_size, config.seed,
           config.lr, config.weight_decay, config.dataset, config.patch_size, 
           config.band, config.num_classes, config.train_percent, config.val_percent, config.test_percent),file=f)
