@@ -3,7 +3,7 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'PaviaU' # Indian_pines/Indian_pines_corrected/PaviaU/
+    dataset = 'Indian_pines' # Indian_pines/Indian_pines_corrected/PaviaU/
                            # PaviaU/PaviaU_1D/PaviaU_2D/PaviaU_3D
                            # crop_43/crop_43_1D/crop_43_2D/crop_43_3D
                            # crop_59/crop_59_1D/crop_59_2D/crop_59_3D
@@ -13,10 +13,10 @@ class DefaultConfigs(object):
     max_trainData = 200
     
     # train/test parameters
-    model_name = 'ResNetv2_FocalLoss' # ResNetv2/ResNetv2_FocalLoss
+    model_name = 'ResNetv2' # ResNetv2/ResNetv2_FocalLoss
                             # Pyramidal_ResNet/SimpleFC/C3F4_CNN/C3F4_CNN_RON/C3F4_CNN_FPN/ResNet/ResNet50/ResNetv2_withoutFC/ResNetv2_withoutDropout
                             # CNN_1D/CNN_2D/CNN_3D
-    focalLoss_gamma = 3
+    focalLoss_gamma = 1
     optimizer = 'SGD' # Adagrad/SGD/Adam
     if model_name == 'CNN_1D':
         epochs = 300 

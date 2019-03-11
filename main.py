@@ -172,7 +172,7 @@ def train(config, kwargs):
             optimizer.zero_grad()
             # calculate loss
             loss = model.calculate_objective(train_images, train_labels)
-            loss_batchSize.append(loss)
+            loss_batchSize.append(loss.item())
             train_loss += loss.item()
             train_number += len(train_labels)
             # backward pass
