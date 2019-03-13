@@ -51,14 +51,19 @@ class ResNetv2_FocalLoss(nn.Module):
             nn.BatchNorm2d(512)
         )
         self.fc = nn.Sequential(
-        nn.Linear(self.input_fc, 2048),
-        nn.Dropout(0.2),
-        nn.ReLU(inplace=True),
-        nn.Linear(2048, 1024),
-        nn.Dropout(0.2),
-        nn.ReLU(inplace=True),
-        nn.Linear(1024, config.num_classes)
+            nn.Linear(self.input_fc, 2048),
+            nn.Dropout(0.2),
+            nn.ReLU(inplace=True),
+            nn.Linear(2048, 1024),
+            nn.Dropout(0.2),
+            nn.ReLU(inplace=True),
+            nn.Linear(1024, config.num_classes)
         )
+
+        # self.fc = nn.Sequential(
+        #     nn.Linear(self.input_fc, config.num_classes),
+        # )
+
         self.Softmax = nn.Softmax()
 
     def forward(self, x):

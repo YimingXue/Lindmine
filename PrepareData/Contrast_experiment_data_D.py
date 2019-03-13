@@ -2,7 +2,7 @@ import numpy as np
 import random
 import scipy.io as sio
 import sys
-sys.path.insert(0,'/home/xueyiming/TEST-master/')
+sys.path.insert(0,'/home/xueyiming/TEST/')
 from config import config
 import os
 import math

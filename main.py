@@ -58,10 +58,6 @@ def train(config, kwargs):
         from ResNetv2 import ResNetv2 as Model
     elif config.model_name == 'ResNet50':
         from ResNet50 import ResNet50 as Model
-    elif config.model_name == 'ResNetv2_withoutFC':
-        from ResNetv2_withoutFC import ResNetv2_withoutFC as Model
-    elif config.model_name == 'ResNetv2_withoutDropout':
-        from ResNetv2_withoutDropout import ResNetv2_withoutDropout as Model
     elif config.model_name == 'CNN_1D':
         from CNN_1D import CNN_1D as Model
     elif config.model_name == 'CNN_2D':

@@ -3,7 +3,7 @@ class DefaultConfigs(object):
     cuda = True
 
     # Dataset selection
-    dataset = 'Indian_pines' # Indian_pines/Indian_pines_corrected/PaviaU/
+    dataset = 'PaviaU' # Indian_pines/Indian_pines_corrected/PaviaU/
                            # PaviaU/PaviaU_1D/PaviaU_2D/PaviaU_3D
                            # crop_43/crop_43_1D/crop_43_2D/crop_43_3D
                            # crop_59/crop_59_1D/crop_59_2D/crop_59_3D
@@ -13,8 +13,8 @@ class DefaultConfigs(object):
     max_trainData = 200
     
     # train/test parameters
-    model_name = 'ResNetv2' # ResNetv2/ResNetv2_FocalLoss
-                            # Pyramidal_ResNet/SimpleFC/C3F4_CNN/C3F4_CNN_RON/C3F4_CNN_FPN/ResNet/ResNet50/ResNetv2_withoutFC/ResNetv2_withoutDropout
+    model_name = 'ResNetv2_FocalLoss' # ResNetv2/ResNetv2_FocalLoss
+                            # Pyramidal_ResNet/SimpleFC/C3F4_CNN/C3F4_CNN_RON/C3F4_CNN_FPN/ResNet/ResNet50/
                             # CNN_1D/CNN_2D/CNN_3D
     focalLoss_gamma = 1
     optimizer = 'SGD' # Adagrad/SGD/Adam
@@ -51,25 +51,30 @@ class DefaultConfigs(object):
     if dataset == 'Indian_pines':
         band = 220
         num_classes = 16
+        patch_size = 29
     if dataset == 'Indian_pines_corrected':
         band = 200
         num_classes = 16
+        patch_size = 29
     if dataset == 'PaviaU' or dataset == 'PaviaU_1D' or dataset == 'PaviaU_2D' or dataset == 'PaviaU_3D':
         band = 103
         num_classes = 9
+        patch_size = 27
     if dataset == 'crop_43' or dataset == 'crop_43_1D' or dataset == 'crop_43_2D' or dataset == 'crop_43_3D':
         band = 63
         num_classes = 15
+        patch_size = 29
     if dataset == 'crop_59' or dataset == 'crop_59_1D' or dataset == 'crop_59_2D' or dataset == 'crop_59_3D':
         band = 63
         num_classes = 19
+        patch_size = 29
     if dataset == 'garbage_crop_37' or dataset == 'garbage' or \
        dataset == 'img_crop_27' or dataset == 'img_crop_27_pool' or \
        dataset == 'img_crop_37_pool':
         band = 63
         num_classes = 2
+        patch_size = 29
     patch_mode = 'Center' # Center/TopLeft/PP(Pixel-Pair)
-    patch_size = 27
     train_percent = 0.75
     val_percent = 0.0
     test_percent = 0.25
