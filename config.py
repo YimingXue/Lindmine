@@ -10,7 +10,7 @@ class DefaultConfigs(object):
     inference = False # For garbage_crop_37 inference
     inference_onlyTrainData = False 
     maxTrain = True # Whether use limited data to train
-    max_trainData = 200
+    max_trainData = 22223
     
     # train/test parameters
     model_name = 'ResNetv2_FocalLoss' # ResNetv2/ResNetv2_FocalLoss
@@ -59,7 +59,7 @@ class DefaultConfigs(object):
     if dataset == 'PaviaU' or dataset == 'PaviaU_1D' or dataset == 'PaviaU_2D' or dataset == 'PaviaU_3D':
         band = 103
         num_classes = 9
-        patch_size = 27
+        patch_size = 23
     if dataset == 'crop_43' or dataset == 'crop_43_1D' or dataset == 'crop_43_2D' or dataset == 'crop_43_3D':
         band = 63
         num_classes = 15
