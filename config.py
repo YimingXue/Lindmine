@@ -10,13 +10,13 @@ class DefaultConfigs(object):
     inference = False # For garbage_crop_37 inference
     inference_onlyTrainData = False 
     maxTrain = True # Whether use limited data to train
-    max_trainData = 22223
+    max_trainData = 200
     
     # train/test parameters
     model_name = 'ResNetv2_FocalLoss' # ResNetv2/ResNetv2_FocalLoss
                             # Pyramidal_ResNet/SimpleFC/C3F4_CNN/C3F4_CNN_RON/C3F4_CNN_FPN/ResNet/ResNet50/
                             # CNN_1D/CNN_2D/CNN_3D
-    focalLoss_gamma = 1
+    focalLoss_gamma = 0.5
     optimizer = 'SGD' # Adagrad/SGD/Adam
     if model_name == 'CNN_1D':
         epochs = 300 
@@ -59,7 +59,7 @@ class DefaultConfigs(object):
     if dataset == 'PaviaU' or dataset == 'PaviaU_1D' or dataset == 'PaviaU_2D' or dataset == 'PaviaU_3D':
         band = 103
         num_classes = 9
-        patch_size = 23
+        patch_size = 33
     if dataset == 'crop_43' or dataset == 'crop_43_1D' or dataset == 'crop_43_2D' or dataset == 'crop_43_3D':
         band = 63
         num_classes = 15

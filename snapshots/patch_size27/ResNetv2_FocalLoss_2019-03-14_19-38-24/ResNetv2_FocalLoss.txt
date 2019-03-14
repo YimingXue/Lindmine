@@ -1,0 +1,123 @@
+#######################PARAMETERS######################## Dataset selection
+	maxTrain: True
+	max_trainData: 200
+	focalLoss_gamma: 0.5
+# train/test parameters	model_name: ResNetv2_FocalLoss
+	optimizer: SGD
+	epochs: 50
+	batch_size: 100
+	seed: 80
+	lr: 0.01
+	weight_decay: 0.0001
+# data preparation parameters
+	dataset: PaviaU
+	patch_size: 27
+	band: 103
+	num_classes: 9
+	train_percent: 0.75
+	val_percent: 0.0
+	test_percent: 0.25
+
+#############################  MODEL  ###################################
+
+ResNetv2_FocalLoss(
+  (conv): Sequential(
+    (0): Conv2d(103, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace)
+    (3): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=True)
+  )
+  (relu): ReLU()
+  (block1): Sequential(
+    (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU()
+    (6): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (7): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (downsample1): Sequential(
+    (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (block2): Sequential(
+    (0): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU()
+    (6): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (7): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (downsample2): Sequential(
+    (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (fc): Sequential(
+    (0): Linear(in_features=32768, out_features=2048, bias=True)
+    (1): Dropout(p=0.2)
+    (2): ReLU(inplace)
+    (3): Linear(in_features=2048, out_features=1024, bias=True)
+    (4): Dropout(p=0.2)
+    (5): ReLU(inplace)
+    (6): Linear(in_features=1024, out_features=9, bias=True)
+  )
+  (Softmax): Softmax()
+)
+##############################################################################
+
+Epoch 1/50| Time: 3.66s| Loss: 1.8714
+Epoch 2/50| Time: 3.34s| Loss: 0.2992
+Epoch 3/50| Time: 2.81s| Loss: 0.0938
+Epoch 4/50| Time: 2.82s| Loss: 0.0371
+Epoch 5/50| Time: 3.55s| Loss: 0.0206
+Epoch 6/50| Time: 4.03s| Loss: 0.0159
+Epoch 7/50| Time: 3.67s| Loss: 0.0121
+Epoch 8/50| Time: 3.97s| Loss: 0.0141
+Epoch 9/50| Time: 4.09s| Loss: 0.0277
+Epoch 10/50| Time: 4.24s| Loss: 0.0157
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-14_19-38-24/ResNetv2_FocalLoss10.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-14_19-38-24/ResNetv2_FocalLoss10.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0604 | Accuracy: 97
+	Batch_idx: 50 | Loss: 0.0225 | Accuracy: 99
+	Batch_idx: 100 | Loss: 0.0056 | Accuracy: 100
+  Class 0, accuracy: 98.49
+  Class 1, accuracy: 99.29
+  Class 2, accuracy: 99.62
+  Class 3, accuracy: 89.16
+  Class 4, accuracy: 100.00
+  Class 5, accuracy: 98.81
+  Class 6, accuracy: 100.00
+  Class 7, accuracy: 99.02
+  Class 8, accuracy: 97.46
+Testing Loss: 0.0457 | OA: 98.38 | AA: 97.98 | Kappa: 97.86 | Time: 22.32
+Epoch 11/50| Time: 3.62s| Loss: 0.0100
+Epoch 12/50| Time: 4.40s| Loss: 0.0056
+Epoch 13/50| Time: 4.31s| Loss: 0.0021
+Epoch 14/50| Time: 4.37s| Loss: 0.0018
+Epoch 15/50| Time: 3.87s| Loss: 0.0016
+Epoch 16/50| Time: 3.74s| Loss: 0.0010
+Epoch 17/50| Time: 3.61s| Loss: 0.0007
+Epoch 18/50| Time: 3.67s| Loss: 0.0020
+Epoch 19/50| Time: 3.62s| Loss: 0.0049
+Epoch 20/50| Time: 3.89s| Loss: 0.0009
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-14_19-38-24/ResNetv2_FocalLoss20.model model saved--<<
+>>--/home/xueyiming/TEST/snapshots/patch_size27/ResNetv2_FocalLoss_2019-03-14_19-38-24/ResNetv2_FocalLoss20.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0203 | Accuracy: 99
+	Batch_idx: 50 | Loss: 0.0072 | Accuracy: 99
+	Batch_idx: 100 | Loss: 0.0043 | Accuracy: 100
+  Class 0, accuracy: 99.52
+  Class 1, accuracy: 99.16
+  Class 2, accuracy: 99.43
+  Class 3, accuracy: 98.04
+  Class 4, accuracy: 100.00
+  Class 5, accuracy: 99.44
+  Class 6, accuracy: 100.00
+  Class 7, accuracy: 98.59
+  Class 8, accuracy: 99.15
+Testing Loss: 0.0185 | OA: 99.19 | AA: 99.26 | Kappa: 98.92 | Time: 25.05
+Epoch 21/50| Time: 3.11s| Loss: 0.0005
+Epoch 22/50| Time: 3.10s| Loss: 0.0007
