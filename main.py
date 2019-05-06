@@ -66,6 +66,8 @@ def train(config, kwargs):
         from CNN_3D import CNN_3D as Model
     elif config.model_name == 'ResNetv2_FocalLoss':
         from ResNetv2_FocalLoss import ResNetv2_FocalLoss as Model
+    elif config.model_name == 'ResNetv3_FocalLoss':
+        from ResNetv3_FocalLoss import ResNetv3_FocalLoss as Model
     else:
         raise Exception('Wrong name of the model!')
     
