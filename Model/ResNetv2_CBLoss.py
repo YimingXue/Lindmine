@@ -5,11 +5,11 @@ import torch.nn.functional as F
 from config import config
 import os
 from skimage import io
-from FocalLoss import FocalLoss
+from CBLoss import CBLoss
 
-class ResNetv3_FocalLoss(nn.Module):
+class ResNetv2_CBLoss(nn.Module):
     def __init__(self, config):
-        super(ResNetv3_FocalLoss, self).__init__()
+        super(ResNetv2_CBLoss, self).__init__()
         self.config = config
         self.input_conv = self.config.band
         self.input_fc = 512 * (math.ceil((math.floor((config.patch_size-7+2*3)/2+1)-3+2*1)/2+1))**2
@@ -60,12 +60,18 @@ class ResNetv3_FocalLoss(nn.Module):
             nn.Linear(1024, config.num_classes)
         )
 
+        # self.fc = nn.Sequential(
+        #     nn.Linear(self.input_fc, config.num_classes),
+        # )
+
         self.Softmax = nn.Softmax()
 
     def forward(self, x):
         c1 = self.conv(x) 
         b1 = self.relu(self.block1(c1))
         b2 = self.relu(self.block2(b1))
+        # b1 = self.relu(self.block1(c1) + self.downsample1(c1))
+        # b2 = self.relu(self.block2(b1) + self.downsample2(b1))
         f1 = b2.view(b2.size(0), -1)
         prob = self.fc(f1)
 
@@ -77,7 +83,7 @@ class ResNetv3_FocalLoss(nn.Module):
         # forward pass
         prob, softmax_prob = self.forward(images)
         # calculate focal loss
-        loss = FocalLoss(gamma=config.focalLoss_gamma, alpha=None, size_average=True)
+        loss = CBLoss(gamma=config.CBLoss_gamma, alpha=None, size_average=True)
         output = loss(prob,labels)
         return output
     

@@ -42,32 +42,20 @@ MODEL_SIGNATURE = str(datetime.datetime.now())[0:19].replace(' ', '_').replace('
 
 def train(config, kwargs):
     # IMPORT MODEL==========================================================================
-    if config.model_name == 'Pyramidal_ResNet':
-        from Pyramidal_ResNet import Pyramidal_ResNet as Model
-    elif config.model_name == 'SimpleFC':
+    if config.model_name == 'SimpleFC':
         from SimpleFC import SimpleFC as Model
     elif config.model_name == 'C3F4_CNN':
         from C3F4_CNN import C3F4_CNN as Model
-    elif config.model_name == 'C3F4_CNN_RON':
-        from C3F4_CNN_RON import C3F4_CNN_RON as Model
-    elif config.model_name == 'C3F4_CNN_FPN':
-        from C3F4_CNN_FPN import C3F4_CNN_FPN as Model
     elif config.model_name == 'ResNet':
         from ResNet import ResNet as Model
     elif config.model_name == 'ResNetv2':
         from ResNetv2 import ResNetv2 as Model
-    elif config.model_name == 'ResNet50':
-        from ResNet50 import ResNet50 as Model
-    elif config.model_name == 'CNN_1D':
-        from CNN_1D import CNN_1D as Model
-    elif config.model_name == 'CNN_2D':
-        from CNN_2D import CNN_2D as Model
-    elif config.model_name == 'CNN_3D':
-        from CNN_3D import CNN_3D as Model
-    elif config.model_name == 'ResNetv2_FocalLoss':
-        from ResNetv2_FocalLoss import ResNetv2_FocalLoss as Model
-    elif config.model_name == 'ResNetv3_FocalLoss':
-        from ResNetv3_FocalLoss import ResNetv3_FocalLoss as Model
+    elif config.model_name == 'ResNetv1_CBLoss':
+        from ResNetv1_CBLoss import ResNetv1_CBLoss as Model
+    elif config.model_name == 'ResNetv2_CBLoss':
+        from ResNetv2_CBLoss import ResNetv2_CBLoss as Model
+    elif config.model_name == 'ResNetv3_CBLoss':
+        from ResNetv3_CBLoss import ResNetv3_CBLoss as Model
     else:
         raise Exception('Wrong name of the model!')
     
@@ -85,7 +73,7 @@ def train(config, kwargs):
           '# Dataset selection\n'
           '\tmaxTrain: {}\n'
           '\tmax_trainData: {}\n'
-          '\tfocalLoss_gamma: {}\n'
+          '\tCBLoss_gamma: {}\n'
           
           '# train/test parameters'
           '\tmodel_name: {}\n'
@@ -104,7 +92,7 @@ def train(config, kwargs):
           '\ttrain_percent: {}\n'
           '\tval_percent: {}\n'
           '\ttest_percent: {}\n'.format(
-          config.maxTrain, config.max_trainData, config.focalLoss_gamma, config.model_name, config.optimizer,
+          config.maxTrain, config.max_trainData, config.CBLoss_gamma, config.model_name, config.optimizer,
           config.epochs, config.batch_size, config.seed,
           config.lr, config.weight_decay, config.dataset, config.patch_size, 
           config.band, config.num_classes, config.train_percent, config.val_percent, config.test_percent),file=f)

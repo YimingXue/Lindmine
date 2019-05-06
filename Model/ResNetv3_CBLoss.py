@@ -5,14 +5,15 @@ import torch.nn.functional as F
 from config import config
 import os
 from skimage import io
+from CBLoss import CBLoss
 
-class ResNet(nn.Module):
+class ResNetv3_CBLoss(nn.Module):
     def __init__(self, config):
-        super(ResNet, self).__init__()
+        super(ResNetv3_CBLoss, self).__init__()
         self.config = config
         self.input_conv = self.config.band
-        self.input_fc = 256 * (math.ceil((math.floor((config.patch_size-7+2*3)/2+1)-3+2*1)/2+1))**2
-        assert (math.ceil((math.floor((config.patch_size-7+2*3)/2+1)-3+2*1)/2+1)) == 8
+        self.input_fc = 1024 * (math.ceil((math.floor((config.patch_size-7+2*3)/2+1)-3+2*1)/2+1))**2
+        # assert (math.ceil((math.floor((config.patch_size-7+2*3)/2+1)-3+2*1)/2+1)) == 8
 
         self.conv = nn.Sequential(
             nn.Conv2d(self.input_conv, 64, kernel_size=7, stride=2, padding=3, bias=False),
@@ -49,21 +50,41 @@ class ResNet(nn.Module):
             nn.Conv2d(256, 512, kernel_size=1, stride=1, bias=False),
             nn.BatchNorm2d(512)
         )
-        self.fc = nn.Sequential(
-        nn.Linear(self.input_fc, 2048),
-        nn.Dropout(0.2),
-        nn.ReLU(inplace=True),
-        nn.Linear(2048, 1024),
-        nn.Dropout(0.2),
-        nn.ReLU(inplace=True),
-        nn.Linear(1024, config.num_classes)
+        self.block3 = nn.Sequential(
+            nn.Conv2d(512, 256, kernel_size=1, bias=False),
+            nn.BatchNorm2d(256),
+            nn.ReLU(),
+            nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.BatchNorm2d(256),
+            nn.ReLU(),
+            nn.Conv2d(256, 1024, kernel_size=1, bias=False),
+            nn.BatchNorm2d(1024)
         )
+        self.downsample3 = nn.Sequential(
+            nn.Conv2d(512, 1024, kernel_size=1, stride=1, bias=False),
+            nn.BatchNorm2d(1024)
+        )
+        self.fc = nn.Sequential(
+            nn.Linear(self.input_fc, 2048),
+            nn.Dropout(0.2),
+            nn.ReLU(inplace=True),
+            nn.Linear(2048, 1024),
+            nn.Dropout(0.2),
+            nn.ReLU(inplace=True),
+            nn.Linear(1024, config.num_classes)
+        )
+
         self.Softmax = nn.Softmax()
 
     def forward(self, x):
         c1 = self.conv(x) 
-        b1 = self.relu(self.block1(c1) + self.downsample1(c1))
-        f1 = b1.view(b1.size(0), -1)
+        b1 = self.relu(self.block1(c1))
+        b2 = self.relu(self.block2(b1))
+        b3 = self.relu(self.block3(b2))
+        # b1 = self.relu(self.block1(c1) + self.downsample1(c1))
+        # b2 = self.relu(self.block2(b1) + self.downsample2(b1))
+        # b3 = self.relu(self.block3(b2) + self.downsample3(b2))
+        f1 = b3.view(b3.size(0), -1)
         prob = self.fc(f1)
 
         softmax_prob = self.Softmax(prob)
@@ -73,8 +94,8 @@ class ResNet(nn.Module):
     def calculate_objective(self, images, labels):
         # forward pass
         prob, softmax_prob = self.forward(images)
-        # calculate cross entropy loss
-        loss = nn.CrossEntropyLoss()
+        # calculate focal loss
+        loss = CBLoss(gamma=config.CBLoss_gamma, alpha=None, size_average=True)
         output = loss(prob,labels)
         return output
     
@@ -101,5 +122,5 @@ class ResNet(nn.Module):
 
 
 if __name__ == "__main__":
-    net = ResNet(config)
+    net = ResNetv2(config)
     print(net)
