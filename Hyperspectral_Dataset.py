@@ -58,6 +58,7 @@ class Hyperspectral_Dataset(Dataset):
             else:
                 self.target_mat = sio.loadmat(self.mat_path+'_gt.mat')[self.mat_name+'_gt']
         else:
+            self.target_mat = sio.loadmat(self.mat_path+'_gt.mat')[self.mat_name+'_gt']
             self.inference_image_list = open(self.path+'/Inference/inference.txt').read().splitlines()
 
         self.height = self.input_mat.shape[0]
@@ -150,7 +151,8 @@ class Hyperspectral_Dataset(Dataset):
             h = int(patch_center[1])
             w = int(patch_center[2])
             patch = self.Patch_Center(h,w)
-            return patch, h, w
+            label = self.target_mat[h,w]-1
+            return patch, label.astype(np.int64), h, w
         return patch, label.astype(np.int64)
 
     def __len__(self):

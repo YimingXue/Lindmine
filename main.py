@@ -42,20 +42,10 @@ MODEL_SIGNATURE = str(datetime.datetime.now())[0:19].replace(' ', '_').replace('
 
 def train(config, kwargs):
     # IMPORT MODEL==========================================================================
-    if config.model_name == 'SimpleFC':
-        from SimpleFC import SimpleFC as Model
-    elif config.model_name == 'C3F4_CNN':
+    if config.model_name == 'C3F4_CNN':
         from C3F4_CNN import C3F4_CNN as Model
-    elif config.model_name == 'ResNet':
-        from ResNet import ResNet as Model
     elif config.model_name == 'ResNetv2':
         from ResNetv2 import ResNetv2 as Model
-    elif config.model_name == 'ResNetv1_CBLoss':
-        from ResNetv1_CBLoss import ResNetv1_CBLoss as Model
-    elif config.model_name == 'ResNetv2_CBLoss':
-        from ResNetv2_CBLoss import ResNetv2_CBLoss as Model
-    elif config.model_name == 'ResNetv3_CBLoss':
-        from ResNetv3_CBLoss import ResNetv3_CBLoss as Model
     else:
         raise Exception('Wrong name of the model!')
     
@@ -295,60 +285,79 @@ def inference(config, kwargs, epoch, evaluate_model_assign=None, train_assign=Fa
     gt = mat_data[mat_name]
     Height, Width = gt.shape[0], gt.shape[1]
     image = np.zeros([Height, Width, 3], dtype=np.uint8)
+    tp = 0; tn = 0; fp = 0; fn = 0
     for h in range(Height):
         for w in range(Width):
             image[h,w,0:3] = (255,255,255)
     
-    for batch_idx, (inference_images, h, w) in enumerate(inference_dataloader):
+    for batch_idx, (inference_images, inference_labels, h, w) in enumerate(inference_dataloader):
         # data preparation
         inference_images = inference_images.type(torch.FloatTensor)
+        inference_labels = inference_labels.type(torch.FloatTensor)
         if CUDA_AVAILABLE:
             inference_images = inference_images.cuda()
+            inference_labels = inference_labels.cuda()
         inference_images = Variable(inference_images)
+        inference_labels = Variable(inference_labels)
 
         # calculate loss and result
         prediction = evaluate_model.inference_classification(inference_images)
         for i in range(len(prediction)):
-            if prediction[i] == 1:
-                image[h[i],w[i],0:3] = (0,255,0)
-            elif prediction[i] == 2:
-                image[h[i],w[i],0:3] = (0,128,0)
-            elif prediction[i] == 3:
-                image[h[i],w[i],0:3] = (255,255,0)
-            elif prediction[i] == 4:
-                image[h[i],w[i],0:3] = (255,174,200)
-            elif prediction[i] == 5:
-                image[h[i],w[i],0:3] = (128,0,0)
-            elif prediction[i] == 6:
-                image[h[i],w[i],0:3] = (0,128,192)
-            elif prediction[i] == 7:
+            class_number = 7 - 1
+            if prediction[i] == class_number and inference_labels[i] == class_number:
+                tp += 1
+            if prediction[i] == class_number and inference_labels[i] != class_number:
+                fp += 1
+            if prediction[i] != class_number and inference_labels[i] == class_number:
+                fn += 1
+            if prediction[i] != class_number and inference_labels[i] != class_number:
+                tn += 1
+
+            if prediction[i] == class_number:
                 image[h[i],w[i],0:3] = (0,0,255)
-            elif prediction[i] == 8:
-                image[h[i],w[i],0:3] = (253,236,166)
-            elif prediction[i] == 9:
-                image[h[i],w[i],0:3] = (255,202,24)
-            elif prediction[i] == 10:
-                image[h[i],w[i],0:3] = (255,127,39)
-            elif prediction[i] == 11:
-                image[h[i],w[i],0:3] = (185,122,86)
-            elif prediction[i] == 12:
-                image[h[i],w[i],0:3] = (255,0,0)
-            elif prediction[i] == 13:
-                image[h[i],w[i],0:3] = (255,128,128)
-            elif prediction[i] == 14:
-                image[h[i],w[i],0:3] = (200,100,100)
-            elif prediction[i] == 15:
-                image[h[i],w[i],0:3] = (72,30,7)
-            elif prediction[i] == 16:
-                image[h[i],w[i],0:3] = (0,168,243)
-            elif prediction[i] == 17:
-                image[h[i],w[i],0:3] = (63,72,204)
-            elif prediction[i] == 18:
-                image[h[i],w[i],0:3] = (196,255,14)
-            elif prediction[i] == 19:
-                image[h[i],w[i],0:3] = (74,85,38)
             else:
                 image[h[i],w[i],0:3] = (255,255,255)
+
+            # if prediction[i] == 1:
+            #     image[h[i],w[i],0:3] = (0,255,0)
+            # elif prediction[i] == 2:
+            #     image[h[i],w[i],0:3] = (0,128,0)
+            # elif prediction[i] == 3:
+            #     image[h[i],w[i],0:3] = (255,255,0)
+            # elif prediction[i] == 4:
+            #     image[h[i],w[i],0:3] = (255,174,200)
+            # elif prediction[i] == 5:
+            #     image[h[i],w[i],0:3] = (128,0,0)
+            # elif prediction[i] == 6:
+            #     image[h[i],w[i],0:3] = (0,128,192)
+            # elif prediction[i] == 7:
+            #     image[h[i],w[i],0:3] = (0,0,255)
+            # elif prediction[i] == 8:
+            #     image[h[i],w[i],0:3] = (253,236,166)
+            # elif prediction[i] == 9:
+            #     image[h[i],w[i],0:3] = (255,202,24)
+            # elif prediction[i] == 10:
+            #     image[h[i],w[i],0:3] = (255,127,39)
+            # elif prediction[i] == 11:
+            #     image[h[i],w[i],0:3] = (185,122,86)
+            # elif prediction[i] == 12:
+            #     image[h[i],w[i],0:3] = (255,0,0)
+            # elif prediction[i] == 13:
+            #     image[h[i],w[i],0:3] = (255,128,128)
+            # elif prediction[i] == 14:
+            #     image[h[i],w[i],0:3] = (200,100,100)
+            # elif prediction[i] == 15:
+            #     image[h[i],w[i],0:3] = (72,30,7)
+            # elif prediction[i] == 16:
+            #     image[h[i],w[i],0:3] = (0,168,243)
+            # elif prediction[i] == 17:
+            #     image[h[i],w[i],0:3] = (63,72,204)
+            # elif prediction[i] == 18:
+            #     image[h[i],w[i],0:3] = (196,255,14)
+            # elif prediction[i] == 19:
+            #     image[h[i],w[i],0:3] = (74,85,38)
+            # else:
+            #     image[h[i],w[i],0:3] = (255,255,255)
         if batch_idx % 1 == 0:
             print('batch_idx {}'.format(batch_idx))
     
@@ -364,6 +373,8 @@ def inference(config, kwargs, epoch, evaluate_model_assign=None, train_assign=Fa
     figure.savefig(image_save_path, format='eps', dpi=600)
     plt.show()
     print('Save Inference image')
+    print('tp: {}, fp: {}, tn: {}, fn: {}'.format(tp, fp, tn, fn))
+    print('precision: {}, recall: {}'.format(tp/(tp+fp), tp/(tp+fn)))
 
 
 if __name__ == '__main__':
@@ -373,6 +384,6 @@ if __name__ == '__main__':
         # evaluate_model_assign = 'C3F4_CNN_RON_2019-01-17_15-32-27'
         # test(config, kwargs, epoch, evaluate_model_assign)
     else:
-        epoch = 50
-        evaluate_model_assign = 'ResNetv2_2019-02-21_15-54-32'
+        epoch = 80
+        evaluate_model_assign = 'ResNetv2_2019-05-16_09-03-51'
         inference(config, kwargs, epoch, evaluate_model_assign)
