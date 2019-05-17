@@ -1,0 +1,239 @@
+#######################PARAMETERS######################## Dataset selection
+	maxTrain: False
+	max_trainData: 200
+	CBLoss_gamma: 1
+# train/test parameters	model_name: ResNetv2
+	optimizer: SGD
+	epochs: 80
+	batch_size: 100
+	seed: 80
+	lr: 0.01
+	weight_decay: 0.0001
+# data preparation parameters
+	dataset: crop_43
+	patch_size: 27
+	band: 63
+	num_classes: 7
+	train_percent: 0.9
+	val_percent: 0.0
+	test_percent: 0.1
+
+#############################  MODEL  ###################################
+
+ResNetv2(
+  (conv): Sequential(
+    (0): Conv2d(63, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace)
+    (3): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=True)
+  )
+  (relu): ReLU()
+  (block1): Sequential(
+    (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU()
+    (6): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (7): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (downsample1): Sequential(
+    (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (block2): Sequential(
+    (0): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU()
+    (6): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (7): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (downsample2): Sequential(
+    (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (fc): Sequential(
+    (0): Linear(in_features=32768, out_features=2048, bias=True)
+    (1): Dropout(p=0.2)
+    (2): ReLU(inplace)
+    (3): Linear(in_features=2048, out_features=1024, bias=True)
+    (4): Dropout(p=0.2)
+    (5): ReLU(inplace)
+    (6): Linear(in_features=1024, out_features=7, bias=True)
+  )
+  (Softmax): Softmax()
+)
+##############################################################################
+
+Epoch 1/80| Time: 32.16s| Loss: 0.5112
+Epoch 2/80| Time: 31.72s| Loss: 0.3585
+Epoch 3/80| Time: 32.19s| Loss: 0.3480
+Epoch 4/80| Time: 31.79s| Loss: 0.3417
+Epoch 5/80| Time: 31.67s| Loss: 0.3371
+Epoch 6/80| Time: 32.14s| Loss: 0.3352
+Epoch 7/80| Time: 31.89s| Loss: 0.3343
+Epoch 8/80| Time: 32.01s| Loss: 0.3318
+Epoch 9/80| Time: 32.62s| Loss: 0.3315
+Epoch 10/80| Time: 32.15s| Loss: 0.3289
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv210.model model saved--<<
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv210.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0642 | Accuracy: 100
+  Class 0, accuracy: 100.00
+  Class 1, accuracy: 100.00
+  Class 2, accuracy: 100.00
+  Class 3, accuracy: 100.00
+  Class 4, accuracy: 100.00
+  Class 5, accuracy: 100.00
+  Class 6, accuracy: 0.00
+Testing Loss: 0.3966 | OA: 90.02 | AA: 85.71 | Kappa: 87.36 | Time: 3.69
+Epoch 11/80| Time: 31.84s| Loss: 0.3292
+Epoch 12/80| Time: 31.51s| Loss: 0.3271
+Epoch 13/80| Time: 32.06s| Loss: 0.3267
+Epoch 14/80| Time: 31.91s| Loss: 0.3256
+Epoch 15/80| Time: 32.17s| Loss: 0.3256
+Epoch 16/80| Time: 32.21s| Loss: 0.3253
+Epoch 17/80| Time: 31.84s| Loss: 0.3216
+Epoch 18/80| Time: 31.98s| Loss: 0.3212
+Epoch 19/80| Time: 31.99s| Loss: 0.3205
+Epoch 20/80| Time: 32.23s| Loss: 0.3185
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv220.model model saved--<<
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv220.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0859 | Accuracy: 100
+  Class 0, accuracy: 100.00
+  Class 1, accuracy: 100.00
+  Class 2, accuracy: 95.45
+  Class 3, accuracy: 99.92
+  Class 4, accuracy: 99.66
+  Class 5, accuracy: 99.74
+  Class 6, accuracy: 0.00
+Testing Loss: 0.3945 | OA: 89.85 | AA: 84.97 | Kappa: 87.15 | Time: 3.76
+Epoch 21/80| Time: 32.06s| Loss: 0.3064
+Epoch 22/80| Time: 32.05s| Loss: 0.2995
+Epoch 23/80| Time: 32.01s| Loss: 0.2941
+Epoch 24/80| Time: 32.21s| Loss: 0.2845
+Epoch 25/80| Time: 32.18s| Loss: 0.2734
+Epoch 26/80| Time: 32.20s| Loss: 0.2610
+Epoch 27/80| Time: 31.88s| Loss: 0.2502
+Epoch 28/80| Time: 31.93s| Loss: 0.2427
+Epoch 29/80| Time: 32.09s| Loss: 0.2371
+Epoch 30/80| Time: 31.97s| Loss: 0.2322
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv230.model model saved--<<
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv230.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.1184 | Accuracy: 100
+  Class 0, accuracy: 100.00
+  Class 1, accuracy: 100.00
+  Class 2, accuracy: 100.00
+  Class 3, accuracy: 99.92
+  Class 4, accuracy: 87.31
+  Class 5, accuracy: 97.31
+  Class 6, accuracy: 13.33
+Testing Loss: 0.3947 | OA: 88.69 | AA: 85.41 | Kappa: 85.73 | Time: 3.72
+Epoch 31/80| Time: 31.81s| Loss: 0.2274
+Epoch 32/80| Time: 32.07s| Loss: 0.2176
+Epoch 33/80| Time: 31.99s| Loss: 0.2140
+Epoch 34/80| Time: 32.01s| Loss: 0.2108
+Epoch 35/80| Time: 31.79s| Loss: 0.2011
+Epoch 36/80| Time: 32.15s| Loss: 0.2017
+Epoch 37/80| Time: 32.26s| Loss: 0.1802
+Epoch 38/80| Time: 31.76s| Loss: 0.1684
+Epoch 39/80| Time: 31.90s| Loss: 0.1566
+Epoch 40/80| Time: 32.09s| Loss: 0.1515
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv240.model model saved--<<
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv240.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.1157 | Accuracy: 99
+  Class 0, accuracy: 98.94
+  Class 1, accuracy: 98.63
+  Class 2, accuracy: 100.00
+  Class 3, accuracy: 97.23
+  Class 4, accuracy: 97.08
+  Class 5, accuracy: 98.72
+  Class 6, accuracy: 26.67
+Testing Loss: 0.2497 | OA: 90.77 | AA: 88.18 | Kappa: 88.34 | Time: 3.70
+Epoch 41/80| Time: 31.50s| Loss: 0.1231
+Epoch 42/80| Time: 31.55s| Loss: 0.1187
+Epoch 43/80| Time: 31.66s| Loss: 0.1163
+Epoch 44/80| Time: 31.86s| Loss: 0.1134
+Epoch 45/80| Time: 32.04s| Loss: 0.1118
+Epoch 46/80| Time: 32.21s| Loss: 0.1099
+Epoch 47/80| Time: 32.02s| Loss: 0.1097
+Epoch 48/80| Time: 32.15s| Loss: 0.1076
+Epoch 49/80| Time: 32.15s| Loss: 0.1063
+Epoch 50/80| Time: 32.18s| Loss: 0.1042
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv250.model model saved--<<
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv250.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0684 | Accuracy: 99
+  Class 0, accuracy: 98.68
+  Class 1, accuracy: 96.35
+  Class 2, accuracy: 100.00
+  Class 3, accuracy: 95.64
+  Class 4, accuracy: 96.57
+  Class 5, accuracy: 97.57
+  Class 6, accuracy: 38.61
+Testing Loss: 0.2294 | OA: 90.90 | AA: 89.06 | Kappa: 88.54 | Time: 3.70
+Epoch 51/80| Time: 32.05s| Loss: 0.1022
+Epoch 52/80| Time: 32.09s| Loss: 0.1021
+Epoch 53/80| Time: 32.01s| Loss: 0.1017
+Epoch 54/80| Time: 31.88s| Loss: 0.0993
+Epoch 55/80| Time: 31.93s| Loss: 0.0984
+Epoch 56/80| Time: 31.82s| Loss: 0.0971
+Epoch 57/80| Time: 32.00s| Loss: 0.0965
+Epoch 58/80| Time: 32.38s| Loss: 0.0946
+Epoch 59/80| Time: 32.42s| Loss: 0.0944
+Epoch 60/80| Time: 32.19s| Loss: 0.0937
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv260.model model saved--<<
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv260.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0536 | Accuracy: 99
+  Class 0, accuracy: 98.94
+  Class 1, accuracy: 98.63
+  Class 2, accuracy: 100.00
+  Class 3, accuracy: 96.43
+  Class 4, accuracy: 96.23
+  Class 5, accuracy: 97.44
+  Class 6, accuracy: 34.72
+Testing Loss: 0.2460 | OA: 90.88 | AA: 88.91 | Kappa: 88.49 | Time: 3.74
+Epoch 61/80| Time: 32.34s| Loss: 0.0902
+Epoch 62/80| Time: 32.12s| Loss: 0.0891
+Epoch 63/80| Time: 32.15s| Loss: 0.0887
+Epoch 64/80| Time: 32.21s| Loss: 0.0898
+Epoch 65/80| Time: 32.04s| Loss: 0.0898
+Epoch 66/80| Time: 31.53s| Loss: 0.0885
+Epoch 67/80| Time: 31.54s| Loss: 0.0887
+Epoch 68/80| Time: 31.57s| Loss: 0.0909
+Epoch 69/80| Time: 31.51s| Loss: 0.0888
+Epoch 70/80| Time: 31.81s| Loss: 0.0883
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv270.model model saved--<<
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv270.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0652 | Accuracy: 98
+  Class 0, accuracy: 98.68
+  Class 1, accuracy: 98.63
+  Class 2, accuracy: 100.00
+  Class 3, accuracy: 96.83
+  Class 4, accuracy: 96.57
+  Class 5, accuracy: 97.44
+  Class 6, accuracy: 33.89
+Testing Loss: 0.2446 | OA: 90.96 | AA: 88.86 | Kappa: 88.59 | Time: 3.80
+Epoch 71/80| Time: 32.02s| Loss: 0.0893
+Epoch 72/80| Time: 32.01s| Loss: 0.0887
+Epoch 73/80| Time: 32.11s| Loss: 0.0887
+Epoch 74/80| Time: 32.10s| Loss: 0.0892
+Epoch 75/80| Time: 32.24s| Loss: 0.0864
+Epoch 76/80| Time: 32.00s| Loss: 0.0878
+Epoch 77/80| Time: 32.11s| Loss: 0.0881
+Epoch 78/80| Time: 32.13s| Loss: 0.0886
+Epoch 79/80| Time: 32.34s| Loss: 0.0866
+Epoch 80/80| Time: 32.24s| Loss: 0.0882
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv280.model model saved--<<
+>>--/home/xueyiming/Landmine/snapshots/patch_size27/ResNetv2_2019-05-17_11-56-15/ResNetv280.model model loaded--<<
+	Batch_idx: 0 | Loss: 0.0549 | Accuracy: 99
+  Class 0, accuracy: 98.94
+  Class 1, accuracy: 98.63
+  Class 2, accuracy: 100.00
+  Class 3, accuracy: 96.67
+  Class 4, accuracy: 95.88
+  Class 5, accuracy: 97.31
+  Class 6, accuracy: 34.72
+Testing Loss: 0.2447 | OA: 90.88 | AA: 88.88 | Kappa: 88.49 | Time: 3.76
